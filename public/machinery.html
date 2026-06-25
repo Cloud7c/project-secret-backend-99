@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machinery - Zim AutoAgri</title>
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="footer.css">
+    <link rel="stylesheet" href="machinery.css">
+</head>
+<body>
+
+   <header class="top-header">
+        <div class="header-container">
+            <div class="brand-section" onclick="window.location.href='index.html';" style="cursor: pointer;">
+                <img src="logo.png" alt="Zim AutoAgri Logo" class="brand-logo">
+                <div class="brand-text">
+                    <h1>ZIM AUTO<span class="brand-green">AGRI</span></h1>
+                    <p>Zimbabwe's Premier Automotive & Agriculture Marketplace</p>
+                </div>
+            </div>
+
+            <div class="location-section">
+                <img src="zim-flag.png" alt="Zimbabwe Flag" class="zim-flag">
+                <span class="location-label">All Provinces, Zim</span>
+            </div>
+        </div>  
+    </header>
+
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="hamburger" id="hamburgerIcon">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+            <ul class="nav-links" id="mainNavLinks">
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="vehicles.html">VEHICLES</a></li>
+                <li><a href="machinery.html" class="active">MACHINERY</a></li>
+                <li><a href="spares.html">SPARES</a></li>
+                
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">FARMING <i class="fa-solid fa-chevron-down" style="font-size: 12px; margin-left: 4px;"></i></a>
+                    <div class="dropdown-content">
+                        <a href="agriculture/equipments.html">Equipments</a>
+                        <a href="agriculture/livestock.html">Livestocks</a>
+                        <a href="agriculture/produce.html">Crop & Produce</a>
+                    </div>
+                </li>
+
+                <li><a href="account.html">MY ACCOUNT</a></li>
+            </ul>
+            <a href="post-ad.html" class="post-ad-btn">POST FREE AD</a>
+        </div>
+    </nav>
+
+    <main class="machinery-page">
+        <div class="machinery-container">
+            
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> / <span>Heavy Machinery</span>
+            </div>
+
+            <!-- ELASTIC CENTERED PAGE HEADER & CONTROLS -->
+            <div class="m-page-header">
+                <h1>HEAVY MACHINERY & CONSTRUCTION</h1>
+                
+                <div class="mobile-controls-row">
+                    <div class="m-page-search">
+                        <input type="text" placeholder="Search Machinery...">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                    
+                    <button class="filters-dropdown-btn" id="filterBtn">
+                        <span id="filterBtnText"><i class="fa-solid fa-filter"></i> Filters</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="machinery-layout">
+                
+                <!-- Left Sidebar (Filters) -->
+                <aside class="filters-sidebar" id="filterSidebar">
+                    <h2 class="sidebar-title">Filter Machinery</h2>
+
+                    <div class="filter-group">
+                        <label>Category</label>
+                        <select>
+                            <option>All Machinery</option>
+                            <option>Excavators</option>
+                            <option>Bulldozers</option>
+                            <option>Front End Loaders</option>
+                            <option>Motor Graders</option>
+                            <option>Cranes</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label>Make</label>
+                        <select>
+                            <option>Any Make</option>
+                            <option>Caterpillar (CAT)</option>
+                            <option>Komatsu</option>
+                            <option>Volvo</option>
+                            <option>JCB</option>
+                            <option>Hitachi</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label>Condition</label>
+                        <select>
+                            <option>Any Condition</option>
+                            <option>Brand New</option>
+                            <option>Used - Excellent</option>
+                            <option>Used - Fair</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label>Operating Weight</label>
+                        <select>
+                            <option>Any Weight</option>
+                            <option>Under 10 Tons</option>
+                            <option>10 - 20 Tons</option>
+                            <option>20 - 40 Tons</option>
+                            <option>Over 40 Tons</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label>Price Range (USD)</label>
+                        <select>
+                            <option>Any Price</option>
+                            <option>Under $30,000</option>
+                            <option>$30,000 - $80,000</option>
+                            <option>Over $80,000</option>
+                        </select>
+                    </div>
+                    
+                    <button class="m-sidebar-apply-btn">Apply Filters</button>
+                </aside>
+
+                <!-- Right Main Content -->
+                <section class="machinery-main">
+
+                    <!-- Sorting Row -->
+                    <div class="sorting-row">
+                        <div class="sort-options">
+                            <label>Sorted By:</label>
+                            <select><option>Newest</option></select>
+                        </div>
+                        <div class="pagination">
+                            <label>Page:</label>
+                            <button class="page-btn"><i class="fa-solid fa-chevron-left"></i></button>
+                            <button class="page-btn"><i class="fa-solid fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Product Grid (No more top card!) -->
+                    <div class="machinery-grid">
+                        
+                        <!-- Card 1: Bulldozer -->
+                        <div class="machinery-card">
+                            <div class="m-card-image">
+                                <span class="m-badge">Featured</span>
+                                <button class="m-fav"><i class="fa-regular fa-heart"></i></button>
+                                <a href="product.html?id=bulldozer">
+                                    <img src="bulldozer.jpg" alt="CAT Bulldozer">
+                                </a>
+                            </div>
+                            <div class="m-card-content">
+                                <p class="m-price">USD 120,000</p>
+                                <h4><a href="product.html?id=bulldozer">Caterpillar D8T Bulldozer</a></h4>
+                                <p class="m-specs"><i class="fa-solid fa-clock"></i> 5,000 Hrs<br><i class="fa-solid fa-location-dot"></i> Harare</p>
+                                <a href="product.html?id=bulldozer" class="m-btn">View Details</a>
+                            </div>
+                        </div>
+
+                        <!-- Card 2: Loader -->
+                        <div class="machinery-card">
+                            <div class="m-card-image">
+                                <span class="m-badge used">Used</span>
+                                <button class="m-fav"><i class="fa-regular fa-heart"></i></button>
+                                <a href="product.html?id=loader">
+                                    <img src="loader.jpg" alt="Komatsu Loader">
+                                </a>
+                            </div>
+                            <div class="m-card-content">
+                                <p class="m-price">USD 75,000</p>
+                                <h4><a href="product.html?id=loader">Komatsu WA380 Front End Loader</a></h4>
+                                <p class="m-specs"><i class="fa-solid fa-clock"></i> 3,200 Hrs<br><i class="fa-solid fa-location-dot"></i> Bulawayo</p>
+                                <a href="product.html?id=loader" class="m-btn">View Details</a>
+                            </div>
+                        </div>
+
+                        <!-- Card 3: Excavator -->
+                        <div class="machinery-card">
+                            <div class="m-card-image">
+                                <span class="m-badge used">Used</span>
+                                <button class="m-fav"><i class="fa-regular fa-heart"></i></button>
+                                <a href="product.html?id=excavator">
+                                    <img src="excavator.jpg" alt="CAT Excavator">
+                                </a>
+                            </div>
+                            <div class="m-card-content">
+                                <p class="m-price">USD 42,000</p>
+                                <h4><a href="product.html?id=excavator">CAT 320 GC Excavator 20-Ton</a></h4>
+                                <p class="m-specs"><i class="fa-solid fa-clock"></i> 4,100 Hrs<br><i class="fa-solid fa-location-dot"></i> Mutare</p>
+                                <a href="product.html?id=excavator" class="m-btn">View Details</a>
+                            </div>
+                        </div>
+
+                        <!-- Card 4: Grader -->
+                        <div class="machinery-card">
+                            <div class="m-card-image">
+                                <span class="m-badge">New</span>
+                                <button class="m-fav"><i class="fa-regular fa-heart"></i></button>
+                                <a href="product.html?id=grader">
+                                    <img src="grader.jpg" alt="Volvo Grader">
+                                </a>
+                            </div>
+                            <div class="m-card-content">
+                                <p class="m-price">USD 95,000</p>
+                                <h4><a href="product.html?id=grader">Volvo G930 Motor Grader</a></h4>
+                                <p class="m-specs"><i class="fa-solid fa-clock"></i> 1,800 Hrs<br><i class="fa-solid fa-location-dot"></i> Gweru</p>
+                                <a href="product.html?id=grader" class="m-btn">View Details</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-row">
+                <div class="footer-col">
+                    <h4>Home</h4>
+                    <ul>
+                        <li><a href="index.html">About</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>About Us</h4>
+                    <ul>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="#">Privacy & Transparency</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact links</h4>
+                    <p class="website-link">Website: <a href="index.html">www.zimautoagri.co.zw</a></p>
+                    <div class="social-links">
+                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                    </div>
+                    <p class="copyright-text">&copy; 2026 Zim AutoAgri.<br>All Rights reserved.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Safety Tips</h4>
+                    <ul>
+                        <li><a href="#">Meet in a public place</a></li>
+                        <li><a href="#">Don't pay in advance</a></li>
+                        <li><a href="#">Inspect the item</a></li>
+                    </ul>
+                    <div class="social-links mt-15">
+                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a href="contact.html" class="whatsapp-float">
+            <i class="fa-brands fa-whatsapp"></i>
+            <span class="notification-badge">1</span>
+        </a>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

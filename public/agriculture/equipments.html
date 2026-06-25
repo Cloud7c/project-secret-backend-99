@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipments - Zim AutoAgri</title>
+    
+    <!-- Global styles (one folder up) -->
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Specific CSS for this page -->
+    <link rel="stylesheet" href="equipments.css"> 
+</head>
+<body class="bg-green-tint">
+
+   <!-- Classic Header Style -->
+   <header class="top-header">
+        <div class="header-container">
+            
+            <!-- LOGO 100% CLICKABLE TO HOME -->
+            <div class="brand-section" onclick="window.location.href='../index.html';" style="cursor: pointer;">
+                <img src="../logo.png" alt="Zim AutoAgri Logo" class="brand-logo">
+                <div class="brand-text">
+                    <h1>ZIM AUTO<span class="brand-green">AGRI</span></h1>
+                    <p>Zimbabwe's Premier Automotive & Agriculture Marketplace</p>
+                </div>
+            </div>
+
+            <div class="location-section">
+                <img src="../zim-flag.png" alt="Zimbabwe Flag" class="zim-flag">
+                <span class="location-label">All Provinces, Zim</span>
+            </div>
+        </div>  
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav class="main-nav">
+        <div class="nav-container nav-simplified">
+            
+            <div class="hamburger" id="hamburgerIcon" style="display: none;">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+
+            <ul class="nav-links" id="mainNavLinks">
+                <li><a href="#" onclick="history.back()" class="back-btn"><i class="fa-solid fa-arrow-left"></i> BACK</a></li>
+                
+                <li><a href="../index.html">HOME</a></li>
+                <li><a href="../vehicles.html">VEHICLES</a></li>
+                <li><a href="../machinery.html">MACHINERY</a></li>
+                <li><a href="../spares.html">SPARES</a></li>
+                
+                <li class="dropdown">
+                    <a href="#" class="dropbtn active">FARMING <i class="fa-solid fa-chevron-down" style="font-size: 12px; margin-left: 4px;"></i></a>
+                    <div class="dropdown-content">
+                        <a href="equipments.html" class="active">Equipments</a>
+                        <a href="livestock.html">Livestocks</a>
+                        <a href="produce.html">Crop & Produce</a>
+                    </div>
+                </li>
+
+                <li><a href="../account.html">MY ACCOUNT</a></li>
+            </ul>
+            <a href="../post-ad.html" class="post-ad-btn" style="padding: 10px 20px; background: #c99a5b; color: #fff; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 14px;">POST FREE AD</a>
+        </div>
+    </nav>
+
+    <!-- THE OPEN FIELD LAYOUT -->
+    <main class="open-field-layout">
+        <div class="equipment-container">
+            
+            <!-- ELASTIC CENTERED PAGE HEADER & CONTROLS -->
+            <div class="eq-page-header">
+                <h1>AGRICULTURAL EQUIPMENTS</h1>
+                
+                <div class="mobile-controls-row">
+                    <div class="eq-page-search">
+                        <input type="text" placeholder="Search Equipments...">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                    
+                    <button class="filters-dropdown-btn" id="filterBtn">
+                        <span id="filterBtnText"><i class="fa-solid fa-filter"></i> Filters</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Horizontal Filter Bar (Acts as Sidebar Dropdown on Mobile) -->
+            <div class="horizontal-filter-bar" id="filterSidebar">
+                <span class="filter-label">FILTER BY:</span>
+                
+                <div class="hf-selects">
+                    <select>
+                        <option>Machine Type (All)</option>
+                        <option>Tractors</option>
+                        <option>Harvesters</option>
+                        <option>Implements</option>
+                    </select>
+                    
+                    <select>
+                        <option>Brand (All)</option>
+                        <option>John Deere</option>
+                        <option>Massey Ferguson</option>
+                        <option>New Holland</option>
+                    </select>
+
+                    <select>
+                        <option>Condition (New/Used)</option>
+                        <option>Brand New</option>
+                        <option>Used</option>
+                    </select>
+
+                    <select>
+                        <option>Price (Range)</option>
+                        <option>Under $10k</option>
+                        <option>$10k - $30k</option>
+                        <option>Over $30k</option>
+                    </select>
+
+                    <select>
+                        <option>Year (All)</option>
+                        <option>2023 - 2024</option>
+                        <option>2018 - 2022</option>
+                        <option>Older</option>
+                    </select>
+
+                    <select>
+                        <option>Location (All)</option>
+                        <option>Harare</option>
+                        <option>Bulawayo</option>
+                        <option>Mutare</option>
+                    </select>
+                    
+                    <button class="clear-all-btn">Clear All</button>
+                </div>
+            </div>
+
+            <!-- Clean Grid -->
+            <div class="eq-grid">
+                
+                <!-- Card 1 -->
+                <div class="eq-card">
+                    <div class="eq-card-img">
+                        <span class="eq-badge">Featured</span>
+                        <button class="eq-fav"><i class="fa-regular fa-heart"></i></button>
+                        <a href="../product.html?id=johndeere">
+                            <img src="../tractor-johndeere.jpg" alt="John Deere Tractor">
+                        </a>
+                    </div>
+                    <div class="eq-card-info">
+                        <h3><a href="../product.html?id=johndeere" style="color: inherit; text-decoration: none;">2020 John Deere 5075E</a></h3>
+                        <p class="eq-price">USD 35,000</p>
+                        <div class="eq-meta">
+                            <span><i class="fa-regular fa-clock"></i> 1,200 Hrs</span>
+                            <span><i class="fa-solid fa-location-dot"></i> Harare</span>
+                        </div>
+                        <a href="../product.html?id=johndeere" class="eq-btn">View Details</a>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="eq-card">
+                    <div class="eq-card-img">
+                        <span class="eq-badge used">Used</span>
+                        <button class="eq-fav"><i class="fa-regular fa-heart"></i></button>
+                        <a href="../product.html?id=massey">
+                            <img src="../tractor-massey.jpg" alt="Massey Ferguson Tractor">
+                        </a>
+                    </div>
+                    <div class="eq-card-info">
+                        <h3><a href="../product.html?id=massey" style="color: inherit; text-decoration: none;">Massey Ferguson 240</a></h3>
+                        <p class="eq-price">USD 12,500</p>
+                        <div class="eq-meta">
+                            <span><i class="fa-regular fa-clock"></i> 8,000 Hrs</span>
+                            <span><i class="fa-solid fa-location-dot"></i> Mutare</span>
+                        </div>
+                        <a href="../product.html?id=massey" class="eq-btn">View Details</a>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="eq-card">
+                    <div class="eq-card-img">
+                        <span class="eq-badge">New</span>
+                        <button class="eq-fav"><i class="fa-regular fa-heart"></i></button>
+                        <a href="../product.html?id=mahindra">
+                            <img src="../tractor-mahindra.jpg" alt="Mahindra Tractor">
+                        </a>
+                    </div>
+                    <div class="eq-card-info">
+                        <h3><a href="../product.html?id=mahindra" style="color: inherit; text-decoration: none;">Mahindra 575 DI</a></h3>
+                        <p class="eq-price">USD 15,000</p>
+                        <div class="eq-meta">
+                            <span><i class="fa-regular fa-clock"></i> Brand New</span>
+                            <span><i class="fa-solid fa-location-dot"></i> Bulawayo</span>
+                        </div>
+                        <a href="../product.html?id=mahindra" class="eq-btn">View Details</a>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="eq-card">
+                    <div class="eq-card-img">
+                        <span class="eq-badge used">Used</span>
+                        <button class="eq-fav"><i class="fa-regular fa-heart"></i></button>
+                        <a href="../product.html?id=caseih">
+                            <img src="../harvester-caseih.jpg" alt="CASE IH Harvester">
+                        </a>
+                    </div>
+                    <div class="eq-card-info">
+                        <h3><a href="../product.html?id=caseih" style="color: inherit; text-decoration: none;">CASE IH Harvester</a></h3>
+                        <p class="eq-price">USD 85,000</p>
+                        <div class="eq-meta">
+                            <span><i class="fa-regular fa-clock"></i> 3,500 Hrs</span>
+                            <span><i class="fa-solid fa-location-dot"></i> Chinhoyi</span>
+                        </div>
+                        <a href="../product.html?id=caseih" class="eq-btn">View Details</a>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="eq-card">
+                    <div class="eq-card-img">
+                        <span class="eq-badge">Featured</span>
+                        <button class="eq-fav"><i class="fa-regular fa-heart"></i></button>
+                        <a href="../product.html?id=newholland">
+                            <img src="../tractor-newholland.jpg" alt="New Holland Tractor">
+                        </a>
+                    </div>
+                    <div class="eq-card-info">
+                        <h3><a href="../product.html?id=newholland" style="color: inherit; text-decoration: none;">New Holland T6.180</a></h3>
+                        <p class="eq-price">USD 42,000</p>
+                        <div class="eq-meta">
+                            <span><i class="fa-regular fa-clock"></i> 850 Hrs</span>
+                            <span><i class="fa-solid fa-location-dot"></i> Gweru</span>
+                        </div>
+                        <a href="../product.html?id=newholland" class="eq-btn">View Details</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Page Navigation Bar -->
+            <div class="pagination-container">
+                <ul class="pagination">
+                    <li><a href="#" class="prev-btn"><i class="fa-solid fa-chevron-left"></i> Prev</a></li>
+                    <li><a href="#" class="active">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><span class="dots">...</span></li>
+                    <li><a href="#">12</a></li>
+                    <li><a href="#" class="next-btn">Next <i class="fa-solid fa-chevron-right"></i></a></li>
+                </ul>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-row">
+                <div class="footer-col">
+                    <h4>Home</h4>
+                    <ul>
+                        <li><a href="../index.html">About</a></li>
+                        <li><a href="../contact.html">Contact Us</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>About Us</h4>
+                    <ul>
+                        <li><a href="../contact.html">Contact Us</a></li>
+                        <li><a href="#">Privacy & Transparency</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact links</h4>
+                    <p class="website-link">Website: <a href="../index.html">www.zimautoagri.co.zw</a></p>
+                    <div class="social-links">
+                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                    </div>
+                    <p class="copyright-text">&copy; 2026 Zim AutoAgri.<br>All Rights reserved.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Safety Tips</h4>
+                    <ul>
+                        <li><a href="#">Meet in a public place</a></li>
+                        <li><a href="#">Don't pay in advance</a></li>
+                        <li><a href="#">Inspect the item</a></li>
+                    </ul>
+                    <div class="social-links mt-15">
+                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a href="../contact.html" class="whatsapp-float">
+            <i class="fa-brands fa-whatsapp"></i>
+            <span class="notification-badge">1</span>
+        </a>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>

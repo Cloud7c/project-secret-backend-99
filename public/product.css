@@ -1,0 +1,643 @@
+/* =========================================
+   PRODUCT PAGE LAYOUT (MATCHING SEGOE UI)
+   ========================================= */
+
+.product-page {
+    padding: 20px 0 60px 0;
+    background-color: #ffffff;
+    
+    background-image: 
+        /* LAYER 1: The Vertical Mask (Height cutoff at 110px) */
+        linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.4) 50px, #ffffff 110px),
+        
+        /* LAYER 2: The Horizontal Color Wash.
+           Fades from white -> yellow -> green -> white. */
+        linear-gradient(to right, #ffffff 0%, #ffebb3 30%, #d4f7c8 70%, #ffffff 100%);
+        
+    /* Keeps the glow at the very top and perfectly centered */
+    background-repeat: no-repeat;
+    background-position: top center;
+    
+    /* Capping the entire glow width at 1050px max. 
+       On smaller screens, it safely shrinks to 100%. */
+    background-size: min(80%, 1100px) 100%;
+    
+    min-height: 100vh;
+    font-family: 'Segoe UI', -apple-system, Arial, sans-serif;
+}
+
+.product-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.breadcrumb {
+    font-size: 13px;
+    color: #000000; /* Absolute black */
+    font-weight: 600; 
+    margin-bottom: 20px;
+    margin-top:30px
+}
+
+.breadcrumb a {
+    color: #2e7d32;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+/* 🟢 CLAMPED: 22px MAX, 700 MAX, 1PX SPACING, ABSOLUTE BLACK */
+.page-title {
+    font-family: 'Segoe UI', -apple-system, Arial, sans-serif;
+    font-size: 22px; 
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* 3-Column Layout */
+.product-layout {
+    display: grid;
+    grid-template-columns: 2fr 1.3fr 1fr; /* Matches the 50% / 30% / 20% layout */
+    gap: 25px;
+    margin-bottom: 50px;
+}
+
+/* --- Left Column: Gallery & Description --- */
+.product-left {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.main-image-container {
+    position: relative;
+    width: 100%;
+    height: 380px;
+    background-color: #eaeaea;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.main-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.favorite-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: #ffffff;
+    border: none;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    cursor: pointer;
+    color: #000000; /* Absolute black icon */
+    font-size: 18px;
+    transition: color 0.2s;
+}
+
+.favorite-btn:hover { color: #e53935; }
+
+.thumbnail-gallery {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.thumb {
+    width: 80px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.thumb.active {
+    border-color: #2e7d32;
+}
+
+.thumb-nav {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    width: 30px;
+    height: 60px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #000000; /* Absolute black */
+}
+
+.description-section {
+    margin-top: 10px;
+}
+
+/* 🟢 MATCHING SEGOE UI FONT */
+.description-section h3 {
+    font-family: 'Segoe UI', -apple-system, Arial, sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #000000;
+    text-transform: uppercase;
+}
+
+.description-section p {
+    font-size: 14px; 
+    line-height: 1.6;
+    color: #000000; /* Absolute black */
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.read-more {
+    font-size: 13px;
+    font-weight: 700; /* Max 700 */
+    color: #2e7d32;
+    text-decoration: none;
+}
+
+/* --- Middle Column: Info & Seller --- */
+.product-middle {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.info-card, .verification-card, .guarantee-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 15px; 
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+}
+
+/* 🟢 CLAMPED: 22px MAX, 700 MAX, 1PX SPACING, ABSOLUTE BLACK */
+.product-title {
+    font-family: 'Segoe UI', -apple-system, Arial, sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #000000;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.subtitle-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px; 
+}
+
+.subtitle-text {
+    font-size: 13px;
+    color: #000000; /* Absolute black */
+    font-weight: 600;
+}
+
+.badge-green {
+    background-color: #2e7d32;
+    color: white;
+    font-size: 10px;
+    font-weight: 700; /* Max 700 */
+    padding: 3px 8px;
+    border-radius: 12px;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 15px; 
+}
+
+.feature-item {
+    font-size: 13px; 
+    color: #000000; /* Absolute black */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600; 
+}
+
+.feature-item i {
+    color: #2e7d32; 
+    font-size: 14px;
+    width: 16px;
+}
+
+.divider {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 15px 0; 
+}
+
+.seller-profile-preview {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.seller-profile-preview h4 {
+    font-size: 14px;
+    font-weight: 700; /* Max 700 */
+    margin-bottom: 5px;
+}
+
+.seller-profile-preview p {
+    font-size: 12px;
+    color: #000000; /* Absolute black */
+    font-weight: 500;
+}
+
+.btn-green-outline {
+    background-color: transparent;
+    border: 1px solid #2e7d32;
+    color: #2e7d32;
+    padding: 8px 15px;
+    border-radius: 4px;
+    font-weight: 700; /* Max 700 */
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-green-outline:hover {
+    background-color: #2e7d32;
+    color: white;
+}
+
+/* Verification Card */
+.verification-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.seller-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.verif-details {
+    flex: 1;
+}
+
+.verif-details h4 {
+    font-size: 14px;
+    font-weight: 700; /* Max 700 */
+    margin-bottom: 4px;
+}
+
+.verif-details p {
+    font-size: 11px;
+    color: #000000; /* Absolute black */
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.stars {
+    color: #ffc107;
+    font-size: 10px;
+}
+
+.stars span {
+    color: #000000; /* Absolute black */
+    margin-left: 5px;
+    font-weight: 600;
+}
+
+.arrow-right {
+    color: #000000; /* Absolute black */
+}
+
+/* Guarantee Card */
+.guarantee-card {
+    background-color: #e8f5e9; /* Light green */
+    border: 1px solid #c8e6c9;
+}
+
+.guar-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 12px; 
+}
+
+.guar-item:last-child {
+    margin-bottom: 0;
+}
+
+.guar-item i {
+    color: #2e7d32;
+    font-size: 16px;
+    margin-top: 2px;
+}
+
+.guar-item p {
+    font-size: 12px;
+    color: #000000; /* Absolute black */
+    line-height: 1.4;
+    font-weight: 500;
+}
+
+.guar-item strong {
+    font-size: 13px;
+    color: #000000; /* Absolute black */
+    display: block;
+    margin-bottom: 2px;
+    font-weight: 700; /* Max 700 */
+}
+
+/* --- Right Column: Pricing & Safety --- */
+.product-right {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.price-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 15px; 
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+}
+
+.price-tag {
+    font-size: 26px;
+    font-weight: 700; /* Max 700 */
+    color: #000000;
+    margin-bottom: 5px;
+}
+
+.price-sub {
+    font-size: 13px;
+    color: #000000; /* Absolute black */
+    font-weight: 600;
+    margin-bottom: 15px; 
+}
+
+/* 🟢 MATCHING SEGOE UI FONT */
+.btn-gold-full, .btn-white-full {
+    width: 100%;
+    padding: 10px; 
+    border-radius: 4px;
+    font-weight: 700; /* Max 700 */
+    font-size: 13px;
+    cursor: pointer;
+    font-family: 'Segoe UI', -apple-system, Arial, sans-serif;
+    margin-bottom: 10px;
+    transition: background-color 0.2s;
+    text-transform: uppercase;
+}
+
+.btn-gold-full {
+    background-color: #c99a5b;
+    color: white;
+    border: none;
+}
+.btn-gold-full:hover { background-color: #b0854d; }
+
+.btn-white-full {
+    background-color: #ffffff;
+    color: #2e7d32;
+    border: 1px solid #2e7d32;
+}
+.btn-white-full:hover { background-color: #f0f7f0; }
+.btn-white-full i { margin-right: 5px; }
+
+/* Safety Tips Card */
+.safety-card {
+    background-color: #fff8e1; /* Light yellow */
+    border: 1px solid #ffecb3;
+    border-radius: 8px;
+    padding: 15px; 
+}
+
+.safety-card h4 {
+    font-size: 14px;
+    font-weight: 700; /* Max 700 */
+    color: #000000;
+    margin-bottom: 10px;
+}
+
+.safety-card p {
+    font-size: 12px;
+    color: #000000; /* Absolute black */
+    line-height: 1.5;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.safety-link {
+    font-size: 12px;
+    font-weight: 700; /* Max 700 */
+    color: #2e7d32;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Related Listings */
+.related-section {
+    margin-top: 40px;
+}
+
+.related-section .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* 🟢 CLAMPED: 22px MAX, 700 MAX, 1PX SPACING, ABSOLUTE BLACK */
+.related-section .section-header h3 {
+    font-family: 'Segoe UI', -apple-system, Arial, sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #000000;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.see-all {
+    font-size: 13px;
+    font-weight: 700; /* Max 700 */
+    color: #2e7d32;
+    text-decoration: none;
+}
+
+/* =========================================
+   📱 MOBILE OVERRIDES (100% INDESTRUCTIBLE SCALING)
+   ========================================= */
+
+@media (max-width: 992px) {
+    .product-layout { grid-template-columns: 1fr 1fr; }
+    .product-right { grid-column: span 2; flex-direction: row; }
+    .price-card, .safety-card { flex: 1; }
+}
+
+@media (max-width: 768px) {
+    .product-page {
+        padding: 10px 0 40px 0 !important;
+    }
+    
+    .product-container {
+        padding: 0 15px !important;
+    }
+    
+    .breadcrumb {
+        font-size: 11px !important;
+        margin-top: 15px !important;
+        margin-bottom: 15px !important;
+    }
+    
+    .page-title {
+        font-size: 16px !important;
+        margin-bottom: 15px !important;
+    }
+    
+    .product-layout { 
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 15px !important; 
+        margin-bottom: 30px !important;
+    }
+    
+    /* 🟢 Image Resizing */
+    .main-image-container {
+        height: 220px !important; /* Scaled down perfectly for mobile */
+        border-radius: 6px !important;
+    }
+    
+    .thumb {
+        width: 60px !important;
+        height: 45px !important;
+    }
+    
+    .thumb-nav {
+        width: 25px !important;
+        height: 45px !important;
+    }
+    
+    /* 🟢 Text Scaling */
+    .description-section h3 {
+        font-size: 16px !important;
+        margin-bottom: 10px !important;
+    }
+    
+    .description-section p {
+        font-size: 12px !important;
+        line-height: 1.4 !important;
+    }
+    
+    .read-more {
+        font-size: 11px !important;
+    }
+    
+    /* 🟢 Middle Info */
+    .product-title {
+        font-size: 18px !important;
+    }
+    
+    .subtitle-text {
+        font-size: 11px !important;
+    }
+    
+    .badge-green {
+        font-size: 9px !important;
+        padding: 3px 6px !important;
+    }
+    
+    .features-grid {
+        gap: 10px !important;
+    }
+    
+    .feature-item {
+        font-size: 11px !important;
+    }
+    
+    .feature-item i {
+        font-size: 12px !important;
+    }
+    
+    /* 🟢 Seller Profile & Verification */
+    .seller-profile-preview h4, .verif-details h4 {
+        font-size: 12px !important;
+    }
+    
+    .seller-profile-preview p, .verif-details p {
+        font-size: 10px !important;
+    }
+    
+    .btn-green-outline {
+        padding: 6px 12px !important;
+        font-size: 10px !important;
+    }
+    
+    /* 🟢 Cards padding */
+    .info-card, .verification-card, .guarantee-card, .price-card, .safety-card {
+        padding: 12px !important;
+    }
+    
+    .guar-item p {
+        font-size: 10px !important;
+    }
+    
+    .guar-item strong {
+        font-size: 11px !important;
+    }
+    
+    /* 🟢 Pricing */
+    .price-tag {
+        font-size: 22px !important;
+    }
+    
+    .price-sub {
+        font-size: 11px !important;
+        margin-bottom: 10px !important;
+    }
+    
+    .btn-gold-full, .btn-white-full {
+        padding: 8px !important;
+        font-size: 11px !important;
+        margin-bottom: 8px !important;
+    }
+    
+    /* 🟢 Safety Tips */
+    .safety-card h4 {
+        font-size: 12px !important;
+    }
+    
+    .safety-card p {
+        font-size: 10px !important;
+        margin-bottom: 10px !important;
+    }
+    
+    .safety-link {
+        font-size: 10px !important;
+    }
+    
+    /* 🟢 Related Section */
+    .related-section .section-header h3 {
+        font-size: 16px !important;
+    }
+    .see-all {
+        font-size: 11px !important;
+    }
+}

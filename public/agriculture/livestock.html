@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livestock - Zim AutoAgri</title>
+    
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="livestock.css"> 
+</head>
+<body class="bg-pasture-green">
+
+   <header class="top-header">
+        <div class="header-container">
+            
+            <!-- LOGO 100% CLICKABLE TO HOME (Using ../ because we are in agriculture folder) -->
+            <div class="brand-section" onclick="window.location.href='../index.html';" style="cursor: pointer;">
+                <img src="../logo.png" alt="Zim AutoAgri Logo" class="brand-logo">
+                <div class="brand-text">
+                    <h1>ZIM AUTO<span class="brand-green">AGRI</span></h1>
+                    <p>Zimbabwe's Premier Automotive & Agriculture Marketplace</p>
+                </div>
+            </div>
+            
+            <div class="location-section">
+                <img src="../zim-flag.png" alt="Zimbabwe Flag" class="zim-flag">
+                <span class="location-label">All Provinces, Zim</span>
+            </div>
+        </div>  
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav class="main-nav">
+        <div class="nav-container nav-simplified">
+            
+            <div class="hamburger" id="hamburgerIcon" style="display: none;">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+
+            <ul class="nav-links" id="mainNavLinks">
+                <li><a href="#" onclick="history.back()" class="back-btn"><i class="fa-solid fa-arrow-left"></i> BACK</a></li>
+                
+                <li><a href="../index.html">HOME</a></li>
+                <li><a href="../vehicles.html">VEHICLES</a></li>
+                <li><a href="../machinery.html">MACHINERY</a></li>
+                <li><a href="../spares.html">SPARES</a></li>
+                
+                <li class="dropdown">
+                    <a href="#" class="dropbtn active">FARMING <i class="fa-solid fa-chevron-down" style="font-size: 12px; margin-left: 4px;"></i></a>
+                    <div class="dropdown-content">
+                        <a href="equipments.html">Equipments</a>
+                        <a href="livestock.html" class="active">Livestocks</a>
+                        <a href="produce.html">Crop & Produce</a>
+                    </div>
+                </li>
+
+                <li><a href="../account.html">MY ACCOUNT</a></li>
+            </ul>
+            <a href="../post-ad.html" class="post-ad-btn" style="padding: 10px 20px; background: #c99a5b; color: #fff; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 14px;">POST FREE AD</a>
+        </div>
+    </nav>
+
+    <main class="pasture-layout">
+        
+        <!-- 🟢 BANNER WITH FADED BACKGROUND & COMPACT ILLUSTRATION -->
+        <div class="livestock-banner">
+            
+            <!-- This Inner wrapper forces the 1100px max width -->
+            <div class="banner-inner">
+                
+                <!-- ELASTIC CENTERED PAGE HEADER & CONTROLS -->
+                <div class="ls-page-header">
+                    <h1>PREMIUM LIVESTOCK</h1>
+                    
+                    <div class="mobile-controls-row">
+                        <div class="ls-page-search">
+                            <input type="text" placeholder="Search breeds, location, animals...">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+                        
+                        <button class="filters-dropdown-btn" id="filterBtn">
+                            <span id="filterBtnText"><i class="fa-solid fa-filter"></i> Filters</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- COMPACT PURE CSS SUNSET -->
+                <div class="banner-illustration">
+                    <div class="cloud cloud-1"></div>
+                    <div class="cloud cloud-2"></div>
+                    
+                    <div class="sun"></div>
+                    
+                    <div class="hill-back"></div>
+                    <div class="hill-middle"></div>
+                    <div class="hill-front"></div>
+                    
+                    <i class="fa-solid fa-cow cow-shadow cow-1"></i>
+                    <i class="fa-solid fa-cow cow-shadow cow-2"></i>
+                    <i class="fa-solid fa-cow cow-shadow cow-3"></i>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="livestock-main-content">
+            <aside class="livestock-sidebar" id="filterSidebar">
+                <div class="sidebar-section">
+                    <h4>Category</h4>
+                    <label><input type="checkbox" checked> Cattle</label>
+                    <label><input type="checkbox"> Poultry (Chickens)</label>
+                    <label><input type="checkbox"> Goats</label>
+                    <label><input type="checkbox"> Sheep</label>
+                    <label><input type="checkbox"> Pigs</label>
+                    <label><input type="checkbox"> Fish (Aquaculture)</label>
+                    <label><input type="checkbox"> Farm Dogs</label>
+                    <label><input type="checkbox"> Rabbits</label>
+                </div>
+
+                <div class="sidebar-section">
+                    <h4>Location</h4>
+                    <select>
+                        <option>All</option>
+                        <option>Harare</option>
+                        <option>Bulawayo</option>
+                        <option>Mutare</option>
+                        <option>Masvingo</option>
+                    </select>
+                </div>
+
+                <div class="sidebar-section">
+                    <h4>Price Range</h4>
+                    <p class="price-range-label">$1,000 - $5,000</p>
+                    <input type="range" min="0" max="5000" class="price-slider">
+                </div>
+            </aside>
+
+            <div class="livestock-right-column">
+                
+                <div class="livestock-grid">
+                    
+                    <!-- Card 1 -->
+                    <div class="ls-card">
+                        <div class="ls-card-img">
+                            <span class="ls-card-badge premium">Premium</span>
+                            <button class="ls-fav"><i class="fa-regular fa-heart"></i></button>
+                            <a href="../product.html?id=angus">
+                                <img src="../cow-angus.jpg" alt="Angus Heifer">
+                            </a>
+                        </div>
+                        <div class="ls-card-body">
+                            <h3><a href="../product.html?id=angus" style="color: inherit; text-decoration: none;">ANGUS HEIFER</a></h3>
+                            <div class="ls-specs">
+                                <p><strong>Age:</strong> 18 Months</p>
+                                <p><strong>Weight:</strong> 1050 lbs</p>
+                                <p><strong>Breeder:</strong> Willow Creek Farm</p>
+                                <p><strong>Location:</strong> Montana</p>
+                            </div>
+                            <div class="ls-price-row">
+                                <span class="price-label">Price</span>
+                                <span class="price-value">$2,850</span>
+                            </div>
+                            <a href="../product.html?id=angus" style="display:block; text-align:center; background:#2e7d32; color:white; padding:8px; border-radius:4px; text-decoration:none; margin-top:10px; font-weight:bold;">View Details</a>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="ls-card">
+                        <div class="ls-card-img">
+                            <span class="ls-card-badge new">New</span>
+                            <button class="ls-fav"><i class="fa-regular fa-heart"></i></button>
+                            <a href="../product.html?id=boer">
+                                <img src="../goat-boer.jpg" alt="Boer Doe">
+                            </a>
+                        </div>
+                        <div class="ls-card-body">
+                            <h3><a href="../product.html?id=boer" style="color: inherit; text-decoration: none;">BOER DOE</a></h3>
+                            <div class="ls-specs">
+                                <p><strong>Age:</strong> 2 Yrs</p>
+                                <p><strong>Weight:</strong> 160 lbs</p>
+                                <p><strong>Breeder:</strong> Sunrise Caprines</p>
+                                <p><strong>Location:</strong> Texas</p>
+                            </div>
+                            <div class="ls-price-row">
+                                <span class="price-label">Price</span>
+                                <span class="price-value">$950</span>
+                            </div>
+                            <a href="../product.html?id=boer" style="display:block; text-align:center; background:#2e7d32; color:white; padding:8px; border-radius:4px; text-decoration:none; margin-top:10px; font-weight:bold;">View Details</a>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="ls-card">
+                        <div class="ls-card-img">
+                            <button class="ls-fav"><i class="fa-regular fa-heart"></i></button>
+                            <a href="../product.html?id=hereford">
+                                <img src="../cow-hereford.jpg" alt="Hereford Steer">
+                            </a>
+                        </div>
+                        <div class="ls-card-body">
+                            <h3><a href="../product.html?id=hereford" style="color: inherit; text-decoration: none;">HEREFORD STEER</a></h3>
+                            <div class="ls-specs">
+                                <p><strong>Age:</strong> 14 Months</p>
+                                <p><strong>Weight:</strong> 920 lbs</p>
+                                <p><strong>Breeder:</strong> Green Valley Ranch</p>
+                                <p><strong>Location:</strong> Kansas</p>
+                            </div>
+                            <div class="ls-price-row">
+                                <span class="price-label">Price</span>
+                                <span class="price-value">$2,400</span>
+                            </div>
+                            <a href="../product.html?id=hereford" style="display:block; text-align:center; background:#2e7d32; color:white; padding:8px; border-radius:4px; text-decoration:none; margin-top:10px; font-weight:bold;">View Details</a>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="ls-card">
+                        <div class="ls-card-img">
+                            <button class="ls-fav"><i class="fa-regular fa-heart"></i></button>
+                            <a href="../product.html?id=nigerian">
+                                <img src="../goat-nigerian.jpg" alt="Nigerian Dwarf">
+                            </a>
+                        </div>
+                        <div class="ls-card-body">
+                            <h3><a href="../product.html?id=nigerian" style="color: inherit; text-decoration: none;">NIGERIAN DWARF</a></h3>
+                            <div class="ls-specs">
+                                <p><strong>Age:</strong> 8 Months</p>
+                                <p><strong>Weight:</strong> 45 lbs</p>
+                                <p><strong>Breeder:</strong> Happy Tails Dairy</p>
+                                <p><strong>Location:</strong> Oregon</p>
+                            </div>
+                            <div class="ls-price-row">
+                                <span class="price-label">Price</span>
+                                <span class="price-value">$650</span>
+                            </div>
+                            <a href="../product.html?id=nigerian" style="display:block; text-align:center; background:#2e7d32; color:white; padding:8px; border-radius:4px; text-decoration:none; margin-top:10px; font-weight:bold;">View Details</a>
+                        </div>
+                    </div>
+
+                    <!-- Card 5 -->
+                    <div class="ls-card">
+                        <div class="ls-card-img">
+                            <span class="ls-card-badge premium">Pedigree</span>
+                            <button class="ls-fav"><i class="fa-regular fa-heart"></i></button>
+                            <a href="../product.html?id=brahman">
+                                <img src="../cow-brahman.jpg" alt="Brahman Bull">
+                            </a>
+                        </div>
+                        <div class="ls-card-body">
+                            <h3><a href="../product.html?id=brahman" style="color: inherit; text-decoration: none;">BRAHMAN BULL</a></h3>
+                            <div class="ls-specs">
+                                <p><strong>Age:</strong> 3 Yrs</p>
+                                <p><strong>Weight:</strong> 1850 lbs</p>
+                                <p><strong>Breeder:</strong> Elite Genetics</p>
+                                <p><strong>Location:</strong> Bulawayo</p>
+                            </div>
+                            <div class="ls-price-row">
+                                <span class="price-label">Price</span>
+                                <span class="price-value">$3,200</span>
+                            </div>
+                            <a href="../product.html?id=brahman" style="display:block; text-align:center; background:#2e7d32; color:white; padding:8px; border-radius:4px; text-decoration:none; margin-top:10px; font-weight:bold;">View Details</a>
+                        </div>
+                    </div>
+
+                    <!-- Card 6 -->
+                    <div class="ls-card">
+                        <div class="ls-card-img">
+                            <span class="ls-card-badge new">New</span>
+                            <button class="ls-fav"><i class="fa-regular fa-heart"></i></button>
+                            <a href="../product.html?id=holstein">
+                                <img src="../cow-holstein.jpg" alt="Holstein Dairy Cow">
+                            </a>
+                        </div>
+                        <div class="ls-card-body">
+                            <h3><a href="../product.html?id=holstein" style="color: inherit; text-decoration: none;">HOLSTEIN MILKER</a></h3>
+                            <div class="ls-specs">
+                                <p><strong>Age:</strong> 4 Yrs</p>
+                                <p><strong>Weight:</strong> 1400 lbs</p>
+                                <p><strong>Breeder:</strong> Morning Dew Dairy</p>
+                                <p><strong>Location:</strong> Harare</p>
+                            </div>
+                            <div class="ls-price-row">
+                                <span class="price-label">Price</span>
+                                <span class="price-value">$1,500</span>
+                            </div>
+                            <a href="../product.html?id=holstein" style="display:block; text-align:center; background:#2e7d32; color:white; padding:8px; border-radius:4px; text-decoration:none; margin-top:10px; font-weight:bold;">View Details</a>
+                        </div>
+                    </div>
+
+                    <!-- Card 7 -->
+                    <div class="ls-card">
+                        <div class="ls-card-img">
+                            <button class="ls-fav"><i class="fa-regular fa-heart"></i></button>
+                            <a href="../product.html?id=boran">
+                                <img src="../cow-boran.jpg" alt="Boran Heifer">
+                            </a>
+                        </div>
+                        <div class="ls-card-body">
+                            <h3><a href="../product.html?id=boran" style="color: inherit; text-decoration: none;">BORAN HEIFER</a></h3>
+                            <div class="ls-specs">
+                                <p><strong>Age:</strong> 20 Months</p>
+                                <p><strong>Weight:</strong> 950 lbs</p>
+                                <p><strong>Breeder:</strong> Savannah Breeders</p>
+                                <p><strong>Location:</strong> Masvingo</p>
+                            </div>
+                            <div class="ls-price-row">
+                                <span class="price-label">Price</span>
+                                <span class="price-value">$1,800</span>
+                            </div>
+                            <a href="../product.html?id=boran" style="display:block; text-align:center; background:#2e7d32; color:white; padding:8px; border-radius:4px; text-decoration:none; margin-top:10px; font-weight:bold;">View Details</a>
+                        </div>
+                    </div>
+
+                    <!-- Card 8 -->
+                    <div class="ls-card">
+                        <div class="ls-card-img">
+                            <button class="ls-fav"><i class="fa-regular fa-heart"></i></button>
+                            <a href="../product.html?id=charolais">
+                                <img src="../cow-charolais.jpg" alt="Charolais Steer">
+                            </a>
+                        </div>
+                        <div class="ls-card-body">
+                            <h3><a href="../product.html?id=charolais" style="color: inherit; text-decoration: none;">CHAROLAIS STEER</a></h3>
+                            <div class="ls-specs">
+                                <p><strong>Age:</strong> 16 Months</p>
+                                <p><strong>Weight:</strong> 1100 lbs</p>
+                                <p><strong>Breeder:</strong> High Veldt Farms</p>
+                                <p><strong>Location:</strong> Midlands</p>
+                            </div>
+                            <div class="ls-price-row">
+                                <span class="price-label">Price</span>
+                                <span class="price-value">$2,100</span>
+                            </div>
+                            <a href="../product.html?id=charolais" style="display:block; text-align:center; background:#2e7d32; color:white; padding:8px; border-radius:4px; text-decoration:none; margin-top:10px; font-weight:bold;">View Details</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-row">
+                
+                <div class="footer-col">
+                    <h4>Home</h4>
+                    <ul>
+                        <li><a href="../index.html">About</a></li>
+                        <li><a href="../contact.html">Contact Us</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>About Us</h4>
+                    <ul>
+                        <li><a href="../contact.html">Contact Us</a></li>
+                        <li><a href="#">Privacy & Transparency</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact links</h4>
+                    <p class="website-link">Website: <a href="../index.html">www.zimautoagri.co.zw</a></p>
+                    <div class="social-links">
+                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                    </div>
+                    <p class="copyright-text">&copy; 2026 Zim AutoAgri.<br>All Rights reserved.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Safety Tips</h4>
+                    <ul>
+                        <li><a href="#">Meet in a public place</a></li>
+                        <li><a href="#">Don't pay in advance</a></li>
+                        <li><a href="#">Inspect the item</a></li>
+                    </ul>
+                    <div class="social-links" style="margin-top: 15px;">
+                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+        <a href="../contact.html" class="whatsapp-float">
+            <i class="fa-brands fa-whatsapp"></i>
+            <span class="notification-badge">1</span>
+        </a>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>

@@ -1,0 +1,529 @@
+/* =========================================
+   EQUIPMENTS PAGE (OPEN FIELD LAYOUT)
+   ========================================= */
+* {
+    box-sizing: border-box !important;
+}
+
+/* 🟢 CENTER-GLOW WITH REDUCED OUTER COLOR WIDTH */
+body.bg-green-tint {
+    background-color: #ffffff; 
+    background-image: 
+        /* LAYER 1 (Vertical Fade): Fades into white 200px down */
+        linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #ffffff 200px),
+        
+        /* LAYER 2 (The Mix): The horizontal color spread */
+        linear-gradient(to right, 
+            #ffffff 0px, 
+            #ffffff 50px, 
+            rgba(255, 215, 0, 0.20) 28%, 
+            rgba(100, 220, 140, 0.9) 40%, 
+            rgba(100, 220, 140, 0.9) 60%, 
+            rgba(255, 215, 0, 0.20) 72%, 
+            #ffffff calc(100% - 50px), 
+            #ffffff 100%);
+        
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: 100% 100%;
+}
+
+/* Simplified Nav alignment */
+.nav-simplified {
+    justify-content: flex-start;
+    gap: 30px;
+}
+
+.back-btn {
+    color: #666 !important;
+}
+
+.back-btn:hover {
+    color: #000 !important;
+    border-bottom: 5px solid #000 !important;
+}
+
+/* --- The Open Field Layout --- */
+.open-field-layout {
+    padding: 0 20px;
+}
+
+.equipment-container {
+    max-width: 1100px; 
+    margin: 0 auto;
+    overflow-x: hidden !important;
+}
+
+/* =========================================
+   PAGE HEADER & CONTROLS ROW
+   ========================================= */
+.eq-page-header {
+    margin-bottom: 25px;
+    margin-top: 20px; 
+    text-align: center; 
+    width: 100%;
+}
+
+/* Screams Agriculture Equipment */
+.eq-page-header h1 {
+    font-family: 'Segoe UI', -apple-system, Arial, sans-serif;
+    font-size: clamp(14px, 4.2vw, 24px); 
+    font-weight: 900;
+    color: #2e7d32; 
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0;
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+}
+
+/* Forces Search and Filter to sit Side-by-Side */
+.mobile-controls-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    max-width: 480px; 
+    margin: 15px auto 0 auto;
+}
+
+.desktop-hide { display: none; }
+
+.eq-page-search {
+    position: relative;
+    flex: 1; 
+}
+
+.eq-page-search input {
+    width: 100%;
+    padding: 10px 15px;
+    padding-right: 35px;
+    border-radius: 20px; 
+    border: 1px solid rgba(0,0,0,0.15);
+    font-family: 'Segoe UI', -apple-system, Arial, sans-serif;
+    font-size: 13px;
+    outline: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: all 0.2s;
+}
+
+.eq-page-search input:focus {
+    border-color: #2e7d32; 
+    box-shadow: 0 4px 12px rgba(46, 125, 50, 0.15);
+}
+
+.eq-page-search i {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666666;
+}
+
+/* Default Desktop: Filter button is hidden */
+.filters-dropdown-btn {
+    display: none; 
+}
+
+/* --- Horizontal Filter Bar --- */
+.horizontal-filter-bar {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    background: transparent; 
+    padding: 0; 
+    box-shadow: none; 
+    margin-bottom: 40px;
+    margin-top: 20px; 
+    gap: 15px; 
+}
+
+.filter-label {
+    font-size: 13px;
+    font-weight: 800;
+    color: #333;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.hf-selects {
+    display: flex;
+    gap: 16px; 
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.hf-selects select {
+    padding: 6px 10px; 
+    border: 1px solid #e0e0e0;
+    border-radius: 4px; 
+    font-size: 13px; 
+    font-weight: 600;
+    outline: none;
+    cursor: pointer;
+    background: #fafafa;
+    color: #444;
+    transition: border-color 0.2s;
+}
+
+.hf-selects select:hover {
+    border-color: #2e7d32;
+}
+
+/* =========================================
+   100% CUSTOM HTML DROPDOWNS (Equipments Theme)
+   ========================================= */
+.custom-filter, .custom-sort { position: relative; width: 100%; min-width: 140px; }
+.custom-filter summary, .custom-sort summary {
+    list-style: none; display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 8px 12px;
+    border: 1px solid #e0e0e0; border-radius: 4px; background: #fafafa; color: #444; font-weight: 600; font-size: 13px; cursor: pointer; user-select: none;
+    transition: border-color 0.2s;
+}
+.custom-filter summary:hover, .custom-sort summary:hover { border-color: #2e7d32; }
+.custom-sort summary { border-radius: 20px; background-color: #ffffff; }
+.custom-filter summary::-webkit-details-marker, .custom-sort summary::-webkit-details-marker { display: none; }
+.custom-filter[open] summary, .custom-sort[open] summary { border-color: #2e7d32; border-bottom-left-radius: 0; border-bottom-right-radius: 0; background-color: #ffffff; }
+
+.custom-options {
+    position: absolute; top: 100%; left: 0; right: 0; background: #ffffff; border: 1px solid #2e7d32; border-top: none;
+    border-bottom-left-radius: 6px; border-bottom-right-radius: 6px; box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    z-index: 1550 !important; 
+    max-height: 220px; overflow-y: auto; display: flex; flex-direction: column;
+}
+.custom-options label { display: flex; align-items: center; gap: 10px; padding: 10px 12px; margin: 0 !important; font-size: 13px !important; font-weight: 600 !important; cursor: pointer; border-bottom: 1px solid #f0f0f0; color: #333; }
+.custom-options label:hover { background-color: #f4f7f2; color: #2e7d32; }
+.custom-options input[type="radio"] { accent-color: #2e7d32; transform: scale(1.2); margin: 0; cursor: pointer; }
+
+
+.clear-all-btn {
+    background: transparent;
+    border: none;
+    color: #888;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 6px 10px;
+}
+
+.clear-all-btn:hover {
+    color: #d32f2f; 
+    text-decoration: underline;
+}
+
+/* --- Equipment Cards Grid --- */
+.eq-grid {
+    display: grid !important;
+    grid-template-columns: repeat(5, 1fr) !important; 
+    gap: 20px !important; 
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* =========================================
+   THE RUGGED TRACTOR THEME CARDS
+   ========================================= */
+.eq-card {
+    background: #1b5e20; 
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    border-bottom: 4px solid #fbc02d; 
+    display: flex;
+    flex-direction: column;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    margin: 0 !important;
+    font-family: 'Segoe UI', -apple-system, Arial, sans-serif;
+}
+
+.eq-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(27, 94, 32, 0.4); 
+}
+
+.eq-card-img {
+    position: relative;
+    height: 160px; 
+    width: 100%;
+    background: #111111;
+}
+
+.eq-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.eq-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #fbc02d; 
+    color: #1b5e20; 
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 900;
+    text-transform: uppercase;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.eq-badge.used {
+    background: #ffffff; 
+    color: #1b5e20;
+}
+
+.eq-fav {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #ffffff;
+    border: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    color: #1b5e20;
+    transition: color 0.2s, transform 0.2s;
+}
+
+.eq-fav:hover {
+    color: #e53935; 
+    transform: scale(1.1);
+}
+
+.eq-card-info {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.eq-card-info h3 {
+    font-size: 14px;
+    color: #ffffff; 
+    margin-bottom: 8px;
+    line-height: 1.4;
+    font-weight: 700;
+}
+
+.eq-price {
+    font-size: 16px;
+    font-weight: 900;
+    color: #fbc02d; 
+    margin-bottom: 12px;
+}
+
+.eq-meta {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid rgba(255, 255, 255, 0.15); 
+    padding-top: 12px;
+    font-size: 11px;
+    color: #c8e6c9; 
+    font-weight: 700;
+    flex: 1;
+}
+
+.eq-meta i {
+    margin-right: 4px;
+    color: #fbc02d; 
+}
+
+.eq-btn {
+    display: block;
+    text-align: center;
+    background: #fbc02d; 
+    color: #1b5e20; 
+    padding: 8px 0;
+    border-radius: 4px;
+    text-decoration: none;
+    margin-top: auto;
+    font-weight: 900;
+    font-size: 12px;
+    text-transform: uppercase;
+    transition: background 0.2s;
+}
+
+.eq-btn:hover {
+    background: #f9a825; 
+}
+
+
+/* =========================================
+   PAGINATION (Page Navigation)
+   ========================================= */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+.pagination {
+    display: flex;
+    list-style: none;
+    gap: 8px;
+    align-items: center;
+}
+
+.pagination li a, .pagination li span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 15px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #555;
+    text-decoration: none;
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    transition: all 0.2s ease;
+}
+
+.pagination li a:hover {
+    background: #f8f9fa;
+    border-color: #2e7d32;
+    color: #2e7d32;
+}
+
+.pagination li a.active {
+    background: #2e7d32;
+    color: #ffffff;
+    border-color: #2e7d32;
+}
+
+.pagination li span.dots {
+    background: transparent;
+    border: none;
+    color: #888;
+}
+
+.pagination li a i {
+    font-size: 12px;
+    margin: 0 6px;
+}
+
+/* ===================================================
+   THE 4 STAGES OF RESPONSIVE PROPORTIONS
+   (Mobile, Tablet, Laptop, Desktop Breakpoints)
+   =================================================== */
+/* 📱 & 📟 STAGE 1 & 2: Mobile & Tablets (Up to 850px) */
+@media (max-width: 850px) {
+    .open-field-layout { padding: 0 10px !important; position: relative !important; }
+    
+    .equipment-container { padding: 10px !important; }
+    .eq-page-header { margin-bottom: 0px !important; position: relative !important; }
+    
+    .sorting-row { display: none !important; } 
+    
+    .desktop-hide {
+        display: flex !important;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+        margin-top: 15px;
+        width: 100%;
+    }
+
+    /* 🟢 The correct, simple small gap that gently pushes the items down */
+    .eq-grid {
+        margin-top: 20px !important; 
+    }
+
+    .eq-page-search input { font-size: 16px !important; height: 38px !important; border-radius: 19px !important; padding-left: 15px !important; }
+    .mobile-controls-row { flex-direction: row !important; gap: 8px !important; width: 100% !important; }
+
+    .filters-dropdown-btn {
+        display: flex !important; align-items: center; justify-content: center; gap: 8px;
+        background-color: #2e7d32; color: #ffffff; border: none; height: 38px !important;
+        font-size: 13px !important; font-weight: 700 !important; border-radius: 19px !important; 
+        box-shadow: 0 4px 10px rgba(0,0,0,0.15) !important; flex: 1 !important;
+        position: relative !important; z-index: 999 !important; cursor: pointer !important;
+    }
+
+    .horizontal-filter-bar { display: none !important; }
+    
+    #filterSidebar {
+        display: none !important; 
+        position: absolute !important;
+        margin-top: 10px !important;
+        left: 20px !important; 
+        width: 240px !important; 
+        max-width: 85vw !important; 
+        background: #ffffff;
+        padding: 15px;
+        border-radius: 10px !important;
+        border: 1px solid #f0f0f0;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.3) !important;
+        z-index: 1500 !important; 
+        max-height: 450px !important; 
+        overflow-y: auto !important;
+        flex-direction: column !important;
+    }
+    #filterSidebar.show-filters { display: flex !important; }
+
+    .hf-selects { flex-direction: column !important; width: 100% !important; gap: 10px !important; }
+
+    #filterSidebar .custom-options {
+        position: relative !important;
+        top: 0 !important;
+        box-shadow: none !important;
+        border: 1px solid #2e7d32 !important;
+        border-top: none !important;
+        max-height: none !important; 
+        border-radius: 0 0 6px 6px !important;
+        margin-bottom: 10px !important;
+    }
+
+    .custom-filter summary, .custom-sort summary { font-size: 13px !important; padding: 10px 15px !important; height: 38px !important; }
+    .custom-options label { padding: 12px 15px !important; font-size: 13px !important; }
+}
+
+/* 📱 STAGE 1 Specifics: Mobile Phones (Up to 575px) */
+@media (max-width: 575px) {
+    .eq-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
+    .eq-card-img { height: 110px !important; }
+    .eq-price { font-size: 14px !important; }
+    .eq-card-info h3 { font-size: 11px !important; white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important; }
+    .eq-meta { font-size: 9px !important; flex-direction: column; gap: 4px; }
+    .eq-btn { font-size: 10px !important; padding: 6px 0 !important; }
+}
+
+/* 📟 STAGE 2 Specifics: Tablets & iPads (576px to 850px) */
+@media (min-width: 576px) and (max-width: 850px) {
+    .eq-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 15px !important; }
+    .eq-card-img { height: 130px !important; }
+}
+
+/* 💻 STAGE 3: Small Laptops (851px to 1050px) */
+@media (min-width: 851px) and (max-width: 1050px) {
+    .eq-grid { grid-template-columns: repeat(4, 1fr) !important; gap: 15px !important; }
+    .filters-dropdown-btn { display: none !important; }
+    #filterSidebar { display: flex !important; }
+}
+
+/* 🖥️ STAGE 4: Large Desktops (1051px and above) */
+@media (min-width: 1051px) {
+    .eq-grid { grid-template-columns: repeat(5, 1fr) !important; gap: 20px !important; }
+    .filters-dropdown-btn { display: none !important; }
+    #filterSidebar { display: flex !important; }
+}
+
+/* Toggle Animation */
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-15px); }
+    to { opacity: 1; transform: translateY(0); }
+}

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spares & Accessories - Zim AutoAgri</title>
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="footer.css">
+    <link rel="stylesheet" href="spares.css"> 
+</head>
+<body>
+
+   <header class="top-header">
+        <div class="header-container">
+            <div class="brand-section" onclick="window.location.href='index.html';" style="cursor: pointer;">
+                <img src="logo.png" alt="Zim AutoAgri Logo" class="brand-logo">
+                <div class="brand-text">
+                    <h1>ZIM AUTO<span class="brand-green">AGRI</span></h1>
+                    <p>Zimbabwe's Premier Automotive & Agriculture Marketplace</p>
+                </div>
+            </div>
+            <div class="location-section">
+                <img src="zim-flag.png" alt="Zimbabwe Flag" class="zim-flag">
+                <span class="location-label">All Provinces, Zim</span>
+            </div>
+        </div>  
+    </header>
+
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="hamburger" id="hamburgerIcon">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+            <ul class="nav-links" id="mainNavLinks">
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="vehicles.html">VEHICLES</a></li>
+                <li><a href="machinery.html">MACHINERY</a></li>
+                <li><a href="spares.html" class="active">SPARES</a></li>
+                
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">FARMING <i class="fa-solid fa-chevron-down" style="font-size: 12px; margin-left: 4px;"></i></a>
+                    <div class="dropdown-content">
+                        <a href="agriculture/equipments.html">Equipments</a>
+                        <a href="agriculture/livestock.html">Livestocks</a>
+                        <a href="agriculture/produce.html">Crop & Produce</a>
+                    </div>
+                </li>
+
+                <li><a href="account.html">MY ACCOUNT</a></li>
+            </ul>
+            <a href="post-ad.html" class="post-ad-btn">POST FREE AD</a>
+        </div>
+    </nav>
+
+    <!-- Beautiful Minimalist Spares Layout -->
+    <main class="spares-page-wrapper">
+        <div class="spares-container">
+            
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> / <span>Spares & Accessories</span>
+            </div>
+
+            <!-- ELASTIC CENTERED HEADER & SIDE-BY-SIDE CONTROLS -->
+            <div class="s-page-header">
+                <h1>SPARES & ACCESSORIES</h1>
+                
+                <!-- 🟢 THE FIX: Both Search and Filter button are now grouped in 1 Row -->
+                <div class="mobile-controls-row">
+                    <div class="s-page-search">
+                        <input type="text" placeholder="Search Part or SKU...">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                    
+                    <button class="filters-dropdown-btn" id="filterBtn">
+                        <span id="filterBtnText"><i class="fa-solid fa-filter"></i> Filters</span>
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="spares-layout">
+                
+                <!-- Slim Premium Sidebar -->
+                <aside class="filters-sidebar" id="filterSidebar">
+                    <h2 class="sidebar-title">Filter Spares</h2>
+                    
+                    <div class="filter-group">
+                        <label>Part Category</label>
+                        <div class="checkbox-list">
+                            <label><input type="checkbox"> Engine Components</label>
+                            <label><input type="checkbox"> Brakes & Rotors</label>
+                            <label><input type="checkbox"> Suspension & Steering</label>
+                            <label><input type="checkbox"> Filters & Fluids</label>
+                            <label><input type="checkbox"> Body Parts</label>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <label>Condition</label>
+                        <div class="checkbox-list">
+                            <label><input type="checkbox"> Genuine OEM</label>
+                            <label><input type="checkbox"> Aftermarket (New)</label>
+                            <label><input type="checkbox"> Refurbished</label>
+                            <label><input type="checkbox"> Used</label>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <label>Vehicle Type</label>
+                        <div class="checkbox-list">
+                            <label><input type="checkbox"> Passenger Cars</label>
+                            <label><input type="checkbox"> Commercial Trucks</label>
+                            <label><input type="checkbox"> Agriculture Tractors</label>
+                        </div>
+                    </div>
+                    
+                    <button class="s-sidebar-apply-btn">Apply Filters</button>
+                </aside>
+
+                <!-- Clean Main Grid -->
+                <section class="spares-main">
+                    
+                    <div class="sorting-row">
+                        <div class="sort-options">
+                            <label>Sorted By:</label>
+                            <select><option>Most Relevant</option><option>Lowest Price</option></select>
+                        </div>
+                    </div>
+
+                    <div class="spares-grid">
+                        
+                        <!-- Product 1: Brakes -->
+                        <div class="s-card">
+                            <span class="s-badge oem">Genuine OEM</span>
+                            <div class="s-card-img">
+                                <a href="product.html?id=brakes">
+                                    <img src="spare-brakes.png" alt="Brake Discs">
+                                </a>
+                            </div>
+                            <p class="s-sku">SKU: BD-88392-XX</p>
+                            <h4 class="s-title"><a href="product.html?id=brakes" style="color: inherit; text-decoration: none;">Carbon Ceramic Brake Disc & Caliper Set</a></h4>
+                            <p class="s-price">USD 450.00</p>
+                            
+                            <div class="s-compatibility">
+                                <i class="fa-solid fa-circle-check"></i> Fits: Universal High Performance
+                            </div>
+                            
+                            <div class="s-actions">
+                                <a href="product.html?id=brakes" class="s-btn-primary">View Details</a>
+                                <a href="#" class="s-btn-icon"><i class="fa-regular fa-heart"></i></a>
+                            </div>
+                        </div>
+
+                        <!-- Product 2: Engine -->
+                        <div class="s-card">
+                            <span class="s-badge">Aftermarket</span>
+                            <div class="s-card-img">
+                                <a href="product.html?id=engine">
+                                    <img src="spare-engine.png" alt="Engine Block">
+                                </a>
+                            </div>
+                            <p class="s-sku">SKU: EB-V8-2991</p>
+                            <h4 class="s-title"><a href="product.html?id=engine" style="color: inherit; text-decoration: none;">Performance V8 Engine Short Block</a></h4>
+                            <p class="s-price">USD 2,100.00</p>
+                            
+                            <div class="s-compatibility">
+                                <i class="fa-solid fa-circle-check"></i> Fits: Toyota Hilux (2015-2022)
+                            </div>
+                            
+                            <div class="s-actions">
+                                <a href="product.html?id=engine" class="s-btn-primary">View Details</a>
+                                <a href="#" class="s-btn-icon"><i class="fa-regular fa-heart"></i></a>
+                            </div>
+                        </div>
+
+                        <!-- Product 3: Suspension -->
+                        <div class="s-card">
+                            <span class="s-badge oem">Genuine OEM</span>
+                            <div class="s-card-img">
+                                <a href="product.html?id=suspension">
+                                    <img src="spare-suspension.png" alt="Suspension Shock">
+                                </a>
+                            </div>
+                            <p class="s-sku">SKU: SS-CL-102</p>
+                            <h4 class="s-title"><a href="product.html?id=suspension" style="color: inherit; text-decoration: none;">Heavy Duty Coilover Shock Absorber</a></h4>
+                            <p class="s-price">USD 185.00</p>
+                            
+                            <div class="s-compatibility">
+                                <i class="fa-solid fa-circle-check"></i> Fits: John Deere Tractors
+                            </div>
+                            
+                            <div class="s-actions">
+                                <a href="product.html?id=suspension" class="s-btn-primary">View Details</a>
+                                <a href="#" class="s-btn-icon"><i class="fa-regular fa-heart"></i></a>
+                            </div>
+                        </div>
+
+                        <!-- Product 4: Filters -->
+                        <div class="s-card">
+                            <span class="s-badge">New</span>
+                            <div class="s-card-img">
+                                <a href="product.html?id=filters">
+                                    <img src="spare-filters.png" alt="Oil Filters">
+                                </a>
+                            </div>
+                            <p class="s-sku">SKU: FL-AX-004</p>
+                            <h4 class="s-title"><a href="product.html?id=filters" style="color: inherit; text-decoration: none;">Premium Oil & Air Filter Maintenance Kit</a></h4>
+                            <p class="s-price">USD 45.00</p>
+                            
+                            <div class="s-compatibility">
+                                <i class="fa-solid fa-circle-check"></i> Fits: Universal Passenger Cars
+                            </div>
+                            
+                            <div class="s-actions">
+                                <a href="product.html?id=filters" class="s-btn-primary">View Details</a>
+                                <a href="#" class="s-btn-icon"><i class="fa-regular fa-heart"></i></a>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-row">
+                <div class="footer-col">
+                    <h4>Home</h4>
+                    <ul>
+                        <li><a href="index.html">About</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>About Us</h4>
+                    <ul>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="#">Privacy & Transparency</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact links</h4>
+                    <p class="website-link">Website: <a href="index.html">www.zimautoagri.co.zw</a></p>
+                    <div class="social-links">
+                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                    </div>
+                    <p class="copyright-text">&copy; 2026 Zim AutoAgri.<br>All Rights reserved.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Safety Tips</h4>
+                    <ul>
+                        <li><a href="#">Meet in a public place</a></li>
+                        <li><a href="#">Don't pay in advance</a></li>
+                        <li><a href="#">Inspect the item</a></li>
+                    </ul>
+                    <div class="social-links mt-15">
+                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a href="contact.html" class="whatsapp-float">
+            <i class="fa-brands fa-whatsapp"></i>
+            <span class="notification-badge">1</span>
+        </a>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

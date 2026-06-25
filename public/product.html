@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page - Zim AutoAgri</title>
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="footer.css">
+    <link rel="stylesheet" href="listings.css"> 
+    <link rel="stylesheet" href="product.css"> 
+</head>
+<body>
+
+   <header class="top-header">
+        <div class="header-container">
+            <div class="brand-section">
+                <!-- LOGO CLICKABLE TO HOME -->
+                <a href="index.html">
+                    <img src="logo.png" alt="Zim AutoAgri Logo" class="brand-logo">
+                </a>
+                <div class="brand-text">
+                    <a href="index.html" style="text-decoration: none; color: inherit;">
+                        <h1>ZIM AUTO<span class="brand-green">AGRI</span></h1>
+                    </a>
+                    <p>Zimbabwe's Premier Automotive & Agriculture Marketplace</p>
+                </div>
+            </div>
+            <div class="location-section">
+                <img src="zim-flag.png" alt="Zimbabwe Flag" class="zim-flag">
+                <span class="location-label">All Provinces, Zim</span>
+            </div>
+        </div>  
+    </header>
+
+    <nav class="main-nav">
+        <div class="nav-container">
+            
+            <!-- 🟢 HAMBURGER MENU (HIDDEN ON DESKTOP BY INLINE STYLE) -->
+            <i class="fa-solid fa-bars hamburger" style="display: none;" onclick="document.querySelector('.nav-links').classList.toggle('active')"></i>
+
+            <ul class="nav-links">
+                <!-- Links properly connected -->
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="vehicles.html" class="active">VEHICLES</a></li>
+                <li><a href="agriculture/equipments.html">MACHINERY</a></li>
+                <li><a href="spares.html">SPARES</a></li>
+                
+                <!-- NEW FARMING DROPDOWN (Replacing Services) -->
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">FARMING <i class="fa-solid fa-chevron-down" style="font-size: 12px; margin-left: 4px;"></i></a>
+                    <div class="dropdown-content">
+                        <a href="agriculture/equipments.html">Equipments</a>
+                        <a href="agriculture/livestock.html">Livestocks</a>
+                        <a href="agriculture/produce.html">Crop & Produce</a>
+                    </div>
+                </li>
+
+                <li><a href="account.html">MY ACCOUNT</a></li>
+            </ul>
+            <a href="post-ad.html" class="post-ad-btn">POST FREE AD</a>
+        </div>
+    </nav>
+
+    <!-- Main Product Layout -->
+    <main class="product-page">
+        <div class="product-container">
+            
+            <!-- Breadcrumb -->
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> / <a href="vehicles.html">Vehicle Listings</a> / <span id="dynamic-breadcrumb">Product Page</span>
+            </div>
+
+            <h2 class="page-title" id="dynamic-page-title">Product Page</h2>
+
+            <div class="product-layout">
+                
+                <!-- Left Column: Gallery & Description -->
+                <div class="product-left">
+                    
+                    <div class="main-image-container">
+                        <button class="favorite-btn"><i class="fa-regular fa-heart"></i></button>
+                        <!-- AUDIT FIX: We leave src blank so the tractor doesn't load and flash! -->
+                        <img src="" alt="Loading product..." class="main-img" id="dynamic-image">
+                    </div>
+                    
+                    <!-- AUDIT FIX: We leave the gallery completely empty inside so the 4 old images don't flash! -->
+                    <div class="thumbnail-gallery" id="dynamic-thumbnails">
+                        <!-- JavaScript will instantly inject the correct thumbnail here! -->
+                    </div>
+
+                    <div class="description-section">
+                        <h3>Description</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
+                        <a href="#" class="read-more">Read more information</a>
+                    </div>
+                    
+                </div>
+
+                <!-- Middle Column: Details & Seller Info -->
+                <div class="product-middle">
+                    
+                    <!-- Main Product Info Card -->
+                    <div class="info-card">
+                        <h3 class="product-title" id="dynamic-title">2022 Toyota Hilux</h3>
+                        
+                        <div class="subtitle-row">
+                            <!-- Added id="dynamic-similar-price" here! -->
+                            <span class="subtitle-text" id="dynamic-similar-price">Similar to USD 45,000</span>
+                            <span class="badge-green">Verified</span>
+                        </div>
+
+                        <!-- Added id="dynamic-features" here! -->
+                        <div class="features-grid" id="dynamic-features">
+                            <div class="feature-item"><i class="fa-solid fa-gauge"></i> Condition</div>
+                            <div class="feature-item"><i class="fa-solid fa-car"></i> Diesel</div>
+                            <div class="feature-item"><i class="fa-solid fa-gear"></i> Manual</div>
+                            <div class="feature-item"><i class="fa-solid fa-location-dot"></i> Zimbabwe</div>
+                        </div>
+
+                        <hr class="divider">
+
+                        <div class="seller-profile-preview">
+                            <div>
+                                <h4>Seller Profile</h4>
+                                <p><i class="fa-solid fa-circle-check" style="color: green;"></i> 2022 since</p>
+                            </div>
+                            <button class="btn-green-outline" onclick="window.location.href='contact.html'">View Details</button>
+                        </div>
+                    </div>
+
+                    <!-- Verification Card -->
+                    <div class="verification-card">
+                        <img src="avatar.jpeg" alt="Seller" class="seller-avatar" style="background-color: #ddd;">
+                        <div class="verif-details">
+                            <h4>Verification <i class="fa-solid fa-circle-check" style="color: #1da1f2;"></i></h4>
+                            <p>Verified Identity</p>
+                            <div class="stars">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i> <span>(12)</span>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right arrow-right"></i>
+                    </div>
+
+                    <!-- Guarantee Card -->
+                    <div class="guarantee-card">
+                        <div class="guar-item">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            <p><strong>Safe deposits</strong><br>Transactions are completely safe with your money protected until you receive the goods.</p>
+                        </div>
+                        <div class="guar-item">
+                            <i class="fa-solid fa-truck"></i>
+                            <p><strong>Delivery</strong><br>We ensure safe delivery to your location seamlessly.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right Column: Pricing & Safety Tips -->
+                <div class="product-right">
+                    
+                    <!-- Pricing Card -->
+                    <div class="price-card">
+                        <h2 class="price-tag" id="dynamic-price">USD 39,000</h2>
+                        <!-- Added id="dynamic-price-sub" here! -->
+                        <p class="price-sub" id="dynamic-price-sub">Price: USD 45,000</p>
+                        <button class="btn-gold-full" onclick="window.location.href='contact.html'">Contact Seller</button>
+                        <button class="btn-white-full" onclick="window.location.href='contact.html'"><i class="fa-regular fa-comment"></i> Chat</button>
+                    </div>
+
+                    <!-- Safety Tips Card -->
+                    <div class="safety-card">
+                        <h4>SAFETY TIPS</h4>
+                        <p>To avoid scams, never pay in advance. Always inspect the item physically before handing over money.</p>
+                        <a href="#" class="safety-link"><i class="fa-solid fa-shield-cat"></i> To know more click here</a>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Related Listings at the bottom -->
+            <div class="related-section">
+                <div class="section-header">
+                    <h3 class="section-title">Related Listings</h3>
+                    <a href="vehicles.html" class="see-all">See View All</a>
+                </div>
+                
+                <!-- We reuse the grid styling from listings.css -->
+                <div class="product-grid">
+                    <div class="product-card auto-card">
+                        <div class="card-image-wrapper">
+                            <span class="category-badge">Automotive</span>
+                            <button class="favorite-btn"><i class="fa-regular fa-heart"></i></button>
+                            <a href="product.html?id=hilux">
+                                <img src="hilux.jpg" alt="Toyota Hilux" class="product-image">
+                            </a>
+                        </div>
+                        <div class="card-details">
+                            <p class="product-price">USD 25,000</p>
+                            <h4 class="product-name"><a href="product.html?id=hilux" style="color: inherit; text-decoration: none;">2018 Toyota Hilux</a></h4>
+                            <p class="product-location"><i class="fa-solid fa-location-dot"></i> Harare</p>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card agri-card">
+                        <div class="card-image-wrapper">
+                            <span class="category-badge">Agriculture</span>
+                            <button class="favorite-btn"><i class="fa-regular fa-heart"></i></button>
+                            <a href="product.html?id=tractor">
+                                <img src="tractor.jpg" alt="Tractor" class="product-image">
+                            </a>
+                        </div>
+                        <div class="card-details">
+                            <p class="product-price">USD 15,000</p>
+                            <h4 class="product-name"><a href="product.html?id=tractor" style="color: inherit; text-decoration: none;">Mahindra Tractor</a></h4>
+                            <p class="product-location"><i class="fa-solid fa-location-dot"></i> Bulawayo</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-row">
+                <div class="footer-col">
+                    <h4>Home</h4>
+                    <ul>
+                        <li><a href="index.html">About</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>About Us</h4>
+                    <ul>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="#">Privacy & Transparency</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact links</h4>
+                    <p class="website-link">Website: <a href="index.html">www.zimautoagri.co.zw</a></p>
+                    <div class="social-links">
+                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                    </div>
+                    <p class="copyright-text">&copy; 2026 Zim AutoAgri.<br>All Rights reserved.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Safety Tips</h4>
+                    <ul>
+                        <li><a href="#">Meet in a public place</a></li>
+                        <li><a href="#">Don't pay in advance</a></li>
+                        <li><a href="#">Inspect the item</a></li>
+                    </ul>
+                    <div class="social-links mt-15">
+                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Fully connected floating WhatsApp -->
+        <a href="contact.html" class="whatsapp-float">
+            <i class="fa-brands fa-whatsapp"></i>
+            <span class="notification-badge">1</span>
+        </a>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

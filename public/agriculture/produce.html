@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop & Produce - Zim AutoAgri</title>
+    
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="produce.css"> 
+</head>
+<body class="bg-fresh-market">
+
+   <header class="top-header">
+        <div class="header-container">
+            
+            <div class="brand-section" onclick="window.location.href='../index.html';" style="cursor: pointer;">
+                <img src="logo.png" alt="Zim AutoAgri Logo" class="brand-logo">
+                <div class="brand-text">
+                    <h1>ZIM AUTO<span class="brand-green">AGRI</span></h1>
+                    <p>Zimbabwe's Premier Automotive & Agriculture Marketplace</p>
+                </div>
+            </div>
+            
+            <div class="location-section">
+                <img src="zim-flag.png" alt="Zimbabwe Flag" class="zim-flag">
+                <span class="location-label">All Provinces, Zim</span>
+            </div>
+        </div>  
+    </header>
+
+    <nav class="main-nav">
+        <div class="nav-container nav-simplified">
+            
+            <div class="hamburger" id="hamburgerIcon">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+
+            <ul class="nav-links" id="mainNavLinks">
+                <li><a href="#" onclick="history.back()" class="back-btn"><i class="fa-solid fa-arrow-left"></i> BACK</a></li>
+                
+                <li><a href="../index.html">HOME</a></li>
+                <li><a href="../vehicles.html">VEHICLES</a></li>
+                <li><a href="../machinery.html">MACHINERY</a></li>
+                <li><a href="../spares.html">SPARES</a></li>
+                
+                <li class="dropdown">
+                    <a href="#" class="dropbtn active">FARMING <i class="fa-solid fa-chevron-down" style="font-size: 12px; margin-left: 4px;"></i></a>
+                    <div class="dropdown-content">
+                        <a href="equipments.html">Equipments</a>
+                        <a href="livestock.html">Livestocks</a>
+                        <a href="produce.html" class="active">Crop & Produce</a>
+                    </div>
+                </li>
+
+                <li><a href="../account.html">MY ACCOUNT</a></li>
+            </ul>
+            <a href="../post-ad.html" class="post-ad-btn" style="padding: 10px 20px; background: #c99a5b; color: #fff; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 14px; white-space: nowrap;">POST FREE AD</a>
+        </div>
+    </nav>
+
+    <main class="produce-layout">
+        
+        <div class="produce-banner" style="background: linear-gradient(rgba(27, 67, 50, 0.35), rgba(45, 106, 79, 0.35)), url('produce-hero-bg.png') center/cover no-repeat;">
+            <div class="banner-inner">
+                <h2>FARM FRESH PRODUCE</h2>
+                <p>Directly from local Zimbabwean farmers to your table</p>
+                
+                <div class="banner-search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Search tomatoes, maize, bulk bags...">
+                    <button class="search-btn">SEARCH</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="produce-main-content">
+            
+            <!-- 🟢 AMAZON-STYLE CUSTOM DROPDOWNS (Fixes Mobile Pop-away bug) -->
+            <div class="produce-filter-bar">
+                
+                <div class="sort-section">
+                    <details class="custom-filter">
+                        <summary>Category <i class="fa-solid fa-chevron-down" style="font-size: 11px; color: #666;"></i></summary>
+                        <div class="custom-options">
+                            <label><input type="radio" name="cat" value="all" checked> All Produce</label>
+                            <label><input type="radio" name="cat" value="fresh"> Fresh Crops</label>
+                            <label><input type="radio" name="cat" value="dried"> Dried Crops</label>
+                            <label><input type="radio" name="cat" value="fruits"> Fruits</label>
+                            <label><input type="radio" name="cat" value="bulk"> Bulk Sacks</label>
+                            <label><input type="radio" name="cat" value="organic"> Organic</label>
+                        </div>
+                    </details>
+                </div>
+                
+                <div class="sort-section">
+                    <details class="custom-sort">
+                        <summary>Sort by <i class="fa-solid fa-chevron-down" style="font-size: 11px; color: #666;"></i></summary>
+                        <div class="custom-options">
+                            <label><input type="radio" name="sort" value="new" checked> Newest Arrivals</label>
+                            <label><input type="radio" name="sort" value="low"> Price: Low to High</label>
+                            <label><input type="radio" name="sort" value="high"> Price: High to Low</label>
+                            <label><input type="radio" name="sort" value="pop"> Popularity</label>
+                        </div>
+                    </details>
+                </div>
+
+            </div>
+
+            <div class="masonry-grid">
+                
+                <div class="masonry-card">
+                    <div class="card-img">
+                        <span class="card-badge organic">Fresh Crop</span>
+                        <a href="../product.html?id=tomatoes">
+                            <img src="tomatoes.png" alt="Tomatoes">
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h3><a href="../product.html?id=tomatoes" style="color: inherit; text-decoration: none;">VINE-RIPENED TOMATOES</a></h3>
+                        <p class="seller"><i class="fa-solid fa-tractor"></i> Sunrise Farms</p>
+                        <p class="desc">Bright, juicy, and freshly picked this morning. Perfect for sauces and canning. 10kg crates available.</p>
+                        <div class="price-row">
+                            <span class="price-val">$12.00 / Crate</span>
+                        </div>
+                        <a href="../product.html?id=tomatoes" class="action-btn" style="text-decoration:none; display:block; text-align:center;">VIEW DETAILS</a>
+                    </div>
+                </div>
+
+                <div class="masonry-card">
+                    <div class="card-img">
+                        <span class="card-badge wholesale">Dried Crop</span>
+                        <a href="../product.html?id=maize">
+                            <img src="maize.png" alt="Maize">
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h3><a href="../product.html?id=maize" style="color: inherit; text-decoration: none;">PREMIUM WHITE MAIZE</a></h3>
+                        <p class="seller"><i class="fa-solid fa-tractor"></i> Valley Agritrade</p>
+                        <p class="desc">High-quality dried white maize perfect for milling into mealie meal. Moisture content below 12%.</p>
+                        <div class="price-row">
+                            <span class="price-val">$280 / Ton</span>
+                        </div>
+                        <a href="../product.html?id=maize" class="action-btn" style="text-decoration:none; display:block; text-align:center;">VIEW DETAILS</a>
+                    </div>
+                </div>
+
+                <div class="masonry-card">
+                    <div class="card-img">
+                        <span class="card-badge fresh">Fresh Crop</span>
+                        <a href="../product.html?id=cabbage">
+                            <img src="cabbage.png" alt="Cabbage">
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h3><a href="../product.html?id=cabbage" style="color: inherit; text-decoration: none;">GIANT GREEN CABBAGES</a></h3>
+                        <p class="seller"><i class="fa-solid fa-tractor"></i> Green Leaf Estates</p>
+                        <p class="desc">Huge, crisp, and tightly packed heads of green cabbage. Grown without chemical pesticides.</p>
+                        <div class="price-row">
+                            <span class="price-val">$1.50 / Head</span>
+                        </div>
+                        <a href="../product.html?id=cabbage" class="action-btn" style="text-decoration:none; display:block; text-align:center;">VIEW DETAILS</a>
+                    </div>
+                </div>
+
+                <div class="masonry-card">
+                    <div class="card-img">
+                        <span class="card-badge wholesale">Dried Crop</span>
+                        <a href="../product.html?id=sugarbeans">
+                            <img src="sugarbeans.png" alt="Sugar Beans">
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h3><a href="../product.html?id=sugarbeans" style="color: inherit; text-decoration: none;">SUGAR BEANS</a></h3>
+                        <p class="seller"><i class="fa-solid fa-tractor"></i> Midlands Grain Co.</p>
+                        <p class="desc">High-protein dried sugar beans. Cleaned and graded. Available in 50kg sacks.</p>
+                        <div class="price-row">
+                            <span class="price-val">$65.00 / Sack</span>
+                        </div>
+                        <a href="../product.html?id=sugarbeans" class="action-btn" style="text-decoration:none; display:block; text-align:center;">VIEW DETAILS</a>
+                    </div>
+                </div>
+
+                <div class="masonry-card">
+                    <div class="card-img">
+                        <span class="card-badge organic">Fresh Crop</span>
+                        <a href="../product.html?id=onions">
+                            <img src="onions.png" alt="Onions">
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h3><a href="../product.html?id=onions" style="color: inherit; text-decoration: none;">RED & WHITE ONIONS</a></h3>
+                        <p class="seller"><i class="fa-solid fa-tractor"></i> Highland Growers</p>
+                        <p class="desc">Cured perfectly for long storage. Strong flavor, excellent quality for commercial use.</p>
+                        <div class="price-row">
+                            <span class="price-val">$8.00 / Pocket</span>
+                        </div>
+                        <a href="../product.html?id=onions" class="action-btn" style="text-decoration:none; display:block; text-align:center;">VIEW DETAILS</a>
+                    </div>
+                </div>
+
+                <div class="masonry-card">
+                    <div class="card-img">
+                        <span class="card-badge organic">Dried Crop</span>
+                        <a href="../product.html?id=groundnuts">
+                            <img src="groundnuts.png" alt="Groundnuts">
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h3><a href="../product.html?id=groundnuts" style="color: inherit; text-decoration: none;">SHELLED GROUNDNUTS</a></h3>
+                        <p class="seller"><i class="fa-solid fa-tractor"></i> Village Harvests</p>
+                        <p class="desc">Premium dried peanuts (nzungu). Perfect for making peanut butter or roasting. 20kg buckets.</p>
+                        <div class="price-row">
+                            <span class="price-val">$25.00 / Bucket</span>
+                        </div>
+                        <a href="../product.html?id=groundnuts" class="action-btn" style="text-decoration:none; display:block; text-align:center;">VIEW DETAILS</a>
+                    </div>
+                </div>
+
+                <div class="masonry-card">
+                    <div class="card-img">
+                        <span class="card-badge fresh">Fresh Crop</span>
+                        <a href="../product.html?id=carrots">
+                            <img src="carrots.png" alt="Carrots">
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h3><a href="../product.html?id=carrots" style="color: inherit; text-decoration: none;">CRUNCHY CARROTS</a></h3>
+                        <p class="seller"><i class="fa-solid fa-tractor"></i> Riverside Organics</p>
+                        <p class="desc">Sweet, bright orange, and packed with vitamins. Washed and ready for the market.</p>
+                        <div class="price-row">
+                            <span class="price-val">$5.00 / Bunch</span>
+                        </div>
+                        <a href="../product.html?id=carrots" class="action-btn" style="text-decoration:none; display:block; text-align:center;">VIEW DETAILS</a>
+                    </div>
+                </div>
+
+                <div class="masonry-card">
+                    <div class="card-img">
+                        <span class="card-badge organic">Fresh Crop</span>
+                        <a href="../product.html?id=potatoes">
+                            <img src="potatoes.png" alt="Potatoes">
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h3><a href="../product.html?id=potatoes" style="color: inherit; text-decoration: none;">IRISH POTATOES (BP1)</a></h3>
+                        <p class="seller"><i class="fa-solid fa-tractor"></i> Nyanga Farms</p>
+                        <p class="desc">Large, unblemished BP1 potatoes straight from the cool soils of Nyanga.</p>
+                        <div class="price-row">
+                            <span class="price-val">$10.00 / Pocket</span>
+                        </div>
+                        <a href="../product.html?id=potatoes" class="action-btn" style="text-decoration:none; display:block; text-align:center;">VIEW DETAILS</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-row">
+                
+                <div class="footer-col">
+                    <h4>Home</h4>
+                    <ul>
+                        <li><a href="../index.html">About</a></li>
+                        <li><a href="../contact.html">Contact Us</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>About Us</h4>
+                    <ul>
+                        <li><a href="../contact.html">Contact Us</a></li>
+                        <li><a href="#">Privacy & Transparency</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact links</h4>
+                    <p class="website-link">Website: <a href="../index.html">www.zimautoagri.co.zw</a></p>
+                    <div class="social-links">
+                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                    </div>
+                    <p class="copyright-text">&copy; 2026 Zim AutoAgri.<br>All Rights reserved.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Safety Tips</h4>
+                    <ul>
+                        <li><a href="#">Meet in a public place</a></li>
+                        <li><a href="#">Don't pay in advance</a></li>
+                        <li><a href="#">Inspect the item</a></li>
+                    </ul>
+                    <div class="social-links" style="margin-top: 15px;">
+                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+        <a href="../contact.html" class="whatsapp-float">
+            <i class="fa-brands fa-whatsapp"></i>
+            <span class="notification-badge">1</span>
+        </a>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>
