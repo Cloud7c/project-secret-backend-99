@@ -1,42 +1,98 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
-    // 1. Select the elements we need to interact with from our HTML
-    const passwordInput = document.getElementById('password-input');
-    const togglePasswordBtn = document.getElementById('toggle-password');
-    const toggleIcon = document.getElementById('toggle-icon');
-    const toggleText = document.getElementById('toggle-text');
 
-    // 2. Make sure the elements exist on the page before running the logic
-    if (togglePasswordBtn && passwordInput) {
-        
-        // 3. Listen for a click on the "Show/Hide" button
-        togglePasswordBtn.addEventListener('click', () => {
-            
-            // Check: Is the password currently hidden (as dots)?
+    // ── Elements ────────────────────────────────────
+    const loginForm      = document.getElementById('login-form');
+    const emailInput     = document.getElementById('email-input');
+    const passwordInput  = document.getElementById('password-input');
+    const toggleBtn      = document.getElementById('toggle-password');
+    const toggleIcon     = document.getElementById('toggle-icon');
+    const toggleText     = document.getElementById('toggle-text');
+    const errorBox       = document.getElementById('error-message');
+    const submitBtn      = loginForm.querySelector('.primary-btn');
+
+    // ── Show / Hide Password ─────────────────────────
+    if (toggleBtn && passwordInput) {
+        toggleBtn.addEventListener('click', () => {
             if (passwordInput.type === 'password') {
-                
-                // Action: Change it to normal text so the user can read it
                 passwordInput.type = 'text';
-                
-                // Action: Swap the icon from an open lock to a closed lock
-                toggleIcon.classList.remove('fa-lock-open');
-                toggleIcon.classList.add('fa-lock');
-                
-                // Action: Change the button text to say "Hide"
+                toggleIcon.classList.replace('fa-lock-open', 'fa-lock');
                 toggleText.innerText = 'Hide';
-                
             } else {
-                
-                // Check: It must already be visible. Change it back to hidden dots!
                 passwordInput.type = 'password';
-                
-                // Action: Swap the icon back to the open lock
-                toggleIcon.classList.remove('fa-lock');
-                toggleIcon.classList.add('fa-lock-open');
-                
-                // Action: Change the text back to "Show"
+                toggleIcon.classList.replace('fa-lock', 'fa-lock-open');
                 toggleText.innerText = 'Show';
             }
         });
     }
+
+    // ── Helper: Show error message ───────────────────
+    const showError = (message) => {
+        errorBox.textContent = message;
+        errorBox.style.display = 'block';
+    };
+
+    const hideError = () => {
+        errorBox.style.display = 'none';
+    };
+
+    // ── Form Submit — Call the Login API ─────────────
+    loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        hideError();
+
+        const email    = emailInput.value.trim();
+        const password = passwordInput.value;
+
+        // Basic front-end validation
+        if (!email || !password) {
+            showError('Please enter your email and password.');
+            return;
+        }
+
+        // Show loading state on button
+        submitBtn.textContent = 'Signing in...';
+        submitBtn.disabled = true;
+
+        try {
+            // Call our real backend API
+            const response = await fetch('/api/auth/login', {
+                method:  'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body:    JSON.stringify({ email, password })
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                // Show the error from the server
+                showError(data.error || 'Login failed. Please try again.');
+                
+                // Clear the password field on failure!
+                passwordInput.value = '';
+                
+                submitBtn.textContent = 'Sign In';
+                submitBtn.disabled = false;
+                return;
+            }
+
+            // ✅ Login successful!
+            // Clear the form fields immediately for security
+            loginForm.reset();
+            
+            // Save the token and user to localStorage
+            localStorage.setItem('zaa_token', data.token);
+            localStorage.setItem('zaa_user',  JSON.stringify(data.user));
+
+            // Redirect to the appropriate page
+            const urlParams = new URLSearchParams(window.location.search);
+            const redirect = urlParams.get('redirect') || 'account.html';
+            window.location.href = redirect;
+
+        } catch (err) {
+            showError('Network error. Please check your connection.');
+            submitBtn.textContent = 'Sign In';
+            submitBtn.disabled = false;
+        }
+    });
+
 });

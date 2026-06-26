@@ -204,5 +204,23 @@
       lucide.createIcons();
     </script>
     <script src="script.js"></script>
+
+
+<script>
+    // Smart nav — if user is already logged in, 
+    // MY ACCOUNT goes straight to dashboard
+    const token = localStorage.getItem('zaa_token');
+    const accountLink = document.getElementById('account-nav-link');
+    const postAdLink = document.getElementById('post-ad-nav-link');
+    if (token) {
+        if (accountLink) accountLink.href = 'account.html';
+        if (postAdLink) postAdLink.href = 'post-ad.html';
+        
+        // For pages inside agriculture folder, handle path
+        if(window.location.pathname.includes('/agriculture/')) {
+            if (accountLink) accountLink.href = '../account.html';
+            if (postAdLink) postAdLink.href = '../post-ad.html';
+        }
+    }
+</script>
 </body>
-</html>

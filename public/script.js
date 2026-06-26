@@ -178,3 +178,89 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// =========================================
+// HOMEPAGE DYNAMIC LISTINGS (PROFESSIONAL ALGO)
+// =========================================
+const homeSlider = document.getElementById('product-slider');
+if (homeSlider && (window.location.pathname === '/' || window.location.pathname.includes('index.html'))) {
+    
+    async function loadHomepageListings() {
+        try {
+            homeSlider.innerHTML = '<div style="text-align:center; width:100%; padding: 40px; color: #666;">Loading latest premium listings <i class="fa-solid fa-spinner fa-spin"></i></div>';
+            
+            // Fetch exactly 8 listings, prioritized by featured status and recency
+            const res = await fetch('/api/listings?limit=8');
+            const data = await res.json();
+            
+            if (data.listings && data.listings.length > 0) {
+                homeSlider.innerHTML = ''; // clear loading
+                
+                data.listings.forEach(listing => {
+                    const priceFormatted = new Intl.NumberFormat('en-US', { style: 'currency', currency: listing.currency || 'USD' }).format(listing.price);
+                    const specs = listing.specs || {};
+
+                    // Build the meta icons dynamically
+                    let metaHtml = '';
+                    if (listing.category === 'vehicles' || listing.category === 'machinery') {
+                        if (specs.condition) metaHtml += `<span><i class="fa-solid fa-gauge"></i> ${specs.condition}</span>`;
+                        if (specs.fuel_type) metaHtml += `<span><i class="fa-solid fa-gas-pump"></i> ${specs.fuel_type}</span>`;
+                        if (specs.transmission) metaHtml += `<span><i class="fa-solid fa-gear"></i> ${specs.transmission}</span>`;
+                    } else if (listing.category === 'livestock' || listing.category === 'produce') {
+                        if (specs.health) metaHtml += `<span><i class="fa-solid fa-notes-medical"></i> ${specs.health}</span>`;
+                        if (specs.gender) metaHtml += `<span><i class="fa-solid fa-venus-mars"></i> ${specs.gender}</span>`;
+                        if (specs.weight) metaHtml += `<span><i class="fa-solid fa-weight-scale"></i> ${specs.weight}</span>`;
+                    } else {
+                        // Spares/equipment fallback
+                        if (specs.condition) metaHtml += `<span><i class="fa-solid fa-certificate"></i> ${specs.condition}</span>`;
+                    }
+
+                    // Fallback images based on category since we haven't built image uploads yet
+                    let imageUrl = 'logo.png';
+                    if (listing.images && listing.images.length > 0) {
+                        imageUrl = listing.images[0];
+                    } else {
+                        if (listing.category === 'vehicles') imageUrl = 'hilux.jpg';
+                        if (listing.category === 'machinery') imageUrl = 'tractor.jpg';
+                        if (listing.category === 'livestock') imageUrl = 'cow.png';
+                        if (listing.category === 'produce') imageUrl = 'tomatoes.png';
+                        if (listing.category === 'spares' || listing.category === 'parts') imageUrl = 'autoparts.png';
+                    }
+
+                    let badgeClass = 'auto-card';
+                    if (listing.category === 'livestock' || listing.category === 'produce' || listing.category === 'machinery') badgeClass = 'agri-card';
+
+                    const cardHtml = \`
+                    <div class="product-card \${badgeClass}">
+                        <div class="card-image-wrapper">
+                            <span class="category-badge" style="text-transform: capitalize;">\${listing.category}</span>
+                            \${listing.is_featured ? '<span class="featured-badge" style="position:absolute; top:10px; right:10px; background:#f59e0b; color:white; padding:4px 8px; border-radius:4px; font-size:12px; font-weight:bold; z-index:2; box-shadow: 0 4px 6px rgba(0,0,0,0.1);"><i class="fa-solid fa-star"></i> Featured</span>' : ''}
+                            <button class="favorite-btn"><i class="fa-regular fa-heart"></i></button>
+                            <a href="product.html?id=\${listing.id}">
+                                <img src="\${imageUrl}" alt="\${listing.title}" class="product-image">
+                            </a>
+                        </div>
+                        <div class="card-details">
+                            <p class="product-price">\${priceFormatted}</p>
+                            <h4 class="product-name"><a href="product.html?id=\${listing.id}" style="color: inherit; text-decoration: none;">\${listing.title}</a></h4>
+                            <p class="product-location"><i class="fa-solid fa-location-dot"></i> \${listing.location}\${listing.province ? ', ' + listing.province : ''}</p>
+                            <div class="product-meta">
+                                \${metaHtml}
+                            </div>
+                            <a href="product.html?id=\${listing.id}" class="view-details-btn">View Details</a>
+                        </div>
+                    </div>\`;
+
+                    homeSlider.innerHTML += cardHtml;
+                });
+            } else {
+                homeSlider.innerHTML = '<div style="text-align:center; width:100%; padding: 40px; color: #666;">No listings available yet. Be the first to post an ad!</div>';
+            }
+        } catch (err) {
+            console.error('Error loading homepage listings:', err);
+            homeSlider.innerHTML = '<div style="text-align:center; width:100%; padding: 40px; color: red;">Failed to load listings. Please check your connection.</div>';
+        }
+    }
+    
+    loadHomepageListings();
+}

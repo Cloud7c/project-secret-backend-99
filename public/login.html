@@ -6,6 +6,15 @@
     <title>Secure Login - Zim AutoAgri</title>
     <link rel="stylesheet" href="login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script>
+    // If user is ALREADY logged in, respect redirect param or go to dashboard
+    const token = localStorage.getItem('zaa_token');
+    if (token) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const redirect = urlParams.get('redirect') || 'account.html';
+        window.location.href = redirect;
+    }
+</script>
 </head>
 <body>
 
@@ -30,14 +39,14 @@
             </div>
 
             <!-- The Login Form -->
-            <form id="login-form">
+            <form id="login-form" autocomplete="off">
                 
                 <!-- Email Input -->
                 <div class="premium-input-group">
                     <i class="fa-regular fa-envelope input-icon"></i>
                     <div class="input-content">
                         <label>Email Address</label>
-                        <input type="email" placeholder="example@email.com" required>
+                        <input type="email" id="email-input" placeholder="example@email.com" autocomplete="off" required>
                     </div>
                 </div>
 
@@ -46,7 +55,7 @@
                     <i class="fa-solid fa-key input-icon"></i>
                     <div class="input-content">
                         <label>Password</label>
-                        <input type="password" id="password-input" placeholder="••••••••" required>
+                        <input type="password" id="password-input" placeholder="••••••••" autocomplete="new-password" required>
                     </div>
                     <!-- The Hide/Show Button -->
                     <button type="button" class="toggle-password" id="toggle-password">
@@ -64,6 +73,9 @@
                     </label>
                 </div>
 
+                <!-- Error Message Box -->
+                <div id="error-message" style="display:none; background:#fee2e2; color:#dc2626; padding:10px 14px; border-radius:8px; font-size:13px; font-weight:600; margin-bottom:10px;"></div>
+
                 <!-- Sign In Button -->
                 <button type="submit" class="primary-btn">Sign In</button>
 
@@ -72,8 +84,8 @@
                     <span>OR</span>
                 </div>
 
-                <!-- Create Account Button -->
-                <button type="button" class="secondary-btn" onclick="window.location.href='#'">Create Account</button>
+                <!-- Create Account Button — now links to register.html -->
+                <button type="button" class="secondary-btn" onclick="window.location.href='register.html'">Create Account</button>
 
             </form>
 

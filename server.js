@@ -1,16 +1,26 @@
+import 'dotenv/config';
 import express from 'express';
-// 1. Import your new routes
-import productRoutes from './src/routes/productRoutes.js';
+import productRoutes  from './src/routes/productRoutes.js';
+import authRoutes     from './src/routes/authRoutes.js';
+import listingsRoutes from './src/routes/listingsRoutes.js';
+import './src/db.js';
 
-const app = express();
-const PORT = 3000;
+const app  = express();
+const PORT = process.env.PORT || 3000;
 
-// Serve static frontend files
+app.use(express.json());
 app.use(express.static('public'));
 
-// 2. Tell the server to use your routes!
+// ── API Routes ──────────────────────────────
 app.use('/api/products', productRoutes);
+app.use('/api/auth',     authRoutes);
+app.use('/api/listings', listingsRoutes);
+
+// ── 404 Handler ─────────────────────────────
+app.use((req, res) => {
+    res.status(404).json({ error: 'Route not found.' });
+});
 
 app.listen(PORT, () => {
-    console.log(`Server is running beautifully on http://localhost:${PORT}`);
+    console.log(`🚀 Server running on http://localhost:${PORT}`);
 });

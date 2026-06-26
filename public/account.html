@@ -6,6 +6,22 @@
     <title>My Dashboard - Zim AutoAgri</title>
     <link rel="stylesheet" href="account.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script>
+    // If user is NOT logged in, send them to login page immediately
+    function checkAuth() {
+        if (!localStorage.getItem('zaa_token')) {
+            window.location.replace('login.html');
+        }
+    }
+    checkAuth();
+    
+    // Catch users pressing the "Back" button after logging out
+    window.addEventListener('pageshow', (event) => {
+        if (event.persisted) {
+            checkAuth();
+        }
+    });
+</script>
 </head>
 <body>
 
@@ -29,13 +45,13 @@
                 </div>
 
                 <div class="user-info">
-                    <h2>John Devlin 
+                    <h2 id="profile-name">John Devlin 
                         <svg class="verified-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M10.5213 2.62368C11.3147 1.75231 12.6853 1.75231 13.4787 2.62368L14.4989 3.74391C14.8998 4.18418 15.4761 4.42288 16.071 4.39508L17.5845 4.32435C18.7614 4.26934 19.7307 5.23857 19.6757 6.41554L19.6049 7.92905C19.5771 8.52388 19.8158 9.10016 20.2561 9.50111L21.3763 10.5213C22.2477 11.3147 22.2477 12.6853 21.3763 13.4787L20.2561 14.4989C19.8158 14.8998 19.5771 15.4761 19.6049 16.071L19.6757 17.5845C19.7307 18.7614 18.7614 19.7307 17.5845 19.6757L16.071 19.6049C15.4761 19.5771 14.8998 19.8158 14.4989 20.2561L13.4787 21.3763C12.6853 22.2477 11.3147 22.2477 10.5213 21.3763L9.50111 20.2561C9.10016 19.8158 8.52388 19.5771 7.92905 19.6049L6.41554 19.6757C5.23857 19.7307 4.26934 18.7614 4.32435 17.5845L4.39508 16.071C4.42288 15.4761 4.18418 14.8998 3.74391 14.4989L2.62368 13.4787C1.75231 12.6853 1.75231 11.3147 2.62368 10.5213L3.74391 9.50111C4.18418 9.10016 4.42288 8.52388 4.39508 7.92905L4.32435 6.41554C4.26934 5.23857 5.23857 4.26934 6.41554 4.32435L7.92905 4.39508C8.52388 4.42288 9.10016 4.18418 9.50111 3.74391L10.5213 2.62368Z" fill="#1d9bf0"/>
                             <path d="M10.9303 14.2413L7.75908 11.0701C7.43364 10.7446 7.43364 10.217 7.75908 9.89156C8.08451 9.56613 8.61215 9.56613 8.93759 9.89156L11.5196 12.4735L15.5624 8.43075C15.8878 8.10531 16.4155 8.10531 16.7409 8.43075C17.0663 8.75618 17.0663 9.28382 16.7409 9.60926L12.1088 14.2413C11.7834 14.5668 11.2557 14.5668 10.9303 14.2413Z" fill="#ffffff"/>
                         </svg>
                     </h2>
-                    <p class="farm-name">Devlin Farms</p>
+                    <p class="farm-name" id="profile-email">Devlin Farms</p>
                     <p class="member-since">Member Since: June 2026</p>
                 </div>
 
@@ -86,6 +102,10 @@
                     <a href="#" class="nav-item">
                         <i class="fa-solid fa-gear"></i>
                         <span>Settings</span>
+                    </a>
+                    <a href="#" class="nav-item text-danger" id="logout-btn" style="color: #dc2626; cursor: pointer;">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <span>Logout</span>
                     </a>
                 </nav>
             </aside>

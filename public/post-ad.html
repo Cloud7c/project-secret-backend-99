@@ -6,6 +6,22 @@
     <title>Post Free Ad - Zim AutoAgri</title>
     <link rel="stylesheet" href="post-ad.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script>
+    // If user is NOT logged in, send them to login page immediately
+    function checkAuth() {
+        if (!localStorage.getItem('zaa_token')) {
+            window.location.replace('login.html');
+        }
+    }
+    checkAuth();
+    
+    // Catch users pressing the "Back" button after logging out
+    window.addEventListener('pageshow', (event) => {
+        if (event.persisted) {
+            checkAuth();
+        }
+    });
+</script>
 </head>
 <body>
 
