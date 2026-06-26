@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Login - Zim AutoAgri</title>
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <main class="login-container">
+        
+        <!-- The White Floating Card -->
+        <div class="login-card">
+            
+            <!-- Logo Section (Perfectly Horizontal) -->
+            <div class="brand-header">
+                <div class="logo-lockup">
+                    <img src="logo.png" alt="Zim AutoAgri Logo" class="logo-img">
+                    <h2>Zim AutoAgri</h2>
+                </div>
+                <p>Vehicles, Machinery & Agriculture</p>
+            </div>
+
+            <!-- Welcome Text -->
+            <div class="welcome-text">
+                <h1>Welcome Back</h1>
+                <p>Please sign in to manage your account.</p>
+            </div>
+
+            <!-- The Login Form -->
+            <form id="login-form">
+                
+                <!-- Email Input -->
+                <div class="premium-input-group">
+                    <i class="fa-regular fa-envelope input-icon"></i>
+                    <div class="input-content">
+                        <label>Email Address</label>
+                        <input type="email" placeholder="example@email.com" required>
+                    </div>
+                </div>
+
+                <!-- Password Input -->
+                <div class="premium-input-group">
+                    <i class="fa-solid fa-key input-icon"></i>
+                    <div class="input-content">
+                        <label>Password</label>
+                        <input type="password" id="password-input" placeholder="••••••••" required>
+                    </div>
+                    <!-- The Hide/Show Button -->
+                    <button type="button" class="toggle-password" id="toggle-password">
+                        <i class="fa-solid fa-lock-open" id="toggle-icon"></i> <span id="toggle-text">Show</span>
+                    </button>
+                </div>
+
+                <!-- Form Options (Forgot Password / Remember Me) -->
+                <div class="form-options">
+                    <a href="#" class="forgot-link">Forgot your password?</a>
+                    <label class="remember-me">
+                        <input type="checkbox"> 
+                        <span class="custom-checkbox"></span>
+                        Remember me
+                    </label>
+                </div>
+
+                <!-- Sign In Button -->
+                <button type="submit" class="primary-btn">Sign In</button>
+
+                <!-- Divider -->
+                <div class="divider">
+                    <span>OR</span>
+                </div>
+
+                <!-- Create Account Button -->
+                <button type="button" class="secondary-btn" onclick="window.location.href='#'">Create Account</button>
+
+            </form>
+
+            <!-- Secure Footer -->
+            <div class="card-footer">
+                <p>Need Help? <a href="#">Contact Support</a></p>
+                <p class="security-text"><i class="fa-solid fa-lock"></i> Secured by Zim AutoAgri Security | © 2026 Zim AutoAgri Inc.</p>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Link to our JS file -->
+    <script src="login.js"></script>
+</body>
+</html>

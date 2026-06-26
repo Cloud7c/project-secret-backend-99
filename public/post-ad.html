@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Free Ad - Zim AutoAgri</title>
+    <link rel="stylesheet" href="post-ad.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Simple Top Bar -->
+    <header class="simple-header">
+        <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back</a>
+        <img src="logo.png" alt="Zim AutoAgri Logo" class="header-logo">
+    </header>
+
+    <main class="form-container">
+        <h1>Create a Listing</h1>
+        <p class="subtitle">Fill out the details below to post your free ad.</p>
+
+        <form id="dynamic-ad-form">
+            
+            <!-- Custom Premium Category Selection -->
+            <div class="form-group primary-category">
+                <label>What are you listing?</label>
+                
+                <div class="custom-dropdown" id="category-dropdown">
+                    <!-- The visible button -->
+                    <div class="dropdown-selected" id="dropdown-selected">
+                        <i class="fa-solid fa-layer-group"></i>
+                        <span>Select a category...</span>
+                        <i class="fa-solid fa-chevron-down arrow"></i>
+                    </div>
+                    
+                    <!-- The "Curtain" that drops down -->
+                    <div class="dropdown-options" id="dropdown-options">
+                        <div class="dropdown-option" data-value="vehicles">
+                            <i class="fa-solid fa-tractor"></i> Vehicles & Machinery
+                        </div>
+                        <div class="dropdown-option" data-value="livestock">
+                            <i class="fa-solid fa-cow"></i> Livestock & Produce
+                        </div>
+                        <div class="dropdown-option" data-value="parts">
+                            <i class="fa-solid fa-gear"></i> Parts & Accessories
+                        </div>
+                    </div>
+                    
+                    <!-- Hidden input to hold the value for our JS logic -->
+                    <input type="hidden" id="main-category" value="">
+                </div>
+            </div>
+
+            <!-- Top Section: Drag & Drop + Thumbnail Grid -->
+            <div class="media-upload-section">
+                <!-- Left Side: Drop Zone -->
+                <div class="drop-zone" id="drop-zone">
+                    <i class="fa-solid fa-camera drop-icon"></i>
+                    <p>Drag & drop photos & videos here</p>
+                    
+                    <button type="button" class="browse-btn" id="trigger-browse-btn">Browse Files</button>
+                    
+                    <!-- Hidden file input -->
+                    <input type="file" id="file-input" multiple hidden accept="image/*,video/*">
+                </div>
+                
+                <!-- Right Side: Thumbnail Previews -->
+                <div class="thumbnail-preview-area" id="thumbnail-preview-area">
+                    <p class="placeholder-text">Uploaded images will appear here...</p>
+                </div>
+            </div>
+
+            <!-- The container where our JavaScript will magically inject the specific inputs -->
+            <div id="dynamic-fields-container">
+                <!-- Inputs will appear here based on the category selection -->
+            </div>
+            
+            <!-- Exact Buttons from the mockup -->
+            <div class="form-actions bottom-actions border-top">
+                <button type="button" class="cancel-btn" id="cancel-btn">Cancel</button>
+                <button type="submit" class="submit-btn" id="submit-btn" disabled>Continue to Details & Publish <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+
+        </form>
+    </main>
+
+    <!-- Link to our new dedicated JS file -->
+    <script src="post-ad.js"></script>
+</body>
+</html>
