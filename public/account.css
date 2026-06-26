@@ -55,6 +55,7 @@ body {
     padding: 25px;
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
 }
 
 .profile-header {
@@ -230,7 +231,7 @@ body {
     background-color: #f9fafb; 
     padding: 5px;
     border-radius: 14px;
-    margin-top: auto;
+    margin-top: 25px;
 }
 .nav-item {
     flex: 1; 

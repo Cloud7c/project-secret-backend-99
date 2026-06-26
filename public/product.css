@@ -641,3 +641,8 @@
         font-size: 11px !important;
     }
 }
+.gallery-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: white; border: none; padding: 15px; cursor: pointer; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 10; transition: background 0.3s; }
+.gallery-arrow:hover { background: rgba(0,0,0,0.8); }
+.left-arrow { left: 10px; }
+.right-arrow { right: 10px; }
+.thumb.active { border: 2px solid #28a745; opacity: 1; }

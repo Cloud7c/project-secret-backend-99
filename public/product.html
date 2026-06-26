@@ -79,10 +79,12 @@
                 <!-- Left Column: Gallery & Description -->
                 <div class="product-left">
                     
-                    <div class="main-image-container">
+                    <div class="main-image-container" style="position: relative;">
                         <button class="favorite-btn"><i class="fa-regular fa-heart"></i></button>
+                        <button class="gallery-arrow left-arrow" id="gallery-left"><i class="fa-solid fa-chevron-left"></i></button>
                         <!-- AUDIT FIX: We leave src blank so the tractor doesn't load and flash! -->
                         <img src="" alt="Loading product..." class="main-img" id="dynamic-image">
+                        <button class="gallery-arrow right-arrow" id="gallery-right"><i class="fa-solid fa-chevron-right"></i></button>
                     </div>
                     
                     <!-- AUDIT FIX: We leave the gallery completely empty inside so the 4 old images don't flash! -->
@@ -90,11 +92,9 @@
                         <!-- JavaScript will instantly inject the correct thumbnail here! -->
                     </div>
 
-                    <div class="description-section">
+                    <div class="description-section" id="dynamic-description">
                         <h3>Description</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
-                        <a href="#" class="read-more">Read more information</a>
+                        <p>Loading description...</p>
                     </div>
                     
                 </div>
@@ -120,41 +120,24 @@
                             <div class="feature-item"><i class="fa-solid fa-location-dot"></i> Zimbabwe</div>
                         </div>
 
-                        <hr class="divider">
-
                         <div class="seller-profile-preview">
                             <div>
-                                <h4>Seller Profile</h4>
-                                <p><i class="fa-solid fa-circle-check" style="color: green;"></i> 2022 since</p>
+                                <h4 id="dynamic-seller-name">Seller Profile</h4>
+                                <p id="dynamic-seller-date"><i class="fa-solid fa-circle-check" style="color: green;"></i> Member</p>
                             </div>
-                            <button class="btn-green-outline" onclick="window.location.href='contact.html'">View Details</button>
                         </div>
                     </div>
 
                     <!-- Verification Card -->
                     <div class="verification-card">
-                        <img src="avatar.jpeg" alt="Seller" class="seller-avatar" style="background-color: #ddd;">
+                        <i class="fa-solid fa-circle-user" style="font-size: 50px; color: #ccc; margin-right: 15px;"></i>
                         <div class="verif-details">
-                            <h4>Verification <i class="fa-solid fa-circle-check" style="color: #1da1f2;"></i></h4>
+                            <h4 id="dynamic-verification-name">Seller Name <i class="fa-solid fa-circle-check" style="color: #1da1f2;"></i></h4>
                             <p>Verified Identity</p>
-                            <div class="stars">
-                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i> <span>(12)</span>
-                            </div>
                         </div>
-                        <i class="fa-solid fa-chevron-right arrow-right"></i>
                     </div>
 
-                    <!-- Guarantee Card -->
-                    <div class="guarantee-card">
-                        <div class="guar-item">
-                            <i class="fa-solid fa-shield-halved"></i>
-                            <p><strong>Safe deposits</strong><br>Transactions are completely safe with your money protected until you receive the goods.</p>
-                        </div>
-                        <div class="guar-item">
-                            <i class="fa-solid fa-truck"></i>
-                            <p><strong>Delivery</strong><br>We ensure safe delivery to your location seamlessly.</p>
-                        </div>
-                    </div>
+
 
                 </div>
 

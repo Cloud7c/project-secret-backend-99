@@ -68,78 +68,93 @@
                 
                 <div class="mobile-controls-row">
                     <div class="m-page-search">
-                        <input type="text" placeholder="Search Machinery...">
-                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="category-search-input" placeholder="Search Machinery...">
+                        <i class="fa-solid fa-magnifying-glass" id="category-search-btn" style="cursor: pointer;"></i>
                     </div>
-                    
+                </div>
+
+                <!-- 🟢 NEW COMPACT MOBILE LAYOUT -->
+                <div class="mobile-action-bar desktop-hide">
                     <button class="filters-dropdown-btn" id="filterBtn">
                         <span id="filterBtnText"><i class="fa-solid fa-filter"></i> Filters</span>
                     </button>
+                    
+                    <details class="custom-sort" style="flex: 1;">
+                        <summary style="height: 42px; border-radius: 21px; justify-content: center; gap: 8px;">
+                            <i class="fa-solid fa-sort"></i> Sort By
+                        </summary>
+                        <div class="custom-options" style="width: 100%;">
+                            <label><input type="radio" name="sortM" checked> Newest</label>
+                            <label><input type="radio" name="sortM"> Lowest Price</label>
+                            <label><input type="radio" name="sortM"> Highest Price</label>
+                        </div>
+                    </details>
                 </div>
             </div>
 
-            <div class="machinery-layout">
+            <div class="machinery-layout" style="position: relative;">
                 
-                <!-- Left Sidebar (Filters) -->
+                <!-- Left Sidebar (Floating Dropdown on Mobile) -->
                 <aside class="filters-sidebar" id="filterSidebar">
                     <h2 class="sidebar-title">Filter Machinery</h2>
-
+                    
                     <div class="filter-group">
                         <label>Category</label>
-                        <select>
-                            <option>All Machinery</option>
-                            <option>Excavators</option>
-                            <option>Bulldozers</option>
-                            <option>Front End Loaders</option>
-                            <option>Motor Graders</option>
-                            <option>Cranes</option>
-                        </select>
+                        <details class="custom-filter">
+                            <summary>All Types <i class="fa-solid fa-chevron-down"></i></summary>
+                            <div class="custom-options">
+                                <label><input type="radio" name="type" value="All Types" checked> All Types</label>
+                                <label><input type="radio" name="type" value="Tractors"> Tractors</label>
+                                <label><input type="radio" name="type" value="Harvesters"> Harvesters</label>
+                                <label><input type="radio" name="type" value="Earthmoving"> Earthmoving</label>
+                                <label><input type="radio" name="type" value="Planters"> Planters</label>
+                            </div>
+                        </details>
                     </div>
 
                     <div class="filter-group">
                         <label>Make</label>
-                        <select>
-                            <option>Any Make</option>
-                            <option>Caterpillar (CAT)</option>
-                            <option>Komatsu</option>
-                            <option>Volvo</option>
-                            <option>JCB</option>
-                            <option>Hitachi</option>
-                        </select>
+                        <details class="custom-filter">
+                            <summary>All Makes <i class="fa-solid fa-chevron-down"></i></summary>
+                            <div class="custom-options">
+                                <label><input type="radio" name="make" value="All Makes" checked> All Makes</label>
+                                <label><input type="radio" name="make" value="John Deere"> John Deere</label>
+                                <label><input type="radio" name="make" value="Massey Ferguson"> Massey Ferguson</label>
+                                <label><input type="radio" name="make" value="Caterpillar"> Caterpillar</label>
+                                <label><input type="radio" name="make" value="JCB"> JCB</label>
+                            </div>
+                        </details>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <label><input type="radio" name="condition" value="Any" checked> Any</label>
+                        <label><input type="radio" name="condition" value="New"> New</label>
+                        <label><input type="radio" name="condition" value="Used"> Used</label>
                     </div>
 
                     <div class="filter-group">
-                        <label>Condition</label>
-                        <select>
-                            <option>Any Condition</option>
-                            <option>Brand New</option>
-                            <option>Used - Excellent</option>
-                            <option>Used - Fair</option>
-                        </select>
+                        <label>Price Range</label>
+                        <input type="range" class="price-slider" min="0" max="500000" id="filter-price-slider">
+                        <div class="price-inputs">
+                            <input type="number" id="filter-price-min" placeholder="Min">
+                            <input type="number" id="filter-price-max" placeholder="Max">
+                        </div>
                     </div>
 
                     <div class="filter-group">
-                        <label>Operating Weight</label>
-                        <select>
-                            <option>Any Weight</option>
-                            <option>Under 10 Tons</option>
-                            <option>10 - 20 Tons</option>
-                            <option>20 - 40 Tons</option>
-                            <option>Over 40 Tons</option>
-                        </select>
-                    </div>
-
-                    <div class="filter-group">
-                        <label>Price Range (USD)</label>
-                        <select>
-                            <option>Any Price</option>
-                            <option>Under $30,000</option>
-                            <option>$30,000 - $80,000</option>
-                            <option>Over $80,000</option>
-                        </select>
+                        <label>Location</label>
+                        <details class="custom-filter">
+                            <summary>All Provinces <i class="fa-solid fa-chevron-down"></i></summary>
+                            <div class="custom-options">
+                                <label><input type="radio" name="loc" value="All Provinces" checked> All Provinces</label>
+                                <label><input type="radio" name="loc" value="Harare"> Harare</label>
+                                <label><input type="radio" name="loc" value="Bulawayo"> Bulawayo</label>
+                                <label><input type="radio" name="loc" value="Mashonaland West"> Mash West</label>
+                            </div>
+                        </details>
                     </div>
                     
-                    <button class="m-sidebar-apply-btn">Apply Filters</button>
+                    <button id="apply-filters-btn" class="post-ad-btn" style="width: 100%; margin-top: 15px; text-align: center; border:none; cursor:pointer;">Apply Filters</button>
                 </aside>
 
                 <!-- Right Main Content -->

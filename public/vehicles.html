@@ -69,8 +69,8 @@
                 
                 <div class="mobile-controls-row">
                     <div class="v-page-search">
-                        <input type="text" placeholder="Search Vehicles...">
-                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="category-search-input" placeholder="Search Vehicles...">
+                        <i class="fa-solid fa-magnifying-glass" id="category-search-btn" style="cursor: pointer;"></i>
                     </div>
                 </div>
 
@@ -104,11 +104,11 @@
                         <details class="custom-filter">
                             <summary>All Makes <i class="fa-solid fa-chevron-down"></i></summary>
                             <div class="custom-options">
-                                <label><input type="radio" name="make" checked> All Makes</label>
-                                <label><input type="radio" name="make"> Toyota</label>
-                                <label><input type="radio" name="make"> Honda</label>
-                                <label><input type="radio" name="make"> Ford</label>
-                                <label><input type="radio" name="make"> Nissan</label>
+                                <label><input type="radio" name="make" value="All Makes" checked> All Makes</label>
+                                <label><input type="radio" name="make" value="Toyota"> Toyota</label>
+                                <label><input type="radio" name="make" value="Honda"> Honda</label>
+                                <label><input type="radio" name="make" value="Ford"> Ford</label>
+                                <label><input type="radio" name="make" value="Nissan"> Nissan</label>
                             </div>
                         </details>
                     </div>
@@ -118,26 +118,27 @@
                         <details class="custom-filter">
                             <summary>All Models <i class="fa-solid fa-chevron-down"></i></summary>
                             <div class="custom-options">
-                                <label><input type="radio" name="model" checked> All Models</label>
-                                <label><input type="radio" name="model"> Hilux</label>
-                                <label><input type="radio" name="model"> Ranger</label>
-                                <label><input type="radio" name="model"> Fit</label>
-                                <label><input type="radio" name="model"> Fortuner</label>
+                                <label><input type="radio" name="model" value="All Models" checked> All Models</label>
+                                <label><input type="radio" name="model" value="Hilux"> Hilux</label>
+                                <label><input type="radio" name="model" value="Ranger"> Ranger</label>
+                                <label><input type="radio" name="model" value="Fit"> Fit</label>
+                                <label><input type="radio" name="model" value="Fortuner"> Fortuner</label>
                             </div>
                         </details>
                     </div>
 
                     <div class="checkbox-group">
-                        <label><input type="checkbox"> New</label>
-                        <label><input type="checkbox"> Used</label>
+                        <label><input type="radio" name="condition" value="Any" checked> Any</label>
+                        <label><input type="radio" name="condition" value="New"> New</label>
+                        <label><input type="radio" name="condition" value="Used"> Used</label>
                     </div>
 
                     <div class="filter-group">
                         <label>Price Range</label>
-                        <input type="range" class="price-slider" min="0" max="100000">
+                        <input type="range" class="price-slider" min="0" max="100000" id="filter-price-slider">
                         <div class="price-inputs">
-                            <input type="text" placeholder="Min">
-                            <input type="text" placeholder="Max">
+                            <input type="number" id="filter-price-min" placeholder="Min">
+                            <input type="number" id="filter-price-max" placeholder="Max">
                         </div>
                     </div>
 
@@ -146,9 +147,9 @@
                         <details class="custom-filter">
                             <summary>Any <i class="fa-solid fa-chevron-down"></i></summary>
                             <div class="custom-options">
-                                <label><input type="radio" name="trans" checked> Any</label>
-                                <label><input type="radio" name="trans"> Automatic</label>
-                                <label><input type="radio" name="trans"> Manual</label>
+                                <label><input type="radio" name="trans" value="Any" checked> Any</label>
+                                <label><input type="radio" name="trans" value="Automatic"> Automatic</label>
+                                <label><input type="radio" name="trans" value="Manual"> Manual</label>
                             </div>
                         </details>
                     </div>
@@ -158,16 +159,16 @@
                         <details class="custom-filter">
                             <summary>All Provinces <i class="fa-solid fa-chevron-down"></i></summary>
                             <div class="custom-options">
-                                <label><input type="radio" name="loc" checked> All Provinces</label>
-                                <label><input type="radio" name="loc"> Harare</label>
-                                <label><input type="radio" name="loc"> Bulawayo</label>
-                                <label><input type="radio" name="loc"> Mutare</label>
-                                <label><input type="radio" name="loc"> Gweru</label>
+                                <label><input type="radio" name="loc" value="All Provinces" checked> All Provinces</label>
+                                <label><input type="radio" name="loc" value="Harare"> Harare</label>
+                                <label><input type="radio" name="loc" value="Bulawayo"> Bulawayo</label>
+                                <label><input type="radio" name="loc" value="Mutare"> Mutare</label>
+                                <label><input type="radio" name="loc" value="Gweru"> Gweru</label>
                             </div>
                         </details>
                     </div>
                     
-                    <button class="post-ad-btn" style="width: 100%; margin-top: 15px; text-align: center; border:none; cursor:pointer;">Apply Filters</button>
+                    <button id="apply-filters-btn" class="post-ad-btn" style="width: 100%; margin-top: 15px; text-align: center; border:none; cursor:pointer;">Apply Filters</button>
                 </aside>
 
                 <!-- Right Main Content -->

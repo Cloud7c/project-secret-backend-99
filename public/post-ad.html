@@ -52,13 +52,22 @@
                     <!-- The "Curtain" that drops down -->
                     <div class="dropdown-options" id="dropdown-options">
                         <div class="dropdown-option" data-value="vehicles">
-                            <i class="fa-solid fa-tractor"></i> Vehicles & Machinery
+                            <i class="fa-solid fa-truck"></i> Vehicles
+                        </div>
+                        <div class="dropdown-option" data-value="machinery">
+                            <i class="fa-solid fa-tractor"></i> Machinery
+                        </div>
+                        <div class="dropdown-option" data-value="equipment">
+                            <i class="fa-solid fa-toolbox"></i> Equipment
+                        </div>
+                        <div class="dropdown-option" data-value="spares">
+                            <i class="fa-solid fa-gear"></i> Spares & Parts
                         </div>
                         <div class="dropdown-option" data-value="livestock">
-                            <i class="fa-solid fa-cow"></i> Livestock & Produce
+                            <i class="fa-solid fa-cow"></i> Livestock
                         </div>
-                        <div class="dropdown-option" data-value="parts">
-                            <i class="fa-solid fa-gear"></i> Parts & Accessories
+                        <div class="dropdown-option" data-value="produce">
+                            <i class="fa-solid fa-seedling"></i> Produce & Crops
                         </div>
                     </div>
                     
@@ -72,12 +81,12 @@
                 <!-- Left Side: Drop Zone -->
                 <div class="drop-zone" id="drop-zone">
                     <i class="fa-solid fa-camera drop-icon"></i>
-                    <p>Drag & drop photos & videos here</p>
+                    <p>Drag & drop photos here</p>
                     
                     <button type="button" class="browse-btn" id="trigger-browse-btn">Browse Files</button>
                     
                     <!-- Hidden file input -->
-                    <input type="file" id="file-input" multiple hidden accept="image/*,video/*">
+                    <input type="file" id="file-input" multiple hidden accept="image/*">
                 </div>
                 
                 <!-- Right Side: Thumbnail Previews -->
