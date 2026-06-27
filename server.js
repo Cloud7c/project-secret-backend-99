@@ -29,8 +29,8 @@ app.use('/api/admin',    adminRoutes);
 app.use('/api/users',    usersRoutes);
 
 // ── React Router Catch-All ──────────────────────────────
-// Send all non-API requests to React's index.html
-app.get(/^(?!\/api).*$/, (req, res) => {
+// Send all non-API requests to React's index.html (exclude /api and /assets)
+app.get(/^(?!\/api|\/assets).*$/, (req, res) => {
     res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
 });
 
