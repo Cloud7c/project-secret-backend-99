@@ -51,7 +51,15 @@ const Navbar = () => {
                             </div>
                         </li>
 
-                        <li><Link to="/account">MY ACCOUNT</Link></li>
+                        {(() => {
+                            try {
+                                const user = JSON.parse(localStorage.getItem('zaa_user') || localStorage.getItem('user'));
+                                if (user && user.is_admin) {
+                                    return <li><Link to="/admin" style={{ color: '#ffb300' }}>ADMIN DASHBOARD</Link></li>;
+                                }
+                            } catch (e) {}
+                            return <li><Link to="/account">MY ACCOUNT</Link></li>;
+                        })()}
                     </ul>
                     <Link to="/post-ad" className="post-ad-btn">POST FREE AD</Link>
                 </div>

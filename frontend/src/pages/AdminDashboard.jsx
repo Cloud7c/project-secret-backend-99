@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../assets/css/admin.css';
 
 const AdminDashboard = () => {
     const navigate = useNavigate();
@@ -18,7 +19,6 @@ const AdminDashboard = () => {
             }
 
             try {
-                // We'll fetch users and listings in parallel
                 const [usersRes, listingsRes] = await Promise.all([
                     fetch('/api/admin/users', { headers: { 'Authorization': `Bearer ${token}` } }),
                     fetch('/api/admin/listings', { headers: { 'Authorization': `Bearer ${token}` } })
@@ -38,8 +38,6 @@ const AdminDashboard = () => {
                 console.error(err);
                 setError(err.message);
                 setLoading(false);
-                // If unauthorized, redirect home or login
-                // navigate('/');
             }
         };
 
@@ -86,7 +84,7 @@ const AdminDashboard = () => {
             <div style={{ padding: '50px', textAlign: 'center' }}>
                 <h2>Access Denied</h2>
                 <p>{error}</p>
-                <button onClick={() => navigate('/')} style={{ padding: '10px 20px', background: '#2e7d32', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', marginTop: '20px' }}>Go Home</button>
+                <button onClick={() => navigate('/')} className="glass-btn" style={{ marginTop: '20px' }}>Go Home</button>
             </div>
         );
     }
@@ -95,155 +93,304 @@ const AdminDashboard = () => {
         return <div style={{ padding: '50px', textAlign: 'center' }}><i className="fa-solid fa-spinner fa-spin" style={{ fontSize: '32px' }}></i></div>;
     }
 
-    const pendingVerifications = users.filter(u => !u.is_verified).length;
+    const pendingVerifications = users.filter(u => !u.is_verified);
     const activeListingsCount = listings.length;
 
     return (
-        <div className="admin-layout" style={{ display: 'flex', minHeight: '100vh', backgroundColor: '#f0f2f5' }}>
-            
-            {/* Sidebar */}
-            <aside className="glass-sidebar" style={{ width: '280px', backgroundColor: '#fff', borderRight: '1px solid #e0e0e0', display: 'flex', flexDirection: 'column' }}>
-                <div className="sidebar-brand" style={{ padding: '20px', borderBottom: '1px solid #e0e0e0', textAlign: 'center' }}>
-                    <h2 style={{ margin: 0, color: '#2e7d32', fontWeight: 900 }}>ZIM AUTOAGRI</h2>
-                    <p style={{ margin: 0, fontSize: '12px', color: '#666' }}>ADMIN DASHBOARD</p>
-                </div>
-                
-                <nav className="sidebar-nav" style={{ flex: 1, padding: '20px 0' }}>
-                    <a href="#" className={`nav-item ${activePanel === 'dashboard-panel' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); setActivePanel('dashboard-panel'); }} style={{ display: 'block', padding: '15px 25px', color: activePanel === 'dashboard-panel' ? '#2e7d32' : '#333', backgroundColor: activePanel === 'dashboard-panel' ? '#e8f5e9' : 'transparent', textDecoration: 'none', fontWeight: activePanel === 'dashboard-panel' ? 'bold' : 'normal' }}>
-                        <i className="fa-solid fa-grid-2" style={{ width: '30px' }}></i> Dashboard
-                    </a>
-                    <a href="#" className={`nav-item ${activePanel === 'users-panel' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); setActivePanel('users-panel'); }} style={{ display: 'block', padding: '15px 25px', color: activePanel === 'users-panel' ? '#2e7d32' : '#333', backgroundColor: activePanel === 'users-panel' ? '#e8f5e9' : 'transparent', textDecoration: 'none', fontWeight: activePanel === 'users-panel' ? 'bold' : 'normal' }}>
-                        <i className="fa-solid fa-users" style={{ width: '30px' }}></i> Users & Verification
-                    </a>
-                    <a href="#" className={`nav-item ${activePanel === 'listings-panel' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); setActivePanel('listings-panel'); }} style={{ display: 'block', padding: '15px 25px', color: activePanel === 'listings-panel' ? '#2e7d32' : '#333', backgroundColor: activePanel === 'listings-panel' ? '#e8f5e9' : 'transparent', textDecoration: 'none', fontWeight: activePanel === 'listings-panel' ? 'bold' : 'normal' }}>
-                        <i className="fa-solid fa-layer-group" style={{ width: '30px' }}></i> Manage Listings
-                    </a>
-                </nav>
-            </aside>
+        <div style={{ position: 'relative', width: '100vw', height: '100vh', overflow: 'hidden', backgroundColor: '#0f172a' }}>
+            {/* Background Orbs for Glassmorphism */}
+            <div className="bg-orb orb-1"></div>
+            <div className="bg-orb orb-2"></div>
+            <div className="bg-orb orb-3"></div>
 
-            {/* Main Content */}
-            <main className="glass-main" style={{ flex: 1, padding: '30px', overflowY: 'auto' }}>
-                <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }}>
-                    <h1>Admin // <span style={{ color: '#2e7d32' }}>SECRET DASHBOARD</span></h1>
-                </header>
+            <div className="admin-layout">
+                {/* LEFT SIDEBAR */}
+                <aside className="glass-sidebar">
+                    <div className="sidebar-brand">
+                        <img src="/logo.png" alt="Logo" className="brand-logo" />
+                        <h2>ZIM AUTOAGRI</h2>
+                    </div>
 
-                {activePanel === 'dashboard-panel' && (
-                    <section>
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px', marginBottom: '30px' }}>
-                            <div style={{ backgroundColor: '#fff', padding: '20px', borderRadius: '12px', boxShadow: '0 2px 10px rgba(0,0,0,0.05)' }}>
-                                <h3 style={{ margin: '0 0 10px 0', color: '#666', fontSize: '14px' }}>Total Registered Users</h3>
-                                <p style={{ margin: 0, fontSize: '32px', fontWeight: 'bold', color: '#111' }}>{users.length}</p>
+                    <nav className="sidebar-nav">
+                        <a href="#" className={`nav-item ${activePanel === 'dashboard-panel' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); setActivePanel('dashboard-panel'); }}>
+                            <i className="fa-solid fa-grid-2"></i> Dashboard
+                        </a>
+                        <a href="#" className={`nav-item ${activePanel === 'users-panel' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); setActivePanel('users-panel'); }}>
+                            <i className="fa-solid fa-users"></i> Users
+                        </a>
+                        <a href="#" className={`nav-item ${activePanel === 'verification-panel' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); setActivePanel('verification-panel'); }}>
+                            <i className="fa-solid fa-shield-check"></i> Verification
+                        </a>
+                        <a href="#" className={`nav-item ${activePanel === 'listings-panel' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); setActivePanel('listings-panel'); }}>
+                            <i className="fa-solid fa-layer-group"></i> Listings
+                        </a>
+                        <a href="#" className={`nav-item ${activePanel === 'payments-panel' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); setActivePanel('payments-panel'); }}>
+                            <i className="fa-solid fa-credit-card"></i> Payments
+                        </a>
+                        <a href="#" className={`nav-item ${activePanel === 'analytics-panel' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); setActivePanel('analytics-panel'); }}>
+                            <i className="fa-solid fa-chart-mixed"></i> Analytics
+                        </a>
+                        <a href="#" className={`nav-item ${activePanel === 'settings-panel' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); setActivePanel('settings-panel'); }}>
+                            <i className="fa-solid fa-gear"></i> Settings
+                        </a>
+                    </nav>
+
+                    {/* Admin Profile at Bottom */}
+                    <div className="sidebar-profile">
+                        <img src="/avatar.jpeg" alt="Admin" className="profile-avatar" onError={(e) => e.target.src='https://ui-avatars.com/api/?name=Admin&background=0D8ABC&color=fff&size=40'} />
+                        <div className="profile-info">
+                            <span className="profile-name">Admin</span>
+                            <span className="profile-role">Super Admin</span>
+                        </div>
+                    </div>
+                </aside>
+
+                {/* MAIN CONTENT AREA */}
+                <main className="glass-main" style={{ overflowY: 'auto', maxHeight: '100vh' }}>
+                    {/* TOP BAR */}
+                    <header className="top-bar">
+                        <div className="top-bar-left">
+                            <h1>Admin // <span className="secret-text">SECRET DASHBOARD</span></h1>
+                            <p className="top-bar-date">{new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                        </div>
+                        <div className="top-bar-right">
+                            <div className="search-box">
+                                <i className="fa-solid fa-magnifying-glass"></i>
+                                <input type="text" placeholder="Search" id="global-search" />
                             </div>
-                            <div style={{ backgroundColor: '#fff', padding: '20px', borderRadius: '12px', boxShadow: '0 2px 10px rgba(0,0,0,0.05)' }}>
-                                <h3 style={{ margin: '0 0 10px 0', color: '#666', fontSize: '14px' }}>Pending Verifications</h3>
-                                <p style={{ margin: 0, fontSize: '32px', fontWeight: 'bold', color: '#d32f2f' }}>{pendingVerifications}</p>
-                            </div>
-                            <div style={{ backgroundColor: '#fff', padding: '20px', borderRadius: '12px', boxShadow: '0 2px 10px rgba(0,0,0,0.05)' }}>
-                                <h3 style={{ margin: '0 0 10px 0', color: '#666', fontSize: '14px' }}>Active Listings</h3>
-                                <p style={{ margin: 0, fontSize: '32px', fontWeight: 'bold', color: '#2e7d32' }}>{activeListingsCount}</p>
-                            </div>
+                            <button className="icon-btn" onClick={() => navigate('/')} title="Back to Main Site"><i className="fa-solid fa-home"></i></button>
+                            <button className="icon-btn"><i className="fa-regular fa-user"></i></button>
                         </div>
-                        
-                        <div style={{ backgroundColor: '#fff', padding: '20px', borderRadius: '12px', boxShadow: '0 2px 10px rgba(0,0,0,0.05)' }}>
-                            <h2 style={{ marginTop: 0, marginBottom: '20px', fontSize: '18px' }}>Recent Listings</h2>
-                            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-                                <thead>
-                                    <tr style={{ borderBottom: '2px solid #eee', textAlign: 'left' }}>
-                                        <th style={{ padding: '12px 10px' }}>Item</th>
-                                        <th style={{ padding: '12px 10px' }}>Category</th>
-                                        <th style={{ padding: '12px 10px' }}>Price</th>
-                                        <th style={{ padding: '12px 10px' }}>Date</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {listings.slice(0, 5).map(l => (
-                                        <tr key={l.id} style={{ borderBottom: '1px solid #eee' }}>
-                                            <td style={{ padding: '12px 10px' }}>{l.title}</td>
-                                            <td style={{ padding: '12px 10px', textTransform: 'capitalize' }}>{l.category}</td>
-                                            <td style={{ padding: '12px 10px' }}>${parseFloat(l.price).toLocaleString()}</td>
-                                            <td style={{ padding: '12px 10px' }}>{new Date(l.created_at).toLocaleDateString()}</td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                    </section>
-                )}
+                    </header>
 
-                {activePanel === 'users-panel' && (
-                    <section>
-                        <div style={{ backgroundColor: '#fff', padding: '20px', borderRadius: '12px', boxShadow: '0 2px 10px rgba(0,0,0,0.05)' }}>
-                            <h2 style={{ marginTop: 0, marginBottom: '20px', fontSize: '18px' }}>Manage Users</h2>
-                            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-                                <thead>
-                                    <tr style={{ borderBottom: '2px solid #eee', textAlign: 'left' }}>
-                                        <th style={{ padding: '12px 10px' }}>Name</th>
-                                        <th style={{ padding: '12px 10px' }}>Email</th>
-                                        <th style={{ padding: '12px 10px' }}>Verified</th>
-                                        <th style={{ padding: '12px 10px' }}>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {users.map(u => (
-                                        <tr key={u.id} style={{ borderBottom: '1px solid #eee' }}>
-                                            <td style={{ padding: '12px 10px' }}>{u.full_name}</td>
-                                            <td style={{ padding: '12px 10px' }}>{u.email}</td>
-                                            <td style={{ padding: '12px 10px' }}>
-                                                {u.is_verified ? 
-                                                    <span style={{ color: '#2e7d32', fontWeight: 'bold' }}><i className="fa-solid fa-check-circle"></i> Yes</span> : 
-                                                    <span style={{ color: '#d32f2f', fontWeight: 'bold' }}>No</span>}
-                                            </td>
-                                            <td style={{ padding: '12px 10px' }}>
-                                                <button 
-                                                    onClick={() => handleVerifyUser(u.id, u.is_verified)}
-                                                    style={{ padding: '6px 12px', background: u.is_verified ? '#f57c00' : '#2e7d32', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
-                                                >
-                                                    {u.is_verified ? 'Revoke Verification' : 'Verify User'}
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                    </section>
-                )}
+                    {/* DASHBOARD PANEL */}
+                    {activePanel === 'dashboard-panel' && (
+                        <section id="dashboard-panel" className="panel-section active">
+                            <div className="dashboard-grid-top">
+                                <div className="stats-row">
+                                    <div className="glass-card stat-card">
+                                        <div className="stat-header">
+                                            <span>Total Active Users</span>
+                                            <i className="fa-solid fa-user-group stat-icon-sm"></i>
+                                        </div>
+                                        <p className="stat-number">{users.length}</p>
+                                        <span className="stat-sub">Total <span className="stat-change positive">+0%</span></span>
+                                    </div>
+                                    <div className="glass-card stat-card">
+                                        <div className="stat-header">
+                                            <span>Verification Queue</span>
+                                            <i className="fa-regular fa-clock stat-icon-sm"></i>
+                                        </div>
+                                        <p className="stat-number">{pendingVerifications.length}</p>
+                                        <span className="stat-sub">Pending <span className="stat-change negative">0%</span></span>
+                                    </div>
+                                    <div className="glass-card stat-card">
+                                        <div className="stat-header">
+                                            <span>New Listings</span>
+                                            <i className="fa-regular fa-calendar stat-icon-sm"></i>
+                                        </div>
+                                        <p className="stat-number">{activeListingsCount}</p>
+                                        <span className="stat-sub">Total <span className="stat-change positive">+0%</span></span>
+                                    </div>
+                                </div>
 
-                {activePanel === 'listings-panel' && (
-                    <section>
-                        <div style={{ backgroundColor: '#fff', padding: '20px', borderRadius: '12px', boxShadow: '0 2px 10px rgba(0,0,0,0.05)' }}>
-                            <h2 style={{ marginTop: 0, marginBottom: '20px', fontSize: '18px' }}>Manage Listings</h2>
-                            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-                                <thead>
-                                    <tr style={{ borderBottom: '2px solid #eee', textAlign: 'left' }}>
-                                        <th style={{ padding: '12px 10px' }}>ID</th>
-                                        <th style={{ padding: '12px 10px' }}>Title</th>
-                                        <th style={{ padding: '12px 10px' }}>Category</th>
-                                        <th style={{ padding: '12px 10px' }}>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {listings.map(l => (
-                                        <tr key={l.id} style={{ borderBottom: '1px solid #eee' }}>
-                                            <td style={{ padding: '12px 10px' }}>#{l.id}</td>
-                                            <td style={{ padding: '12px 10px' }}>{l.title}</td>
-                                            <td style={{ padding: '12px 10px', textTransform: 'capitalize' }}>{l.category}</td>
-                                            <td style={{ padding: '12px 10px' }}>
-                                                <button 
-                                                    onClick={() => handleDeleteListing(l.id)}
-                                                    style={{ padding: '6px 12px', background: '#d32f2f', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
-                                                >
-                                                    <i className="fa-solid fa-trash"></i> Delete
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                    </section>
-                )}
-            </main>
+                                <div className="glass-card marketplace-overview">
+                                    <div className="card-header-row">
+                                        <div>
+                                            <h3>Marketplace Listings Overview</h3>
+                                            <p className="sub-text">Live feed of recent listings</p>
+                                        </div>
+                                        <button className="dots-btn"><i className="fa-solid fa-ellipsis"></i></button>
+                                    </div>
+                                    <div className="table-responsive">
+                                        <table className="mini-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Item Name</th>
+                                                    <th>Category</th>
+                                                    <th>Price</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {listings.slice(0, 5).map(l => (
+                                                    <tr key={l.id}>
+                                                        <td>{l.title}</td>
+                                                        <td style={{ textTransform: 'capitalize' }}>{l.category}</td>
+                                                        <td>${parseFloat(l.price).toLocaleString()}</td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    )}
+
+                    {/* USERS PANEL */}
+                    {activePanel === 'users-panel' && (
+                        <section id="users-panel" className="panel-section active">
+                            <div className="glass-card full-width-card">
+                                <div className="card-header-row">
+                                    <h3>All Registered Users</h3>
+                                </div>
+                                <div className="table-responsive">
+                                    <table className="glass-table">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Name</th>
+                                                <th>Email</th>
+                                                <th>Province</th>
+                                                <th>Status</th>
+                                                <th>Joined</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {users.map(u => (
+                                                <tr key={u.id}>
+                                                    <td>#{u.id}</td>
+                                                    <td>{u.full_name}</td>
+                                                    <td>{u.email}</td>
+                                                    <td>{u.province || 'N/A'}</td>
+                                                    <td>
+                                                        {u.is_verified ? 
+                                                            <span style={{ color: 'var(--accent-green)', fontWeight: 'bold' }}>Verified</span> : 
+                                                            <span style={{ color: 'var(--accent-red)', fontWeight: 'bold' }}>Pending</span>}
+                                                    </td>
+                                                    <td>{new Date(u.created_at).toLocaleDateString()}</td>
+                                                    <td>
+                                                        <button className="glass-btn" onClick={() => handleVerifyUser(u.id, u.is_verified)}>
+                                                            {u.is_verified ? 'Revoke' : 'Verify'}
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </section>
+                    )}
+
+                    {/* VERIFICATION PANEL */}
+                    {activePanel === 'verification-panel' && (
+                        <section id="verification-panel" className="panel-section active">
+                            <div className="glass-card full-width-card">
+                                <div className="card-header-row">
+                                    <h3>Pending Verification Requests</h3>
+                                </div>
+                                <div className="table-responsive">
+                                    <table className="glass-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Request ID</th>
+                                                <th>User Name</th>
+                                                <th>Email</th>
+                                                <th>Status</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {pendingVerifications.length === 0 ? (
+                                                <tr><td colSpan="5" style={{ textAlign: 'center' }}>No pending verifications.</td></tr>
+                                            ) : (
+                                                pendingVerifications.map(u => (
+                                                    <tr key={u.id}>
+                                                        <td>#{u.id}</td>
+                                                        <td>{u.full_name}</td>
+                                                        <td>{u.email}</td>
+                                                        <td><span style={{ color: 'var(--accent-gold)' }}>Pending Review</span></td>
+                                                        <td>
+                                                            <button className="glass-btn" onClick={() => handleVerifyUser(u.id, u.is_verified)}>
+                                                                Approve Verification
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                ))
+                                            )}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </section>
+                    )}
+
+                    {/* LISTINGS PANEL */}
+                    {activePanel === 'listings-panel' && (
+                        <section id="listings-panel" className="panel-section active">
+                            <div className="glass-card full-width-card">
+                                <div className="card-header-row">
+                                    <h3>All Marketplace Listings</h3>
+                                </div>
+                                <div className="table-responsive">
+                                    <table className="glass-table">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Title</th>
+                                                <th>Category</th>
+                                                <th>Seller</th>
+                                                <th>Price</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {listings.map(l => (
+                                                <tr key={l.id}>
+                                                    <td>#{l.id}</td>
+                                                    <td>{l.title}</td>
+                                                    <td style={{ textTransform: 'capitalize' }}>{l.category}</td>
+                                                    <td>{l.seller_name || `User #${l.user_id}`}</td>
+                                                    <td>${parseFloat(l.price).toLocaleString()}</td>
+                                                    <td>
+                                                        <button className="glass-btn" style={{ color: 'var(--accent-red)', borderColor: 'var(--accent-red)' }} onClick={() => handleDeleteListing(l.id)}>
+                                                            <i className="fa-solid fa-trash"></i> Delete
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </section>
+                    )}
+                    
+                    {/* PLACEHOLDER PANELS */}
+                    {activePanel === 'payments-panel' && (
+                        <section className="panel-section active">
+                            <div className="glass-card full-width-card" style={{ textAlign: 'center', padding: '4rem' }}>
+                                <i className="fa-solid fa-credit-card" style={{ fontSize: '3rem', color: 'var(--accent-blue)', marginBottom: '1rem' }}></i>
+                                <h3>Payments Module</h3>
+                                <p className="sub-text">Coming soon — EcoCash, Innbucks, Visa integrations</p>
+                            </div>
+                        </section>
+                    )}
+                    
+                    {activePanel === 'analytics-panel' && (
+                        <section className="panel-section active">
+                            <div className="glass-card full-width-card" style={{ textAlign: 'center', padding: '4rem' }}>
+                                <i className="fa-solid fa-chart-line" style={{ fontSize: '3rem', color: 'var(--accent-green)', marginBottom: '1rem' }}></i>
+                                <h3>Analytics Engine</h3>
+                                <p className="sub-text">Traffic, conversion, and revenue analytics coming soon</p>
+                            </div>
+                        </section>
+                    )}
+                    
+                    {activePanel === 'settings-panel' && (
+                        <section className="panel-section active">
+                            <div className="glass-card full-width-card" style={{ textAlign: 'center', padding: '4rem' }}>
+                                <i className="fa-solid fa-gear" style={{ fontSize: '3rem', color: 'var(--text-secondary)', marginBottom: '1rem' }}></i>
+                                <h3>Platform Settings</h3>
+                                <p className="sub-text">Site configuration, admin management, and security settings</p>
+                            </div>
+                        </section>
+                    )}
+
+                </main>
+            </div>
         </div>
     );
 };

@@ -26,19 +26,23 @@ const Login = () => {
             const data = await res.json();
             if (!res.ok) throw new Error(data.error || 'Login failed');
 
-            localStorage.setItem('token', data.token);
-            localStorage.setItem('user', JSON.stringify(data.user));
+            localStorage.setItem('zaa_token', data.token);
+            localStorage.setItem('zaa_user', JSON.stringify(data.user));
 
             setSuccess('Login successful! Redirecting...');
             setTimeout(() => {
-                const searchParams = new URLSearchParams(location.search);
-                const redirect = searchParams.get('redirect') || '/';
-                if (redirect.includes('account')) {
-                    navigate('/account');
-                } else if (redirect.includes('post-ad')) {
-                    navigate('/post-ad');
+                if (data.user.is_admin) {
+                    navigate('/admin');
                 } else {
-                    navigate('/');
+                    const searchParams = new URLSearchParams(location.search);
+                    const redirect = searchParams.get('redirect') || '/';
+                    if (redirect.includes('account')) {
+                        navigate('/account');
+                    } else if (redirect.includes('post-ad')) {
+                        navigate('/post-ad');
+                    } else {
+                        navigate('/');
+                    }
                 }
             }, 1000);
         } catch (err) {
