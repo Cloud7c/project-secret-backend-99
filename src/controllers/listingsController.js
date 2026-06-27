@@ -11,10 +11,11 @@ import fs from 'fs';
 export const createListing = async (req, res) => {
     try {
         const {
-            user_id, category, title, price,
+            category, title, price,
             currency, description, province,
             location, specs
         } = req.body;
+        const user_id = req.user.id;
 
         // 1. Validate the fields every listing must have
         if (!user_id || !category || !title || !price) {

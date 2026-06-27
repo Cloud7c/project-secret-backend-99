@@ -1,12 +1,9 @@
-- NEVER commit or push code without explicit user permission. The user will tell you when to commit.
-
-## Strict Workflow Rules
-- NEVER commit to git unless explicitly instructed to do so by the user. Do not even do small tweaks for committing.
-- Keep the project structure super organized.
-- Always use local ports to test before proceeding.
-
+const fs = require('fs');
+const content = `
 ## Enterprise Architecture & Scalability Rules
 - The site will scale to be massive (like Amazon/OLX). Architecture must be highly manageable, modular, and efficient.
 - Use enterprise-grade formulas and approaches to ensure blazing fast performance and zero data loss in the database.
 - NO DUMMIES. Ensure all placeholders or mock data are strictly removed or replaced with robust loading states or actual dynamic database connections.
 - Proceed step-by-step and test rigorously at every stage.
+`;
+fs.appendFileSync('.agents/AGENTS.md', content);

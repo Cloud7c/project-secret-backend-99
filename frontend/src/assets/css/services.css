@@ -1,0 +1,196 @@
+/* =========================================
+   SERVICES PAGE LAYOUT (SEGOE UI STANDARDS APPLIED)
+   ========================================= */
+
+.services-page {
+  
+    padding: 30px 0 60px 0;
+    background-color: #ffffff;
+    
+    background-image: 
+        /* LAYER 1: The Vertical Mask (Height cutoff at 110px) */
+        linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.4) 50px, #ffffff 110px),
+        
+        /* LAYER 2: The Horizontal Color Wash.
+           Fades from white -> yellow -> green -> white. */
+        linear-gradient(to right, #ffffff 0%, #ffebb3 30%, #d4f7c8 70%, #ffffff 100%);
+        
+    /* Keeps the glow at the very top and perfectly centered */
+    background-repeat: no-repeat;
+    background-position: top center;
+    
+    /* 🟢 THE FIX: Caps the entire glow width at 1050px max. 
+       On smaller screens, it safely shrinks to 100%. */
+    background-size: min(80%, 1100px) 100%;
+    
+    min-height: 100vh;
+    font-family: 'Segoe UI', -apple-system, Arial, sans-serif;
+}
+
+/* SCALED DOWN TO 1000px TO MATCH THE SITE STANDARDS */
+.services-container {
+    max-width: 1000px; 
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.breadcrumb {
+    font-size: 13px;
+    color: #000000; /* Absolute black */
+    font-weight: 600; 
+    margin-bottom: 20px;
+}
+
+.breadcrumb a {
+    color: #2e7d32;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+/* Top Header Row (Title + Search) */
+.services-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+/* 🟢 CLAMPED: 22px MAX, 700 MAX, 1PX SPACING, ABSOLUTE BLACK */
+.services-title {
+    font-family: 'Segoe UI', -apple-system, Arial, sans-serif;
+    font-size: 22px; 
+    font-weight: 700;
+    color: #000000;
+    letter-spacing: 1px;
+}
+
+.services-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.services-actions .nav-arrow {
+    background-color: #ffffff;
+    border: 1px solid rgba(0,0,0,0.1); /* Very faint outline */
+    border-radius: 4px;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    color: #000000; /* Absolute black */
+    transition: background-color 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.services-actions .nav-arrow:hover {
+    background-color: #f0f0f0;
+}
+
+.services-actions select {
+    padding: 8px 15px;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 4px;
+    font-family: 'Segoe UI', -apple-system, Arial, sans-serif;
+    outline: none;
+    color: #000000; /* Absolute black */
+    font-weight: 600; 
+    font-size: 13px;
+}
+
+.btn-search {
+    background-color: #2e7d32;
+    color: white;
+    border: none;
+    padding: 9px 20px;
+    border-radius: 4px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'Segoe UI', -apple-system, Arial, sans-serif;
+    font-size: 13px;
+    transition: background-color 0.2s;
+}
+
+.btn-search:hover {
+    background-color: #1b5e20;
+}
+
+/* 4-Column Grid (Fluidly scales down inside 1000px) */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+/* Service Card Design (Shadow only, no borders) */
+.service-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 35px 20px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03); /* Soft shadow */
+    border: none; /* NO VISIBLE BORDER */
+    position: relative;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    font-family: 'Segoe UI', -apple-system, Arial, sans-serif;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08); /* Deeper shadow on hover */
+}
+
+.service-icon {
+    font-size: 42px;
+    width: 42px; 
+    height: 42px; 
+    color: #2e7d32; 
+    margin-bottom: 20px;
+}
+
+.service-card h3 {
+    font-family: 'Segoe UI', -apple-system, Arial, sans-serif;
+    font-size: 18px; /* Within the 22px max limit */
+    font-weight: 700;
+    color: #000000; /* Absolute black */
+    margin-bottom: 10px;
+}
+
+.service-card p {
+    font-size: 12px;
+    color: #000000; /* Absolute black */
+    font-weight: 500; /* Clamped from 600 */
+    line-height: 1.5;
+}
+
+/* Small Orange Badge */
+.badge-new {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #c99a5b; 
+    color: white;
+    font-size: 10px;
+    font-weight: 700; /* Clamped from 800 */
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 1024px) {
+    .services-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 768px) {
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .services-header-row { flex-direction: column; align-items: flex-start; gap: 15px; }
+    .services-actions { width: 100%; justify-content: space-between; }
+}
+@media (max-width: 480px) {
+    .services-grid { grid-template-columns: 1fr; }
+}

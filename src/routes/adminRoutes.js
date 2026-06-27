@@ -1,7 +1,18 @@
 import express from 'express';
 import pool from '../db.js';
+import protect from '../middleware/auth.js';
 
 const router = express.Router();
+
+const protectAdmin = (req, res, next) => {
+    if (!req.user || !req.user.is_admin) {
+        return res.status(403).json({ error: 'Access denied. Admins only.' });
+    }
+    next();
+};
+
+// Apply to all routes
+router.use(protect, protectAdmin);
 
 // 1. Fetch All Users for Dashboard
 router.get('/users', async (req, res) => {

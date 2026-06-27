@@ -1,0 +1,141 @@
+/* =========================================
+   HERO SECTION (HIGH-END LUXURY VIDEO)
+   ========================================= */
+
+/* --- Hero Section Background --- */
+.hero-section {
+    position: relative;
+    /* Removed the old background-image to make way for the video */
+    padding: 130px 20px 140px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; 
+}
+
+/* --- CRITICAL FIX: Forces video to the background! --- */
+.hero-video-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Makes video fill the space perfectly without stretching */
+    z-index: 0; /* Puts video at the very bottom layer */
+}
+
+/* Dark overlay to ensure white text pops */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Slightly darkened to 50% for moving video */
+    z-index: 1; /* Sits right above the video (0) */
+}
+
+/* Container for all hero content */
+.hero-content {
+    position: relative;
+    z-index: 2; /* Keeps content safely above the dark overlay (1) */
+    width: 100%;
+    max-width: 800px; 
+    text-align: center;
+}
+
+/* --- Hero Typography (UPGRADED TO LUXURY SERIF) --- */
+.hero-title {
+    font-family: 'Playfair Display', Georgia, serif; /* Luxury Serif Font */
+    color: #ffffff;
+    font-size: 46px; /* Slightly larger for impact */
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.hero-subtitle {
+    font-family: 'Playfair Display', Georgia, serif; /* Luxury Serif Font */
+    color: #c99a5b; /* The exact gold/bronze from the mockup */
+    font-size: 38px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* --- Search Box Area --- */
+.hero-search-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; 
+    background-color: rgba(0, 0, 0, 0.55); 
+    padding: 15px; 
+    border-radius: 8px; 
+}
+
+/* Top Row Input */
+.search-input-main {
+    width: 100%;
+    padding: 12px 20px; 
+    font-size: 15px;
+    color: #111111; /* UPGRADED: Super black text */
+    font-weight: 600; /* Added weight for readability */
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Bottom Row Flexbox */
+.search-bottom-row {
+    display: flex;
+    gap: 10px; 
+}
+
+/* Dropdowns */
+.search-select {
+    flex: 1; 
+    padding: 12px 15px; 
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    color: #111111; /* UPGRADED: Super black instead of faint #555 */
+    font-weight: 600; /* Added weight for readability */
+    background-color: #ffffff;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Search Button */
+.search-submit-btn {
+    background-color: #c99a5b; 
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 12px 40px; 
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.search-submit-btn:hover {
+    background-color: #b0854d; 
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+    .hero-title { font-size: 32px; }
+    .hero-subtitle { font-size: 26px; }
+    
+    .search-bottom-row {
+        flex-direction: column; 
+    }
+    
+    .search-submit-btn {
+        padding: 16px; 
+    }
+}
