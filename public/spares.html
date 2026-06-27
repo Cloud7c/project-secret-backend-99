@@ -86,37 +86,47 @@
                 <aside class="filters-sidebar" id="filterSidebar">
                     <h2 class="sidebar-title">Filter Spares</h2>
                     
-                    <div class="filter-group">
-                        <label>Part Category</label>
-                        <div class="checkbox-list">
-                            <label><input type="checkbox"> Engine Components</label>
-                            <label><input type="checkbox"> Brakes & Rotors</label>
-                            <label><input type="checkbox"> Suspension & Steering</label>
-                            <label><input type="checkbox"> Filters & Fluids</label>
-                            <label><input type="checkbox"> Body Parts</label>
-                        </div>
+                    <div class="sidebar-section">
+                        <h4>Part Category</h4>
+                        <details class="custom-filter">
+                            <summary>All Categories <i class="fa-solid fa-chevron-down"></i></summary>
+                            <div class="custom-options">
+                                <label><input type="radio" name="type" value="All Types" checked> All Categories</label>
+                                <label><input type="radio" name="type" value="Engine Components"> Engine Components</label>
+                                <label><input type="radio" name="type" value="Brakes & Rotors"> Brakes & Rotors</label>
+                                <label><input type="radio" name="type" value="Suspension & Steering"> Suspension & Steering</label>
+                                <label><input type="radio" name="type" value="Filters & Fluids"> Filters & Fluids</label>
+                                <label><input type="radio" name="type" value="Body Parts"> Body Parts</label>
+                            </div>
+                        </details>
                     </div>
 
-                    <div class="filter-group">
-                        <label>Condition</label>
-                        <div class="checkbox-list">
-                            <label><input type="checkbox"> Genuine OEM</label>
-                            <label><input type="checkbox"> Aftermarket (New)</label>
-                            <label><input type="checkbox"> Refurbished</label>
-                            <label><input type="checkbox"> Used</label>
-                        </div>
+                    <div class="sidebar-section">
+                        <h4>Condition</h4>
+                        <details class="custom-filter">
+                            <summary>Any Condition <i class="fa-solid fa-chevron-down"></i></summary>
+                            <div class="custom-options">
+                                <label><input type="radio" name="condition" value="Any" checked> Any Condition</label>
+                                <label><input type="radio" name="condition" value="Genuine OEM"> Genuine OEM</label>
+                                <label><input type="radio" name="condition" value="Aftermarket (New)"> Aftermarket (New)</label>
+                                <label><input type="radio" name="condition" value="Refurbished"> Refurbished</label>
+                                <label><input type="radio" name="condition" value="Used"> Used</label>
+                            </div>
+                        </details>
                     </div>
 
-                    <div class="filter-group">
-                        <label>Vehicle Type</label>
-                        <div class="checkbox-list">
-                            <label><input type="checkbox"> Passenger Cars</label>
-                            <label><input type="checkbox"> Commercial Trucks</label>
-                            <label><input type="checkbox"> Agriculture Tractors</label>
-                        </div>
+                    <div class="sidebar-section">
+                        <h4>Vehicle Type</h4>
+                        <details class="custom-filter">
+                            <summary>All Makes <i class="fa-solid fa-chevron-down"></i></summary>
+                            <div class="custom-options">
+                                <label><input type="radio" name="make" value="All Makes" checked> All Types</label>
+                                <label><input type="radio" name="make" value="Passenger Cars"> Passenger Cars</label>
+                                <label><input type="radio" name="make" value="Commercial Trucks"> Commercial Trucks</label>
+                                <label><input type="radio" name="make" value="Agriculture Tractors"> Agriculture Tractors</label>
+                            </div>
+                        </details>
                     </div>
-                    
-                    <button class="s-sidebar-apply-btn">Apply Filters</button>
                 </aside>
 
                 <!-- Clean Main Grid -->

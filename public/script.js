@@ -765,7 +765,7 @@ if (targetCategory && targetGridId) {
         }
 
         // Instant Filter Change triggers
-        document.querySelectorAll('.custom-filter input[type="radio"]').forEach(radio => {
+        document.querySelectorAll('.custom-filter input[type="radio"], .custom-sort input[type="radio"]').forEach(radio => {
             radio.addEventListener('change', () => {
                 triggerFilters();
             });
@@ -790,7 +790,7 @@ if (targetCategory && targetGridId) {
 // =========================================
 // CUSTOM FILTER AUTO-CLOSE & SUMMARY UPDATE
 // =========================================
-document.querySelectorAll('.custom-filter').forEach(details => {
+document.querySelectorAll('.custom-filter, .custom-sort').forEach(details => {
     const summary = details.querySelector('summary');
     const originalText = summary ? summary.innerHTML.split('<i')[0].trim() : ''; // Get the text before the icon
     
