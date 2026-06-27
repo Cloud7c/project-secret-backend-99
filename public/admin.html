@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin // SECRET DASHBOARD</title>
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Background Orbs for Glassmorphism -->
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+    <div class="bg-orb orb-3"></div>
+
+    <div class="admin-layout">
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- LEFT SIDEBAR (Exact replica from image) -->
+        <!-- ═══════════════════════════════════════ -->
+        <aside class="glass-sidebar">
+            <div class="sidebar-brand">
+                <img src="logo.png" alt="Logo" class="brand-logo">
+                <h2>ZIM AUTOAGRI</h2>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-target="dashboard-panel">
+                    <i class="fa-solid fa-grid-2"></i> Dashboard
+                </a>
+                <a href="#" class="nav-item" data-target="users-panel">
+                    <i class="fa-solid fa-users"></i> Users
+                </a>
+                <a href="#" class="nav-item" data-target="verification-panel">
+                    <i class="fa-solid fa-shield-check"></i> Verification
+                </a>
+                <a href="#" class="nav-item" data-target="listings-panel">
+                    <i class="fa-solid fa-layer-group"></i> Listings
+                </a>
+                <a href="#" class="nav-item" data-target="payments-panel">
+                    <i class="fa-solid fa-credit-card"></i> Payments
+                </a>
+                <a href="#" class="nav-item" data-target="analytics-panel">
+                    <i class="fa-solid fa-chart-mixed"></i> Analytics
+                </a>
+                <a href="#" class="nav-item" data-target="settings-panel">
+                    <i class="fa-solid fa-gear"></i> Settings
+                </a>
+            </nav>
+
+            <!-- Admin Profile at Bottom -->
+            <div class="sidebar-profile">
+                <img src="avatar.jpeg" alt="Admin" class="profile-avatar" onerror="this.src='https://ui-avatars.com/api/?name=Admin&background=0D8ABC&color=fff&size=40'">
+                <div class="profile-info">
+                    <span class="profile-name">Admin</span>
+                    <span class="profile-role">Super Admin</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- MAIN CONTENT AREA                      -->
+        <!-- ═══════════════════════════════════════ -->
+        <main class="glass-main">
+
+            <!-- TOP BAR -->
+            <header class="top-bar">
+                <div class="top-bar-left">
+                    <h1>Admin // <span class="secret-text">SECRET DASHBOARD</span></h1>
+                    <p class="top-bar-date" id="current-datetime"></p>
+                </div>
+                <div class="top-bar-right">
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" placeholder="Search" id="global-search">
+                    </div>
+                    <button class="icon-btn"><i class="fa-regular fa-bell"></i></button>
+                    <button class="icon-btn"><i class="fa-regular fa-user"></i></button>
+                </div>
+            </header>
+
+            <!-- ═══════════════════════════════════════ -->
+            <!-- DASHBOARD PANEL (Main Overview)        -->
+            <!-- ═══════════════════════════════════════ -->
+            <section id="dashboard-panel" class="panel-section active">
+
+                <!-- ROW 1: Stats Cards + Marketplace Overview -->
+                <div class="dashboard-grid-top">
+                    <!-- 3 Stat Cards -->
+                    <div class="stats-row">
+                        <div class="glass-card stat-card">
+                            <div class="stat-header">
+                                <span>Total Active Users</span>
+                                <i class="fa-solid fa-user-group stat-icon-sm"></i>
+                            </div>
+                            <p class="stat-number" id="stat-total-users">0</p>
+                            <span class="stat-sub">Total <span class="stat-change positive" id="stat-users-change">+0%</span></span>
+                        </div>
+                        <div class="glass-card stat-card">
+                            <div class="stat-header">
+                                <span>Verification Queue</span>
+                                <i class="fa-regular fa-clock stat-icon-sm"></i>
+                            </div>
+                            <p class="stat-number" id="stat-pending-verifications">0</p>
+                            <span class="stat-sub">Pending <span class="stat-change negative" id="stat-verify-change">0%</span></span>
+                        </div>
+                        <div class="glass-card stat-card">
+                            <div class="stat-header">
+                                <span>New Listings</span>
+                                <i class="fa-regular fa-calendar stat-icon-sm"></i>
+                            </div>
+                            <p class="stat-number" id="stat-new-listings">0</p>
+                            <span class="stat-sub">Today <span class="stat-change positive" id="stat-listings-change">+0%</span></span>
+                        </div>
+                    </div>
+
+                    <!-- Marketplace Listings Overview (Right Column) -->
+                    <div class="glass-card marketplace-overview">
+                        <div class="card-header-row">
+                            <div>
+                                <h3>Marketplace Listings Overview</h3>
+                                <p class="sub-text">Live feed of recent listings</p>
+                            </div>
+                            <button class="dots-btn"><i class="fa-solid fa-ellipsis"></i></button>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="mini-table">
+                                <thead>
+                                    <tr>
+                                        <th>Image</th>
+                                        <th>Item Name</th>
+                                        <th>Category</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="marketplace-overview-body">
+                                    <!-- Injected by JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ROW 2: Pending User Verification Requests Table -->
+                <div class="glass-card full-width-card">
+                    <div class="card-header-row">
+                        <h3>Pending User Verification Requests</h3>
+                        <button class="dots-btn"><i class="fa-solid fa-ellipsis"></i></button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="glass-table">
+                            <thead>
+                                <tr>
+                                    <th>Request ID</th>
+                                    <th>User Name</th>
+                                    <th>Email</th>
+                                    <th>Status</th>
+                                    <th>Documents</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="pending-verification-body">
+                                <!-- Injected by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- ROW 3: Bottom 3-Column Grid -->
+                <div class="dashboard-grid-bottom">
+                    <!-- User Verification Requests (Left) -->
+                    <div class="glass-card">
+                        <div class="card-header-row">
+                            <h3>User Verification Requests</h3>
+                            <button class="dots-btn"><i class="fa-solid fa-ellipsis"></i></button>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="mini-table">
+                                <thead>
+                                    <tr>
+                                        <th>User Name</th>
+                                        <th>Email</th>
+                                        <th>Status</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="verification-requests-body">
+                                    <!-- Injected by JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Verification Activity Chart (Center) -->
+                    <div class="glass-card chart-card">
+                        <h3>Verification Activity</h3>
+                        <p class="sub-text">(Past 7 Days)</p>
+                        <div class="bar-chart" id="verification-chart">
+                            <div class="chart-bar-group">
+                                <div class="chart-bars-inner">
+                                    <div class="chart-bar" style="height: 40%;" data-color="blue"></div>
+                                    <div class="chart-bar" style="height: 55%;" data-color="gold"></div>
+                                </div>
+                                <span class="chart-label">M</span>
+                            </div>
+                            <div class="chart-bar-group">
+                                <div class="chart-bars-inner">
+                                    <div class="chart-bar" style="height: 60%;" data-color="blue"></div>
+                                    <div class="chart-bar" style="height: 35%;" data-color="gold"></div>
+                                </div>
+                                <span class="chart-label">T</span>
+                            </div>
+                            <div class="chart-bar-group">
+                                <div class="chart-bars-inner">
+                                    <div class="chart-bar" style="height: 80%;" data-color="blue"></div>
+                                    <div class="chart-bar" style="height: 50%;" data-color="gold"></div>
+                                </div>
+                                <span class="chart-label">W</span>
+                            </div>
+                            <div class="chart-bar-group">
+                                <div class="chart-bars-inner">
+                                    <div class="chart-bar" style="height: 70%;" data-color="blue"></div>
+                                    <div class="chart-bar" style="height: 45%;" data-color="gold"></div>
+                                </div>
+                                <span class="chart-label">T</span>
+                            </div>
+                            <div class="chart-bar-group">
+                                <div class="chart-bars-inner">
+                                    <div class="chart-bar" style="height: 90%;" data-color="blue"></div>
+                                    <div class="chart-bar" style="height: 60%;" data-color="gold"></div>
+                                </div>
+                                <span class="chart-label">F</span>
+                            </div>
+                            <div class="chart-bar-group">
+                                <div class="chart-bars-inner">
+                                    <div class="chart-bar" style="height: 50%;" data-color="blue"></div>
+                                    <div class="chart-bar" style="height: 30%;" data-color="gold"></div>
+                                </div>
+                                <span class="chart-label">S</span>
+                            </div>
+                            <div class="chart-bar-group">
+                                <div class="chart-bars-inner">
+                                    <div class="chart-bar" style="height: 30%;" data-color="blue"></div>
+                                    <div class="chart-bar" style="height: 20%;" data-color="gold"></div>
+                                </div>
+                                <span class="chart-label">S</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Marketplace Growth Chart (Right) -->
+                    <div class="glass-card chart-card">
+                        <div class="card-header-row">
+                            <div>
+                                <h3>Marketplace Growth</h3>
+                                <p class="sub-text">(New Users & Listings)</p>
+                            </div>
+                            <button class="dots-btn"><i class="fa-solid fa-ellipsis"></i></button>
+                        </div>
+                        <canvas id="growth-chart" width="300" height="150"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════ -->
+            <!-- USERS PANEL                            -->
+            <!-- ═══════════════════════════════════════ -->
+            <section id="users-panel" class="panel-section">
+                <div class="glass-card full-width-card">
+                    <div class="card-header-row">
+                        <h3>All Registered Users</h3>
+                        <button class="glass-btn" onclick="fetchUsers()"><i class="fa-solid fa-rotate-right"></i> Refresh</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="glass-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Province</th>
+                                    <th>Status</th>
+                                    <th>Joined</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="users-table-body">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════ -->
+            <!-- VERIFICATION PANEL                     -->
+            <!-- ═══════════════════════════════════════ -->
+            <section id="verification-panel" class="panel-section">
+                <div class="glass-card full-width-card">
+                    <div class="card-header-row">
+                        <h3>Pending Verification Requests</h3>
+                        <button class="glass-btn" onclick="fetchUsers()"><i class="fa-solid fa-rotate-right"></i> Refresh</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="glass-table">
+                            <thead>
+                                <tr>
+                                    <th>Request ID</th>
+                                    <th>User Name</th>
+                                    <th>Email</th>
+                                    <th>Status</th>
+                                    <th>Documents</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="verification-table-body">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════ -->
+            <!-- LISTINGS PANEL                         -->
+            <!-- ═══════════════════════════════════════ -->
+            <section id="listings-panel" class="panel-section">
+                <div class="glass-card full-width-card">
+                    <div class="card-header-row">
+                        <h3>All Marketplace Listings</h3>
+                        <button class="glass-btn" onclick="fetchAdminListings()"><i class="fa-solid fa-rotate-right"></i> Refresh</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="glass-table">
+                            <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Title</th>
+                                    <th>Category</th>
+                                    <th>Seller</th>
+                                    <th>Price</th>
+                                    <th>Featured</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="listings-table-body">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════ -->
+            <!-- PAYMENTS PANEL (Placeholder)           -->
+            <!-- ═══════════════════════════════════════ -->
+            <section id="payments-panel" class="panel-section">
+                <div class="glass-card full-width-card" style="text-align:center; padding: 4rem;">
+                    <i class="fa-solid fa-credit-card" style="font-size:3rem; color: var(--accent-blue); margin-bottom:1rem;"></i>
+                    <h3>Payments Module</h3>
+                    <p class="sub-text">Coming soon — EcoCash, Innbucks, Visa integrations</p>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════ -->
+            <!-- ANALYTICS PANEL (Placeholder)          -->
+            <!-- ═══════════════════════════════════════ -->
+            <section id="analytics-panel" class="panel-section">
+                <div class="glass-card full-width-card" style="text-align:center; padding: 4rem;">
+                    <i class="fa-solid fa-chart-line" style="font-size:3rem; color: var(--accent-green); margin-bottom:1rem;"></i>
+                    <h3>Analytics Engine</h3>
+                    <p class="sub-text">Traffic, conversion, and revenue analytics coming soon</p>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════ -->
+            <!-- SETTINGS PANEL (Placeholder)           -->
+            <!-- ═══════════════════════════════════════ -->
+            <section id="settings-panel" class="panel-section">
+                <div class="glass-card full-width-card" style="text-align:center; padding: 4rem;">
+                    <i class="fa-solid fa-gear" style="font-size:3rem; color: var(--text-secondary); margin-bottom:1rem;"></i>
+                    <h3>Platform Settings</h3>
+                    <p class="sub-text">Site configuration, admin management, and security settings</p>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

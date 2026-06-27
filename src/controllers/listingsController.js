@@ -34,13 +34,14 @@ export const createListing = async (req, res) => {
             });
         }
 
-        // 3. Validate the user actually exists
+        // 3. Validate the user actually exists and check verification status
         const userCheck = await pool.query(
-            'SELECT id FROM users WHERE id = $1', [user_id]
+            'SELECT id, is_verified FROM users WHERE id = $1', [user_id]
         );
         if (userCheck.rows.length === 0) {
             return res.status(404).json({ error: 'User not found.' });
         }
+        const isVerified = userCheck.rows[0].is_verified || false;
 
         // 4. Parse specs if it's a string (FormData sends strings)
         let parsedSpecs = {};
@@ -74,15 +75,16 @@ export const createListing = async (req, res) => {
         const result = await pool.query(
             `INSERT INTO listings
                 (user_id, category, title, price, currency,
-                 description, province, location, images, specs)
-             VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)
+                 description, province, location, images, specs, is_featured)
+             VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)
              RETURNING *`,
             [
                 user_id, category, title, price,
                 currency || 'USD', description,
                 province, location,
                 uploadedImages,
-                parsedSpecs
+                parsedSpecs,
+                isVerified
             ]
         );
 

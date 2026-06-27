@@ -3,6 +3,7 @@ import express from 'express';
 import productRoutes  from './src/routes/productRoutes.js';
 import authRoutes     from './src/routes/authRoutes.js';
 import listingsRoutes from './src/routes/listingsRoutes.js';
+import adminRoutes    from './src/routes/adminRoutes.js';
 import './src/db.js';
 
 const app  = express();
@@ -16,6 +17,7 @@ app.use('/uploads', express.static('uploads'));
 app.use('/api/products', productRoutes);
 app.use('/api/auth',     authRoutes);
 app.use('/api/listings', listingsRoutes);
+app.use('/api/admin',    adminRoutes);
 
 // ── 404 Handler ─────────────────────────────
 app.use((req, res) => {
