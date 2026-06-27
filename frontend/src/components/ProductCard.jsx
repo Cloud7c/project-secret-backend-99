@@ -20,22 +20,22 @@ const ProductCard = ({ listing, cardType }) => {
     if (cardType === 'vehicles') {
         return (
             <div className="product-card">
-                <div className="card-image">
-                    <span className={`badge ${specs.condition === 'Used' ? 'used' : ''}`}>{specs.condition || 'New'}</span>
+                <div className="card-image-wrapper">
+                    <span className={`category-badge ${specs.condition === 'Used' ? 'used' : ''}`}>{specs.condition || 'New'}</span>
                     <button className="favorite-btn"><i className="fa-regular fa-heart"></i></button>
                     <Link to={`/product/${listing.id}`}>
-                        <img src={imageUrl} alt={listing.title} loading="lazy" />
+                        <img src={imageUrl} alt={listing.title} loading="lazy" className="product-image" />
                     </Link>
                 </div>
-                <div className="card-content">
+                <div className="card-details">
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '4px', marginBottom: '8px' }}>
                         {listing.is_featured && <span className="featured-badge"><i className="fa-solid fa-star"></i> Featured</span>}
-                        <h3 className="price" style={{ marginBottom: 0 }}>{priceFormatted}</h3>
+                        <h3 className="card-price" style={{ marginBottom: 0 }}>{priceFormatted}</h3>
                     </div>
-                    <h4 className="title"><Link to={`/product/${listing.id}`}>{listing.title}</Link></h4>
-                    <p className="location"><i className="fa-solid fa-location-dot"></i> {listing.location}</p>
+                    <h4 className="card-title"><Link to={`/product/${listing.id}`}>{listing.title}</Link></h4>
+                    <p className="card-location"><i className="fa-solid fa-location-dot"></i> {listing.location}</p>
                     
-                    <div className="specs">
+                    <div className="card-meta">
                         <span><i className="fa-solid fa-gauge"></i> {specs.mileage || 'N/A'}</span>
                         <span><i className="fa-solid fa-gas-pump"></i> {specs.fuel_type || 'N/A'}</span>
                         <span><i className="fa-solid fa-gear"></i> {specs.transmission || 'N/A'}</span>
