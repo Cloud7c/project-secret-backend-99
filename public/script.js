@@ -903,6 +903,63 @@ if (window.location.pathname.includes('product.html')) {
                 }
 
                 // ─────────────────────────────────────────────────────────
+                // RELATED LISTINGS ALGORITHM
+                // ─────────────────────────────────────────────────────────
+                const relatedGrid = document.querySelector('.related-section .product-grid');
+                if (relatedGrid) {
+                    try {
+                        const relRes = await fetch(`/api/listings?category=${listing.category}&exclude_id=${listing.id}&limit=4&sort=pop`);
+                        const relData = await relRes.json();
+                        
+                        if (relData.listings && relData.listings.length > 0) {
+                            relatedGrid.innerHTML = ''; // clear dummy data
+                            
+                            relData.listings.forEach(relListing => {
+                                let relImageUrl = '/logo.png';
+                                if (relListing.images && relListing.images.length > 0) {
+                                    relImageUrl = relListing.images[0];
+                                } else {
+                                    if (relListing.category === 'vehicles') relImageUrl = '/hilux.jpg';
+                                    if (relListing.category === 'machinery') relImageUrl = '/tractor.jpg';
+                                    if (relListing.category === 'livestock') relImageUrl = '/cow.png';
+                                    if (relListing.category === 'produce') relImageUrl = '/tomatoes.png';
+                                    if (relListing.category === 'spares' || relListing.category === 'parts') relImageUrl = '/spare-brakes.png';
+                                    if (relListing.category === 'equipment') relImageUrl = '/tractor-1.png';
+                                }
+
+                                const relPriceFormatted = new Intl.NumberFormat('en-US', { style: 'currency', currency: relListing.currency || 'USD' }).format(relListing.price);
+                                
+                                relatedGrid.innerHTML += `
+                                    <div class="product-card">
+                                        <div class="card-image-wrapper">
+                                            <span class="category-badge">${relListing.category.toUpperCase()}</span>
+                                            <button class="favorite-btn"><i class="fa-regular fa-heart"></i></button>
+                                            <a href="/product.html?id=${relListing.id}">
+                                                <img src="${relImageUrl}" alt="${relListing.title}" class="product-image" style="height: 180px; object-fit: cover;">
+                                            </a>
+                                        </div>
+                                        <div class="card-details">
+                                            <p class="product-price">${relPriceFormatted}</p>
+                                            <h4 class="product-name"><a href="/product.html?id=${relListing.id}" style="color: inherit; text-decoration: none;">${relListing.title}</a></h4>
+                                            <p class="product-location"><i class="fa-solid fa-location-dot"></i> ${relListing.location}</p>
+                                        </div>
+                                    </div>
+                                `;
+                            });
+                            
+                            // Update 'See All' link
+                            const seeAllLink = document.querySelector('.related-section .see-all');
+                            if (seeAllLink) seeAllLink.href = `/agriculture/${listing.category}.html`;
+                        } else {
+                            // Hide related section if no related items
+                            document.querySelector('.related-section').style.display = 'none';
+                        }
+                    } catch (e) {
+                        console.error('Failed to load related listings', e);
+                    }
+                }
+
+                // ─────────────────────────────────────────────────────────
                 // VIEW TRACKING (Unique Views Algorithm)
                 // ─────────────────────────────────────────────────────────
                 const trackView = async () => {
