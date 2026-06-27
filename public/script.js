@@ -826,8 +826,13 @@ if (heroSearchBtn && heroSearchInput) {
         }
         
         const locRadio = document.querySelector('.hero-custom-dropdowns input[name="location"]:checked');
-        if (locRadio && locRadio.value && locRadio.value !== 'All Provinces' && locRadio.value !== '') {
+        if (locRadio && locRadio.value && !locRadio.value.toLowerCase().startsWith('all ') && locRadio.value !== '') {
             catQuery += `&province=${encodeURIComponent(locRadio.value)}`;
+        }
+
+        const modelRadio = document.querySelector('.hero-custom-dropdowns input[name="model"]:checked');
+        if (modelRadio && modelRadio.value && !modelRadio.value.toLowerCase().startsWith('any ') && modelRadio.value !== '') {
+            catQuery += `&model=${encodeURIComponent(modelRadio.value)}`;
         }
 
         // Call the homepage slider update directly instead of navigating away
