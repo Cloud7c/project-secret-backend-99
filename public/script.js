@@ -185,15 +185,15 @@ if (homeSlider && (window.location.pathname === '/' || window.location.pathname.
                     }
 
                     // Fallback images based on category since we haven't built image uploads yet
-                    let imageUrl = 'logo.png';
+                    let imageUrl = '/logo.png';
                     if (listing.images && listing.images.length > 0) {
                         imageUrl = listing.images[0];
                     } else {
-                        if (listing.category === 'vehicles') imageUrl = 'hilux.jpg';
-                        if (listing.category === 'machinery') imageUrl = 'tractor.jpg';
-                        if (listing.category === 'livestock') imageUrl = 'cow.png';
-                        if (listing.category === 'produce') imageUrl = 'tomatoes.png';
-                        if (listing.category === 'spares' || listing.category === 'parts') imageUrl = 'autoparts.png';
+                        if (listing.category === 'vehicles') imageUrl = '/hilux.jpg';
+                        if (listing.category === 'machinery') imageUrl = '/tractor.jpg';
+                        if (listing.category === 'livestock') imageUrl = '/cow.png';
+                        if (listing.category === 'produce') imageUrl = '/tomatoes.png';
+                        if (listing.category === 'spares' || listing.category === 'parts') imageUrl = '/autoparts.png';
                     }
 
                     let badgeClass = 'auto-card';
@@ -204,7 +204,7 @@ if (homeSlider && (window.location.pathname === '/' || window.location.pathname.
                         <div class="card-image-wrapper">
                             <span class="category-badge" style="text-transform: capitalize;">${listing.category}</span>
                             <button class="favorite-btn"><i class="fa-regular fa-heart"></i></button>
-                            <a href="product.html?id=${listing.id}">
+                            <a href="/product.html?id=${listing.id}">
                                 <img src="${imageUrl}" alt="${listing.title}" class="product-image" loading="lazy">
                             </a>
                         </div>
@@ -213,12 +213,12 @@ if (homeSlider && (window.location.pathname === '/' || window.location.pathname.
                                 ${listing.is_featured ? '<span class="featured-badge"><i class="fa-solid fa-star"></i> Featured</span>' : ''}
                                 <p class="product-price" style="margin-bottom: 0;">${priceFormatted}</p>
                             </div>
-                            <h4 class="product-name"><a href="product.html?id=${listing.id}" style="color: inherit; text-decoration: none;">${listing.title}</a></h4>
+                            <h4 class="product-name"><a href="/product.html?id=${listing.id}" style="color: inherit; text-decoration: none;">${listing.title}</a></h4>
                             <p class="product-location"><i class="fa-solid fa-location-dot"></i> ${listing.location}${listing.province ? ', ' + listing.province : ''}</p>
                             <div class="product-meta">
                                 ${metaHtml}
                             </div>
-                            <a href="product.html?id=${listing.id}" class="view-details-btn">View Details</a>
+                            <a href="/product.html?id=${listing.id}" class="view-details-btn">View Details</a>
                         </div>
                     </div>`;
 
@@ -308,16 +308,16 @@ if (targetCategory && targetGridId) {
                         let cardHtml = '';
 
                         // Fallback image logic
-                        let imageUrl = 'logo.png';
+                        let imageUrl = '/logo.png';
                         if (listing.images && listing.images.length > 0) {
                             imageUrl = listing.images[0];
                         } else {
-                            if (listing.category === 'vehicles') imageUrl = 'hilux.jpg';
-                            if (listing.category === 'machinery') imageUrl = 'tractor.jpg';
-                            if (listing.category === 'livestock') imageUrl = 'cow.png';
-                            if (listing.category === 'produce') imageUrl = 'tomatoes.png';
-                            if (listing.category === 'spares' || listing.category === 'parts') imageUrl = 'spare-brakes.png';
-                            if (listing.category === 'equipment') imageUrl = 'tractor-1.png';
+                            if (listing.category === 'vehicles') imageUrl = '/hilux.jpg';
+                            if (listing.category === 'machinery') imageUrl = '/tractor.jpg';
+                            if (listing.category === 'livestock') imageUrl = '/cow.png';
+                            if (listing.category === 'produce') imageUrl = '/tomatoes.png';
+                            if (listing.category === 'spares' || listing.category === 'parts') imageUrl = '/spare-brakes.png';
+                            if (listing.category === 'equipment') imageUrl = '/tractor-1.png';
                         }
 
                         if (cardType === 'vehicle') {
@@ -326,7 +326,7 @@ if (targetCategory && targetGridId) {
                                 <div class="v-card-image">
                                     <span class="v-badge ${specs.condition === 'Used' ? 'used' : ''}">${specs.condition || 'New'}</span>
                                     <button class="v-fav"><i class="fa-regular fa-heart"></i></button>
-                                    <a href="product.html?id=${listing.id}"><img src="${imageUrl}" alt="${listing.title}" loading="lazy"></a>
+                                    <a href="/product.html?id=${listing.id}"><img src="${imageUrl}" alt="${listing.title}" loading="lazy"></a>
                                 </div>
                                 <div class="v-card-content">
                                     
@@ -334,9 +334,9 @@ if (targetCategory && targetGridId) {
                                         ${listing.is_featured ? '<span class="featured-badge"><i class="fa-solid fa-star"></i> Featured</span>' : ''}
                                         <p class="v-price" style="margin-bottom:0;">${priceFormatted}</p>
                                     </div>
-                                    <h4><a href="product.html?id=${listing.id}">${listing.title}</a></h4>
+                                    <h4><a href="/product.html?id=${listing.id}">${listing.title}</a></h4>
                                     <p class="v-specs"><i class="fa-solid fa-gauge"></i> ${specs.mileage || 'N/A'}<br><i class="fa-solid fa-location-dot"></i> ${listing.location}</p>
-                                    <a href="product.html?id=${listing.id}" class="v-btn">View Details</a>
+                                    <a href="/product.html?id=${listing.id}" class="v-btn">View Details</a>
                                 </div>
                             </div>`;
                         } else if (cardType === 'machinery') {
@@ -345,7 +345,7 @@ if (targetCategory && targetGridId) {
                                 <div class="m-card-image">
                                     <span class="m-badge ${specs.condition === 'Used' ? 'used' : ''}">${specs.condition || 'New'}</span>
                                     <button class="m-fav"><i class="fa-regular fa-heart"></i></button>
-                                    <a href="product.html?id=${listing.id}"><img src="${imageUrl}" alt="${listing.title}" loading="lazy"></a>
+                                    <a href="/product.html?id=${listing.id}"><img src="${imageUrl}" alt="${listing.title}" loading="lazy"></a>
                                 </div>
                                 <div class="m-card-content">
                                     
@@ -353,9 +353,9 @@ if (targetCategory && targetGridId) {
                                         ${listing.is_featured ? '<span class="featured-badge"><i class="fa-solid fa-star"></i> Featured</span>' : ''}
                                         <p class="m-price" style="margin-bottom:0;">${priceFormatted}</p>
                                     </div>
-                                    <h4><a href="product.html?id=${listing.id}">${listing.title}</a></h4>
+                                    <h4><a href="/product.html?id=${listing.id}">${listing.title}</a></h4>
                                     <p class="m-specs"><i class="fa-solid fa-clock"></i> ${specs.mileage || 'N/A'}<br><i class="fa-solid fa-location-dot"></i> ${listing.location}</p>
-                                    <a href="product.html?id=${listing.id}" class="m-btn">View Details</a>
+                                    <a href="/product.html?id=${listing.id}" class="m-btn">View Details</a>
                                 </div>
                             </div>`;
                         } else if (cardType === 'spares') {
@@ -363,10 +363,10 @@ if (targetCategory && targetGridId) {
                             <div class="s-card">
                                 <span class="s-badge ${specs.condition === 'Used' ? '' : 'oem'}">${specs.condition || 'OEM'}</span>
                                 <div class="s-card-img">
-                                    <a href="product.html?id=${listing.id}"><img src="${imageUrl}" alt="${listing.title}" loading="lazy"></a>
+                                    <a href="/product.html?id=${listing.id}"><img src="${imageUrl}" alt="${listing.title}" loading="lazy"></a>
                                 </div>
                                 <p class="s-sku">SKU: ${specs.part_number || 'N/A'}</p>
-                                <h4 class="s-title"><a href="product.html?id=${listing.id}" style="color: inherit; text-decoration: none;">${listing.title}</a></h4>
+                                <h4 class="s-title"><a href="/product.html?id=${listing.id}" style="color: inherit; text-decoration: none;">${listing.title}</a></h4>
                                 
                                 <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 4px; padding: 0 1rem; margin-bottom: 0.5rem;">
                                     ${listing.is_featured ? '<span class="featured-badge"><i class="fa-solid fa-star"></i> Featured</span>' : ''}
@@ -374,7 +374,7 @@ if (targetCategory && targetGridId) {
                                 </div>
                                 <div class="s-compatibility"><i class="fa-solid fa-circle-check"></i> Fits: ${specs.compatible || 'Universal'}</div>
                                 <div class="s-actions">
-                                    <a href="product.html?id=${listing.id}" class="s-btn-primary">View Details</a>
+                                    <a href="/product.html?id=${listing.id}" class="s-btn-primary">View Details</a>
                                     <a href="#" class="s-btn-icon"><i class="fa-regular fa-heart"></i></a>
                                 </div>
                             </div>`;
@@ -384,10 +384,10 @@ if (targetCategory && targetGridId) {
                                 <div class="eq-card-img">
                                     <span class="eq-badge ${specs.condition === 'Used' ? 'used' : ''}">${specs.condition || 'New'}</span>
                                     <button class="eq-fav"><i class="fa-regular fa-heart"></i></button>
-                                    <a href="product.html?id=${listing.id}"><img src="${imageUrl}" alt="${listing.title}" loading="lazy"></a>
+                                    <a href="/product.html?id=${listing.id}"><img src="${imageUrl}" alt="${listing.title}" loading="lazy"></a>
                                 </div>
                                 <div class="eq-card-info">
-                                    <h3><a href="product.html?id=${listing.id}" style="color: inherit; text-decoration: none;">${listing.title}</a></h3>
+                                    <h3><a href="/product.html?id=${listing.id}" style="color: inherit; text-decoration: none;">${listing.title}</a></h3>
                                     
                                     <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 4px; margin-bottom: 8px;">
                                         ${listing.is_featured ? '<span class="featured-badge"><i class="fa-solid fa-star"></i> Featured</span>' : ''}
@@ -397,7 +397,7 @@ if (targetCategory && targetGridId) {
                                         <span><i class="fa-regular fa-clock"></i> ${specs.mileage || 'N/A'}</span>
                                         <span><i class="fa-solid fa-location-dot"></i> ${listing.location}</span>
                                     </div>
-                                    <a href="product.html?id=${listing.id}" class="eq-btn">View Details</a>
+                                    <a href="/product.html?id=${listing.id}" class="eq-btn">View Details</a>
                                 </div>
                             </div>`;
                         } else if (cardType === 'livestock') {
@@ -406,12 +406,12 @@ if (targetCategory && targetGridId) {
                                 <div class="ls-card-img">
                                     <span class="ls-card-badge">${listing.category}</span>
                                     <button class="ls-fav"><i class="fa-regular fa-heart"></i></button>
-                                    <a href="product.html?id=${listing.id}">
+                                    <a href="/product.html?id=${listing.id}">
                                         <img src="${imageUrl}" alt="${listing.title}" loading="lazy">
                                     </a>
                                 </div>
                                 <div class="ls-card-body">
-                                    <h3><a href="product.html?id=${listing.id}" style="color: inherit; text-decoration: none;">${listing.title}</a></h3>
+                                    <h3><a href="/product.html?id=${listing.id}" style="color: inherit; text-decoration: none;">${listing.title}</a></h3>
                                     <div class="ls-specs">
                                         <p><strong>Status:</strong> ${specs.health || 'Available'}</p>
                                         <p><strong>Weight:</strong> ${specs.weight || 'N/A'}</p>
@@ -422,7 +422,7 @@ if (targetCategory && targetGridId) {
                                         <span class="price-label">Price</span>
                                         <span class="price-value">${priceFormatted}</span>
                                     </div>
-                                    <a href="product.html?id=${listing.id}" style="display:block; text-align:center; background:#2e7d32; color:white; padding:8px; border-radius:4px; text-decoration:none; margin-top:10px; font-weight:bold;">View Details</a>
+                                    <a href="/product.html?id=${listing.id}" style="display:block; text-align:center; background:#2e7d32; color:white; padding:8px; border-radius:4px; text-decoration:none; margin-top:10px; font-weight:bold;">View Details</a>
                                 </div>
                             </div>`;
                         } else if (cardType === 'produce') {
@@ -430,18 +430,18 @@ if (targetCategory && targetGridId) {
                             <div class="masonry-card">
                                 <div class="card-img">
                                     <span class="card-badge organic">Fresh Crop</span>
-                                    <a href="product.html?id=${listing.id}">
+                                    <a href="/product.html?id=${listing.id}">
                                         <img src="${imageUrl}" alt="${listing.title}" loading="lazy">
                                     </a>
                                 </div>
                                 <div class="card-body">
-                                    <h3><a href="product.html?id=${listing.id}" style="color: inherit; text-decoration: none;">${listing.title}</a></h3>
+                                    <h3><a href="/product.html?id=${listing.id}" style="color: inherit; text-decoration: none;">${listing.title}</a></h3>
                                     <p class="seller"><i class="fa-solid fa-tractor"></i> ${listing.seller_name || 'Verified Farmer'}</p>
                                     <p class="desc">${listing.description ? listing.description.substring(0, 80) + '...' : 'Fresh produce available for order.'}</p>
                                     <div class="price-row">
                                         <span class="price-val">${priceFormatted}</span>
                                     </div>
-                                    <a href="product.html?id=${listing.id}" class="action-btn" style="text-decoration:none; display:block; text-align:center;">VIEW DETAILS</a>
+                                    <a href="/product.html?id=${listing.id}" class="action-btn" style="text-decoration:none; display:block; text-align:center;">VIEW DETAILS</a>
                                 </div>
                             </div>`;
                         }
@@ -492,36 +492,36 @@ if (targetCategory && targetGridId) {
                     const listing = data.listings[0];
                     const priceFormatted = new Intl.NumberFormat('en-US', { style: 'currency', currency: listing.currency || 'USD' }).format(listing.price);
                     
-                    let imageUrl = 'logo.png';
+                    let imageUrl = '/logo.png';
                     if (listing.images && listing.images.length > 0) {
                         imageUrl = listing.images[0];
                     } else {
-                        if (listing.category === 'vehicles') imageUrl = 'hilux.jpg';
-                        if (listing.category === 'machinery') imageUrl = 'tractor.jpg';
-                        if (listing.category === 'livestock') imageUrl = 'cow.png';
-                        if (listing.category === 'produce') imageUrl = 'tomatoes.png';
-                        if (listing.category === 'spares' || listing.category === 'parts') imageUrl = 'spare-brakes.png';
-                        if (listing.category === 'equipment') imageUrl = 'tractor-1.png';
+                        if (listing.category === 'vehicles') imageUrl = '/hilux.jpg';
+                        if (listing.category === 'machinery') imageUrl = '/tractor.jpg';
+                        if (listing.category === 'livestock') imageUrl = '/cow.png';
+                        if (listing.category === 'produce') imageUrl = '/tomatoes.png';
+                        if (listing.category === 'spares' || listing.category === 'parts') imageUrl = '/spare-brakes.png';
+                        if (listing.category === 'equipment') imageUrl = '/tractor-1.png';
                     }
 
                     // Dynamically update the HTML of the highlight card
                     highlightCard.innerHTML = `
                         <div class="highlight-image">
                             <span class="badge">Featured</span>
-                            <a href="product.html?id=${listing.id}">
+                            <a href="/product.html?id=${listing.id}">
                                 <img src="${imageUrl}" alt="${listing.title}">
                             </a>
                         </div>
                         <div class="highlight-details">
                             <div class="highlight-header">
-                                <h3><a href="product.html?id=${listing.id}">${listing.title}</a></h3>
+                                <h3><a href="/product.html?id=${listing.id}">${listing.title}</a></h3>
                                 <button class="favorite-btn"><i class="fa-regular fa-heart"></i></button>
                             </div>
                             <p class="highlight-price"><strong>${priceFormatted}</strong></p>
                             <p class="highlight-desc">${listing.description ? listing.description.substring(0, 150) + '...' : 'Premium featured listing.'}</p>
                             <div class="highlight-actions">
-                                <a href="product.html?id=${listing.id}" class="btn-gold">View Details</a>
-                                <a href="product.html?id=${listing.id}" class="btn-green">Contact Seller</a>
+                                <a href="/product.html?id=${listing.id}" class="btn-gold">View Details</a>
+                                <a href="/product.html?id=${listing.id}" class="btn-green">Contact Seller</a>
                             </div>
                         </div>
                     `;
