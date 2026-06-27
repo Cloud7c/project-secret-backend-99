@@ -131,8 +131,13 @@ export const getAllListings = async (req, res) => {
         query += ` AND l.province = $${params.length}`;
     }
     if (search) {
-        params.push(`%${search}%`);
-        query += ` AND (l.title ILIKE $${params.length} OR l.description ILIKE $${params.length})`;
+        const spaceAgnosticSearch = `%${search.replace(/\s+/g, '')}%`;
+        params.push(spaceAgnosticSearch);
+        query += ` AND (
+            REPLACE(l.title, ' ', '') ILIKE $${params.length} OR 
+            REPLACE(l.description, ' ', '') ILIKE $${params.length} OR 
+            REPLACE(l.specs::text, ' ', '') ILIKE $${params.length}
+        )`;
     }
     if (user_id) {
         params.push(user_id);
