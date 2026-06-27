@@ -154,16 +154,34 @@ document.addEventListener('DOMContentLoaded', () => {
 const homeSlider = document.getElementById('product-slider');
 if (homeSlider && (window.location.pathname === '/' || window.location.pathname.includes('index.html'))) {
     
-    async function loadHomepageListings() {
+    async function loadHomepageListings(searchQuery = '', catQuery = '') {
         try {
-            homeSlider.innerHTML = '<div style="text-align:center; width:100%; padding: 40px; color: #666;">Loading latest premium listings <i class="fa-solid fa-spinner fa-spin"></i></div>';
+            homeSlider.classList.add('loading');
             
-            // Fetch 8 listings with randomized rotation so every visitor sees a fresh mix
-            const res = await fetch('/api/listings?limit=8&shuffle=true');
+            // Build query for search vs featured
+            let finalQuery = '/api/listings?limit=8';
+            if (searchQuery || catQuery) {
+                if (searchQuery) finalQuery += `&search=${searchQuery}`;
+                if (catQuery) finalQuery += catQuery;
+                
+                // Update section title
+                const titleEl = document.querySelector('.featured-section .section-title');
+                if (titleEl) titleEl.innerText = 'SEARCH RESULTS';
+                
+                // Smooth scroll down to results
+                document.querySelector('.featured-section').scrollIntoView({ behavior: 'smooth' });
+            } else {
+                finalQuery += '&shuffle=true';
+                const titleEl = document.querySelector('.featured-section .section-title');
+                if (titleEl) titleEl.innerText = 'FEATURED LISTINGS';
+            }
+            
+            const res = await fetch(finalQuery);
             const data = await res.json();
             
             if (data.listings && data.listings.length > 0) {
-                homeSlider.innerHTML = ''; // clear loading
+                homeSlider.classList.remove('loading');
+                homeSlider.innerHTML = '';
                 
                 data.listings.forEach(listing => {
                     const priceFormatted = new Intl.NumberFormat('en-US', { style: 'currency', currency: listing.currency || 'USD' }).format(listing.price);
@@ -225,14 +243,20 @@ if (homeSlider && (window.location.pathname === '/' || window.location.pathname.
                     homeSlider.innerHTML += cardHtml;
                 });
             } else {
-                homeSlider.innerHTML = '<div style="text-align:center; width:100%; padding: 40px; color: #666;">No listings available yet. Be the first to post an ad!</div>';
+                homeSlider.classList.remove('loading');
+                homeSlider.innerHTML = '<div style="text-align:center; width:100%; padding: 40px; color: #666;">No results found. Please try a different search or browse the categories above.</div>';
             }
         } catch (err) {
             console.error('Error loading homepage listings:', err);
-            homeSlider.innerHTML = '<div style="text-align:center; width:100%; padding: 40px; color: red;">Failed to load listings. Please check your connection.</div>';
+            homeSlider.classList.remove('loading');
+            homeSlider.innerHTML = '<div style="text-align:center; width:100%; padding: 40px; color: #ff4d4d;">Failed to load items.</div>';
         }
     }
-    
+
+    // Export so we can call it from the hero search
+    window.loadHomepageListings = loadHomepageListings;
+
+    // Call it immediately on load
     loadHomepageListings();
 }
 
@@ -269,6 +293,10 @@ if (path.includes('vehicles.html')) {
     targetCategory = 'produce';
     targetGridId = '.masonry-grid';
     cardType = 'produce';
+} else if (path.includes('search.html')) {
+    targetCategory = '';
+    targetGridId = '.search-grid';
+    cardType = 'search';
 }
 
 if (targetCategory && targetGridId) {
@@ -280,7 +308,8 @@ if (targetCategory && targetGridId) {
         async function loadCategoryListings(queryString = '', append = false) {
             try {
                 if (!append) {
-                    gridElement.innerHTML = `<div style="text-align:center; width:100%; padding: 40px; color: #666; grid-column: 1 / -1;">Loading ${targetCategory} listings <i class="fa-solid fa-spinner fa-spin"></i></div>`;
+                    // Smooth loading fade instead of harsh clearing
+                    gridElement.classList.add('loading');
                 } else {
                     // Remove existing load more button before appending
                     const existingBtn = document.getElementById('load-more-btn-container');
@@ -290,7 +319,7 @@ if (targetCategory && targetGridId) {
                     gridElement.insertAdjacentHTML('beforeend', loadingHtml);
                 }
                 
-                const res = await fetch(`/api/listings?category=${targetCategory}${queryString}`);
+                const res = await fetch(`/api/listings?${queryString}`);
                 const data = await res.json();
                 
                 if (append) {
@@ -299,7 +328,10 @@ if (targetCategory && targetGridId) {
                 }
 
                 if (data.listings && data.listings.length > 0) {
-                    if (!append) gridElement.innerHTML = ''; // clear loading
+                    if (!append) {
+                        gridElement.innerHTML = '';
+                        gridElement.classList.remove('loading');
+                    }
                     
                     data.listings.forEach(listing => {
                         const priceFormatted = new Intl.NumberFormat('en-US', { style: 'currency', currency: listing.currency || 'USD' }).format(listing.price);
@@ -444,6 +476,25 @@ if (targetCategory && targetGridId) {
                                     <a href="/product.html?id=${listing.id}" class="action-btn" style="text-decoration:none; display:block; text-align:center;">VIEW DETAILS</a>
                                 </div>
                             </div>`;
+                        } else if (cardType === 'search') {
+                            cardHtml = `
+                            <div class="product-card" style="background:#fff; border-radius:8px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.05); display:flex; flex-direction:column;">
+                                <div style="position:relative;">
+                                    <span style="position:absolute; top:10px; left:10px; background:rgba(0,0,0,0.7); color:#fff; padding:4px 8px; border-radius:4px; font-size:12px; font-weight:bold; z-index:2;">${listing.category.toUpperCase()}</span>
+                                    <a href="/product.html?id=${listing.id}">
+                                        <img src="${imageUrl}" alt="${listing.title}" style="width:100%; height:180px; object-fit:cover;">
+                                    </a>
+                                </div>
+                                <div style="padding:15px; display:flex; flex-direction:column; flex:1;">
+                                    <h4 style="font-size:16px; margin:0 0 10px 0;"><a href="/product.html?id=${listing.id}" style="color:#333; text-decoration:none;">${listing.title}</a></h4>
+                                    <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 4px; margin-bottom: 8px;">
+                                        ${listing.is_featured ? '<span class="featured-badge" style="font-size:10px;"><i class="fa-solid fa-star"></i> Featured</span>' : ''}
+                                        <p style="color:#2e7d32; font-weight:bold; font-size:18px; margin:0;">${priceFormatted}</p>
+                                    </div>
+                                    <p style="color:#666; font-size:12px; margin-bottom:15px;"><i class="fa-solid fa-location-dot"></i> ${listing.location}</p>
+                                    <a href="/product.html?id=${listing.id}" style="margin-top:auto; background:#f2f2f2; color:#333; text-align:center; padding:8px; border-radius:4px; text-decoration:none; font-weight:bold; font-size:13px; border:1px solid #ddd;">View Details</a>
+                                </div>
+                            </div>`;
                         }
 
                         gridElement.insertAdjacentHTML('beforeend', cardHtml);
@@ -577,6 +628,15 @@ if (targetCategory && targetGridId) {
             const maxPrice = document.getElementById('filter-price-max');
             if (maxPrice && maxPrice.value) queryString += `&price_max=${encodeURIComponent(maxPrice.value)}`;
 
+            if (targetCategory && targetCategory !== '') {
+                queryString += `&category=${encodeURIComponent(targetCategory)}`;
+            }
+
+            const categoryRadio = document.querySelector('input[name="category"]:checked');
+            if (categoryRadio && categoryRadio.value !== 'All Categories' && categoryRadio.value !== '') {
+                queryString += `&category=${encodeURIComponent(categoryRadio.value)}`;
+            }
+
             if (searchInput && searchInput.value.trim()) {
                 queryString += `&search=${encodeURIComponent(searchInput.value.trim())}`;
             }
@@ -651,6 +711,34 @@ if (targetCategory && targetGridId) {
         restoreFiltersFromUrl();
         loadCategoryHighlight();
 
+        // Bind clear filters button
+        const clearFiltersBtn = document.getElementById('clear-filters-btn');
+        if (clearFiltersBtn) {
+            clearFiltersBtn.addEventListener('click', () => {
+                // Reset all text inputs
+                if (searchInput) searchInput.value = '';
+                const minPrice = document.getElementById('filter-price-min');
+                if (minPrice) minPrice.value = '';
+                const maxPrice = document.getElementById('filter-price-max');
+                if (maxPrice) maxPrice.value = '';
+
+                // Reset radios to default (first item is usually 'All')
+                document.querySelectorAll('.custom-filter').forEach(details => {
+                    const firstRadio = details.querySelector('input[type="radio"]');
+                    if (firstRadio) {
+                        firstRadio.checked = true;
+                        // update summary UI
+                        const summary = details.querySelector('summary');
+                        const label = firstRadio.parentElement.textContent.trim();
+                        const originalText = summary.innerHTML.split('<i')[0].trim();
+                        summary.innerHTML = `${label} <i class="fa-solid fa-chevron-down"></i>`;
+                    }
+                });
+
+                triggerFilters();
+            });
+        }
+
         if (applyBtn) {
             applyBtn.addEventListener('click', triggerFilters);
         }
@@ -659,13 +747,43 @@ if (targetCategory && targetGridId) {
             searchBtn.addEventListener('click', triggerFilters);
         }
 
+        // Instant Debounced Search
+        let debounceTimer;
         if (searchInput) {
+            searchInput.addEventListener('input', () => {
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => {
+                    triggerFilters();
+                }, 500);
+            });
             searchInput.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') {
+                    clearTimeout(debounceTimer);
                     triggerFilters();
                 }
             });
         }
+
+        // Instant Filter Change triggers
+        document.querySelectorAll('.custom-filter input[type="radio"]').forEach(radio => {
+            radio.addEventListener('change', () => {
+                triggerFilters();
+            });
+        });
+        
+        // Instant Price Filter triggers (debounced)
+        const minPrice = document.getElementById('filter-price-min');
+        const maxPrice = document.getElementById('filter-price-max');
+        [minPrice, maxPrice].forEach(input => {
+            if (input) {
+                input.addEventListener('input', () => {
+                    clearTimeout(debounceTimer);
+                    debounceTimer = setTimeout(() => {
+                        triggerFilters();
+                    }, 500);
+                });
+            }
+        });
     }
 }
 
@@ -678,19 +796,51 @@ document.querySelectorAll('.custom-filter').forEach(details => {
     
     const radios = details.querySelectorAll('input[type="radio"]');
     radios.forEach(radio => {
-        radio.addEventListener('change', (e) => {
-            if (e.target.checked) {
-                // Update summary text
-                if (summary) {
-                    const selectedLabel = e.target.parentElement.textContent.trim();
-                    summary.innerHTML = `${selectedLabel} <i class="fa-solid fa-chevron-down"></i>`;
-                }
-                // Close the dropdown
-                details.removeAttribute('open');
+        radio.addEventListener('change', () => {
+            const labelText = radio.parentElement.textContent.trim();
+            
+            // Only update summary if it's NOT the generic 'All Categories' etc.
+            if (labelText.toLowerCase().startsWith('all ')) {
+                summary.innerHTML = `${originalText} <i class="fa-solid fa-chevron-down"></i>`;
+            } else {
+                summary.innerHTML = `${labelText} <i class="fa-solid fa-chevron-down"></i>`;
             }
+
+            details.removeAttribute('open');
         });
     });
 });
+
+// =========================================
+// HERO GLOBAL SEARCH (INDEX.HTML)
+// =========================================
+const heroSearchBtn = document.getElementById('hero-search-btn');
+const heroSearchInput = document.getElementById('hero-search-input');
+if (heroSearchBtn && heroSearchInput) {
+    const performGlobalSearch = () => {
+        const query = heroSearchInput.value.trim();
+        let catQuery = '';
+        const catRadio = document.querySelector('.hero-custom-dropdowns input[name="category"]:checked');
+        if (catRadio && catRadio.value && catRadio.value !== 'All Categories' && catRadio.value !== '') {
+            catQuery = `&category=${encodeURIComponent(catRadio.value)}`;
+        }
+        
+        const locRadio = document.querySelector('.hero-custom-dropdowns input[name="location"]:checked');
+        if (locRadio && locRadio.value && locRadio.value !== 'All Provinces' && locRadio.value !== '') {
+            catQuery += `&province=${encodeURIComponent(locRadio.value)}`;
+        }
+
+        // Call the homepage slider update directly instead of navigating away
+        if (typeof window.loadHomepageListings === 'function') {
+            window.loadHomepageListings(encodeURIComponent(query), catQuery);
+        }
+    };
+
+    heroSearchBtn.addEventListener('click', performGlobalSearch);
+    heroSearchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') performGlobalSearch();
+    });
+}
 
 // =========================================
 // DUAL PRICE SLIDER LOGIC

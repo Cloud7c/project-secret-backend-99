@@ -175,7 +175,7 @@ export const getAllListings = async (req, res) => {
     
     // ── SORTING & ROTATION ALGORITHM ──────────────────────────
     if (shuffle === 'true') {
-        query += ` AND l.is_featured = TRUE ORDER BY RANDOM()`;
+        query += ` ORDER BY l.is_featured DESC, RANDOM()`;
     } else {
         if (sort === 'low') {
             query += ` ORDER BY l.is_featured DESC, l.price ASC`;
