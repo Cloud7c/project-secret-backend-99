@@ -209,9 +209,9 @@ if (homeSlider && (window.location.pathname === '/' || window.location.pathname.
                             </a>
                         </div>
                         <div class="card-details">
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                                <p class="product-price" style="margin-bottom: 0;">${priceFormatted}</p>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 4px; margin-bottom: 8px;">
                                 ${listing.is_featured ? '<span class="featured-badge"><i class="fa-solid fa-star"></i> Featured</span>' : ''}
+                                <p class="product-price" style="margin-bottom: 0;">${priceFormatted}</p>
                             </div>
                             <h4 class="product-name"><a href="product.html?id=${listing.id}" style="color: inherit; text-decoration: none;">${listing.title}</a></h4>
                             <p class="product-location"><i class="fa-solid fa-location-dot"></i> ${listing.location}${listing.province ? ', ' + listing.province : ''}</p>
@@ -330,9 +330,9 @@ if (targetCategory && targetGridId) {
                                 </div>
                                 <div class="v-card-content">
                                     
-                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                                        <p class="v-price" style="margin-bottom:0;">${priceFormatted}</p>
+                                    <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 4px; margin-bottom: 8px;">
                                         ${listing.is_featured ? '<span class="featured-badge"><i class="fa-solid fa-star"></i> Featured</span>' : ''}
+                                        <p class="v-price" style="margin-bottom:0;">${priceFormatted}</p>
                                     </div>
                                     <h4><a href="product.html?id=${listing.id}">${listing.title}</a></h4>
                                     <p class="v-specs"><i class="fa-solid fa-gauge"></i> ${specs.mileage || 'N/A'}<br><i class="fa-solid fa-location-dot"></i> ${listing.location}</p>
@@ -349,9 +349,9 @@ if (targetCategory && targetGridId) {
                                 </div>
                                 <div class="m-card-content">
                                     
-                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                                        <p class="m-price" style="margin-bottom:0;">${priceFormatted}</p>
+                                    <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 4px; margin-bottom: 8px;">
                                         ${listing.is_featured ? '<span class="featured-badge"><i class="fa-solid fa-star"></i> Featured</span>' : ''}
+                                        <p class="m-price" style="margin-bottom:0;">${priceFormatted}</p>
                                     </div>
                                     <h4><a href="product.html?id=${listing.id}">${listing.title}</a></h4>
                                     <p class="m-specs"><i class="fa-solid fa-clock"></i> ${specs.mileage || 'N/A'}<br><i class="fa-solid fa-location-dot"></i> ${listing.location}</p>
@@ -368,9 +368,9 @@ if (targetCategory && targetGridId) {
                                 <p class="s-sku">SKU: ${specs.part_number || 'N/A'}</p>
                                 <h4 class="s-title"><a href="product.html?id=${listing.id}" style="color: inherit; text-decoration: none;">${listing.title}</a></h4>
                                 
-                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0 1rem; margin-bottom: 0.5rem;">
+                                <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 4px; padding: 0 1rem; margin-bottom: 0.5rem;">
+                                    ${listing.is_featured ? '<span class="featured-badge"><i class="fa-solid fa-star"></i> Featured</span>' : ''}
                                     <p class="s-price" style="margin-bottom:0; padding:0;">${priceFormatted}</p>
-                                    ${listing.is_featured ? '<span class="featured-badge"><i class="fa-solid fa-star"></i></span>' : ''}
                                 </div>
                                 <div class="s-compatibility"><i class="fa-solid fa-circle-check"></i> Fits: ${specs.compatible || 'Universal'}</div>
                                 <div class="s-actions">
@@ -389,9 +389,9 @@ if (targetCategory && targetGridId) {
                                 <div class="eq-card-info">
                                     <h3><a href="product.html?id=${listing.id}" style="color: inherit; text-decoration: none;">${listing.title}</a></h3>
                                     
-                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                                        <p class="eq-price" style="margin-bottom:0;">${priceFormatted}</p>
+                                    <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 4px; margin-bottom: 8px;">
                                         ${listing.is_featured ? '<span class="featured-badge"><i class="fa-solid fa-star"></i> Featured</span>' : ''}
+                                        <p class="eq-price" style="margin-bottom:0;">${priceFormatted}</p>
                                     </div>
                                     <div class="eq-meta">
                                         <span><i class="fa-regular fa-clock"></i> ${specs.mileage || 'N/A'}</span>
