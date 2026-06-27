@@ -167,41 +167,11 @@
             <div class="related-section">
                 <div class="section-header">
                     <h3 class="section-title">Related Listings</h3>
-                    <a href="vehicles.html" class="see-all">See View All</a>
+                    <a href="#" id="dynamic-see-all" class="see-all">See All</a>
                 </div>
                 
                 <!-- We reuse the grid styling from listings.css -->
-                <div class="product-grid">
-                    <div class="product-card auto-card">
-                        <div class="card-image-wrapper">
-                            <span class="category-badge">Automotive</span>
-                            <button class="favorite-btn"><i class="fa-regular fa-heart"></i></button>
-                            <a href="product.html?id=hilux">
-                                <img src="hilux.jpg" alt="Toyota Hilux" class="product-image">
-                            </a>
-                        </div>
-                        <div class="card-details">
-                            <p class="product-price">USD 25,000</p>
-                            <h4 class="product-name"><a href="product.html?id=hilux" style="color: inherit; text-decoration: none;">2018 Toyota Hilux</a></h4>
-                            <p class="product-location"><i class="fa-solid fa-location-dot"></i> Harare</p>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card agri-card">
-                        <div class="card-image-wrapper">
-                            <span class="category-badge">Agriculture</span>
-                            <button class="favorite-btn"><i class="fa-regular fa-heart"></i></button>
-                            <a href="product.html?id=tractor">
-                                <img src="tractor.jpg" alt="Tractor" class="product-image">
-                            </a>
-                        </div>
-                        <div class="card-details">
-                            <p class="product-price">USD 15,000</p>
-                            <h4 class="product-name"><a href="product.html?id=tractor" style="color: inherit; text-decoration: none;">Mahindra Tractor</a></h4>
-                            <p class="product-location"><i class="fa-solid fa-location-dot"></i> Bulawayo</p>
-                        </div>
-                    </div>
-                </div>
+                <div class="product-grid" id="related-grid"><div style="width:100%; text-align:center; padding: 40px; color: #666; grid-column: 1 / -1;">Loading related listings <i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div>
             </div>
 
         </div>

@@ -1099,7 +1099,15 @@ if (window.location.pathname.includes('product.html')) {
                             
                             // Update 'See All' link
                             const seeAllLink = document.querySelector('.related-section .see-all');
-                            if (seeAllLink) seeAllLink.href = `/agriculture/${listing.category}.html`;
+                            if (seeAllLink) {
+                                let catLink = '/index.html';
+                                if (listing.category === 'vehicles') catLink = '/vehicles.html';
+                                else if (listing.category === 'spares' || listing.category === 'parts') catLink = '/spares.html';
+                                else if (listing.category === 'machinery' || listing.category === 'equipment') catLink = '/agriculture/equipments.html';
+                                else if (listing.category === 'livestock') catLink = '/agriculture/livestock.html';
+                                else if (listing.category === 'produce') catLink = '/agriculture/produce.html';
+                                seeAllLink.href = catLink;
+                            }
                         } else {
                             // Hide related section if no related items
                             document.querySelector('.related-section').style.display = 'none';
