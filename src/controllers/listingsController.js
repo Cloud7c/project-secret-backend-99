@@ -188,8 +188,13 @@ export const getAllListings = async (req, res) => {
     // This algorithm prevents old featured ads from permanently blocking fresh unfeatured ads,
     // while still giving featured ads a massive, calculated advantage.
     if (shuffle === 'true') {
-        // Randomly mix them, but give featured a mathematical probability boost
-        query += ` ORDER BY (CASE WHEN l.is_featured THEN RANDOM() + 0.5 ELSE RANDOM() END) DESC`;
+        // Randomly mix them, but give featured a mathematical probability boost. Use seed if provided.
+        if (seed) {
+            params.push(seed);
+            query += ` ORDER BY (CASE WHEN l.is_featured THEN (('x' || substr(md5(l.id::text || $${params.length}), 1, 8))::bit(32)::bigint % 1000) / 1000.0 + 0.5 ELSE (('x' || substr(md5(l.id::text || $${params.length}), 1, 8))::bit(32)::bigint % 1000) / 1000.0 END) DESC`;
+        } else {
+            query += ` ORDER BY (CASE WHEN l.is_featured THEN RANDOM() + 0.5 ELSE RANDOM() END) DESC`;
+        }
     } else {
         if (sort === 'low') {
             // Price sorting should be strict to not annoy users, but featured breaks ties
@@ -200,18 +205,29 @@ export const getAllListings = async (req, res) => {
             // Give featured ads an artificial +500 view bump to their ranking score
             query += ` ORDER BY (COALESCE(l.views, 0) + CASE WHEN l.is_featured THEN 500 ELSE 0 END) DESC, l.created_at DESC`;
         } else {
-            // Default "Freshness" + Hourly Rotation for Featured Ads!
+            // Default "Freshness" + Unique Browser Rotation for Featured Ads!
             // 1. All Featured ads get a +7 days artificial freshness bump.
             // 2. Featured ads ALSO get up to +3 days of extra bonus pseudo-random time.
-            // 3. This bonus time is tied to the current HOUR, so every hour the top featured ads completely shuffle!
-            // 4. Because it's tied to the hour, pagination still works flawlessly (no duplicate ads when clicking Load More).
-            query += ` ORDER BY (
-                EXTRACT(EPOCH FROM l.created_at)
-                + CASE WHEN l.is_featured THEN 604800 ELSE 0 END
-                + CASE WHEN l.is_featured THEN 
-                    (('x' || substr(md5(l.id::text || to_char(current_timestamp, 'YYYY-MM-DD-HH24')), 1, 8))::bit(32)::bigint % 259200)
-                  ELSE 0 END
-            ) DESC`;
+            // 3. This bonus time is tied to the unique browser SEED, so every browser sees a unique order!
+            // 4. Because it's tied to the seed, pagination still works flawlessly (no duplicate ads when clicking Load More).
+            if (seed) {
+                params.push(seed);
+                query += ` ORDER BY (
+                    EXTRACT(EPOCH FROM l.created_at)
+                    + CASE WHEN l.is_featured THEN 604800 ELSE 0 END
+                    + CASE WHEN l.is_featured THEN 
+                        (('x' || substr(md5(l.id::text || $${params.length}), 1, 8))::bit(32)::bigint % 259200)
+                      ELSE 0 END
+                ) DESC`;
+            } else {
+                query += ` ORDER BY (
+                    EXTRACT(EPOCH FROM l.created_at)
+                    + CASE WHEN l.is_featured THEN 604800 ELSE 0 END
+                    + CASE WHEN l.is_featured THEN 
+                        (('x' || substr(md5(l.id::text || to_char(current_timestamp, 'YYYY-MM-DD-HH24')), 1, 8))::bit(32)::bigint % 259200)
+                      ELSE 0 END
+                ) DESC`;
+            }
         }
     }
 

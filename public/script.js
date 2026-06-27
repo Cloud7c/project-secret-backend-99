@@ -55,6 +55,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+// Initialize Browser Unique Seed for Ad Rotation
+let zaa_seed = sessionStorage.getItem('zaa_seed');
+if (!zaa_seed) {
+    zaa_seed = Math.floor(Math.random() * 1000000000).toString();
+    sessionStorage.setItem('zaa_seed', zaa_seed);
+}
+
 // Main Navigation Hamburger Menu Toggle
 document.addEventListener("DOMContentLoaded", function() {
     var hamburgerIcon = document.getElementById("hamburgerIcon");
@@ -159,7 +166,7 @@ if (homeSlider && (window.location.pathname === '/' || window.location.pathname.
             homeSlider.classList.add('loading');
             
             // Build query for search vs featured
-            let finalQuery = '/api/listings?limit=8';
+            let finalQuery = `/api/listings?limit=8&seed=${zaa_seed}`;
             if (searchQuery || catQuery) {
                 if (searchQuery) finalQuery += `&search=${searchQuery}`;
                 if (catQuery) finalQuery += catQuery;
@@ -319,7 +326,7 @@ if (targetCategory && targetGridId) {
                     gridElement.insertAdjacentHTML('beforeend', loadingHtml);
                 }
                 
-                const res = await fetch(`/api/listings?${queryString}`);
+                const res = await fetch(`/api/listings?${queryString}&seed=${zaa_seed}`);
                 const data = await res.json();
                 
                 if (append) {
@@ -536,7 +543,7 @@ if (targetCategory && targetGridId) {
 
             try {
                 // Fetch 1 random featured listing for this specific category
-                const res = await fetch(`/api/listings?category=${targetCategory}&limit=1&shuffle=true`);
+                const res = await fetch(`/api/listings?category=${targetCategory}&limit=1&shuffle=true&seed=${zaa_seed}`);
                 const data = await res.json();
 
                 if (data.listings && data.listings.length > 0) {
@@ -1098,7 +1105,7 @@ if (window.location.pathname.includes('product.html')) {
                 const relatedGrid = document.querySelector('.related-section .product-grid');
                 if (relatedGrid) {
                     try {
-                        const relRes = await fetch(`/api/listings?category=${listing.category}&exclude_id=${listing.id}&limit=4&sort=pop`);
+                        const relRes = await fetch(`/api/listings?category=${listing.category}&exclude_id=${listing.id}&limit=4&sort=pop&seed=${zaa_seed}`);
                         const relData = await relRes.json();
                         
                         if (relData.listings && relData.listings.length > 0) {
