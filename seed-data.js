@@ -165,19 +165,19 @@ function getListings() {
           description: 'Premium ceramic brake pads for trucks and bakkies. Fits Toyota, Ford, Isuzu. Long-lasting performance for farm vehicles.',
           province: 'Harare', location: 'Graniteside',
           image: path.join(PUBLIC_DIR, 'spare-brakes.png'),
-          specs: { condition: 'New', part_number: 'BP-HD-2024', compatible: 'Toyota Hilux, Ford Ranger, Isuzu KB' }},
+          specs: { condition: 'New', part_category: 'Brakes & Rotors', part_number: 'BP-HD-2024', compatible: 'Toyota Hilux, Ford Ranger, Isuzu KB' }},
 
         { userIdx: 1, category: 'spares', title: 'Tractor Engine Overhaul Kit — MF 290', price: 2200, currency: 'USD',
           description: 'Complete engine overhaul kit for Massey Ferguson 290. Includes pistons, rings, gaskets, bearings, and oil seals. Genuine Perkins parts.',
           province: 'Bulawayo', location: 'Kelvin Industrial',
           image: path.join(PUBLIC_DIR, 'spare-engine.png'),
-          specs: { condition: 'New', part_number: 'MF290-EOK', compatible: 'Massey Ferguson 290, 285' }},
+          specs: { condition: 'New', part_category: 'Engine Components', part_number: 'MF290-EOK', compatible: 'Massey Ferguson 290, 285' }},
 
         { userIdx: 5, category: 'spares', title: 'Air & Oil Filter Pack x10', price: 180, currency: 'USD',
           description: 'Bulk pack of 10 air filters and 10 oil filters. Fits most Japanese 4x4 vehicles. Keep your farm fleet maintained at low cost.',
           province: 'Masvingo', location: 'Masvingo Industrial',
           image: path.join(PUBLIC_DIR, 'spare-filters.png'),
-          specs: { condition: 'New', part_number: 'FLT-PACK-10', compatible: 'Toyota, Nissan, Mitsubishi' }},
+          specs: { condition: 'New', part_category: 'Filters & Fluids', part_number: 'FLT-PACK-10', compatible: 'Toyota, Nissan, Mitsubishi' }},
 
         // ── EQUIPMENT ───────────────────────────
         { userIdx: 7, category: 'equipment', title: 'Centre Pivot Irrigation System', price: 25000, currency: 'USD',
