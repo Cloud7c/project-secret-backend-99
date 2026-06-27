@@ -591,8 +591,8 @@ if (targetCategory && targetGridId) {
         const searchInput = document.getElementById('category-search-input');
         const searchBtn = document.getElementById('category-search-btn');
 
-        function triggerFilters(isAppend = false) {
-            if (!isAppend) {
+        function triggerFilters(isAppend = false, isInitialLoad = false) {
+            if (isAppend !== true && isInitialLoad !== true) {
                 currentPage = 1;
             }
 
@@ -704,7 +704,7 @@ if (targetCategory && targetGridId) {
             }
 
             // Execute filters immediately (this will do the initial fetch with the URL params applied)
-            triggerFilters();
+            triggerFilters(false, true);
         }
 
         // Initialize
