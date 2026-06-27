@@ -79,4 +79,54 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // 3. Connect Registration Form to Backend API
+    const registerForm = document.getElementById('register-form');
+    if (registerForm) {
+        registerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Grab values from the inputs
+            const full_name = document.getElementById('fullname').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const password = document.getElementById('password-input').value;
+            // Company and Address aren't in the DB currently, but we can send province logic later
+            const province = document.getElementById('address').value;
+
+            // Change button text to show loading state
+            const submitBtn = registerForm.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Creating...';
+            submitBtn.disabled = true;
+
+            try {
+                const response = await fetch('/api/auth/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ full_name, email, phone, password, province })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    alert(data.error || 'Registration failed.');
+                } else {
+                    alert(data.message);
+                    // Save the token and redirect to homepage or dashboard
+                    localStorage.setItem('token', data.token);
+                    window.location.href = 'index.html';
+                }
+            } catch (err) {
+                console.error('Error during registration:', err);
+                alert('A network error occurred. Please try again.');
+            } finally {
+                // Restore button state
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+    }
 });
