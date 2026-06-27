@@ -108,7 +108,7 @@ export const createListing = async (req, res) => {
 export const getAllListings = async (req, res) => {
     const { 
         category, province, search, limit, user_id, shuffle,
-        price_min, price_max, make, model, condition, transmission, type, breed, sort, page, exclude_id
+        price_min, price_max, make, model, condition, transmission, type, breed, sort, page, exclude_id, seed
     } = req.query;
 
     // Build a dynamic query based on what filters were sent
