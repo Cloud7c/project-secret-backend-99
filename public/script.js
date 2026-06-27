@@ -548,19 +548,19 @@ if (targetCategory && targetGridId) {
             let queryString = '';
 
             const type = document.querySelector('input[name="type"]:checked');
-            if (type && type.value !== 'All Types') queryString += `&type=${encodeURIComponent(type.value)}`;
+            if (type && !type.value.toLowerCase().startsWith('all ')) queryString += `&type=${encodeURIComponent(type.value)}`;
 
             const make = document.querySelector('input[name="make"]:checked');
-            if (make && make.value !== 'All Makes') queryString += `&make=${encodeURIComponent(make.value)}`;
+            if (make && !make.value.toLowerCase().startsWith('all ')) queryString += `&make=${encodeURIComponent(make.value)}`;
 
             const breed = document.querySelector('input[name="breed"]:checked');
-            if (breed && breed.value !== 'All Breeds') queryString += `&breed=${encodeURIComponent(breed.value)}`;
+            if (breed && !breed.value.toLowerCase().startsWith('all ')) queryString += `&breed=${encodeURIComponent(breed.value)}`;
 
             const sort = document.querySelector('input[name="sort"]:checked');
             if (sort && sort.value !== 'new') queryString += `&sort=${encodeURIComponent(sort.value)}`;
 
             const model = document.querySelector('input[name="model"]:checked');
-            if (model && model.value !== 'All Models') queryString += `&model=${encodeURIComponent(model.value)}`;
+            if (model && !model.value.toLowerCase().startsWith('all ')) queryString += `&model=${encodeURIComponent(model.value)}`;
 
             const condition = document.querySelector('input[name="condition"]:checked');
             if (condition && condition.value !== 'Any') queryString += `&condition=${encodeURIComponent(condition.value)}`;
@@ -569,7 +569,7 @@ if (targetCategory && targetGridId) {
             if (trans && trans.value !== 'Any') queryString += `&transmission=${encodeURIComponent(trans.value)}`;
 
             const loc = document.querySelector('input[name="loc"]:checked');
-            if (loc && loc.value !== 'All Provinces') queryString += `&province=${encodeURIComponent(loc.value)}`;
+            if (loc && !loc.value.toLowerCase().startsWith('all ')) queryString += `&province=${encodeURIComponent(loc.value)}`;
 
             const minPrice = document.getElementById('filter-price-min');
             if (minPrice && minPrice.value) queryString += `&price_min=${encodeURIComponent(minPrice.value)}`;
