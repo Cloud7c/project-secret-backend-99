@@ -103,12 +103,29 @@
                         <label>Make</label>
                         <details class="custom-filter">
                             <summary>All Makes <i class="fa-solid fa-chevron-down"></i></summary>
-                            <div class="custom-options">
+                            <div class="custom-options" style="max-height: 250px; overflow-y: auto;">
                                 <label><input type="radio" name="make" value="All Makes" checked> All Makes</label>
-                                <label><input type="radio" name="make" value="Toyota"> Toyota</label>
-                                <label><input type="radio" name="make" value="Honda"> Honda</label>
+                                <label><input type="radio" name="make" value="Audi"> Audi</label>
+                                <label><input type="radio" name="make" value="BMW"> BMW</label>
+                                <label><input type="radio" name="make" value="Chevrolet"> Chevrolet</label>
                                 <label><input type="radio" name="make" value="Ford"> Ford</label>
+                                <label><input type="radio" name="make" value="Honda"> Honda</label>
+                                <label><input type="radio" name="make" value="Hyundai"> Hyundai</label>
+                                <label><input type="radio" name="make" value="Isuzu"> Isuzu</label>
+                                <label><input type="radio" name="make" value="Jaguar"> Jaguar</label>
+                                <label><input type="radio" name="make" value="Jeep"> Jeep</label>
+                                <label><input type="radio" name="make" value="Kia"> Kia</label>
+                                <label><input type="radio" name="make" value="Land Rover"> Land Rover</label>
+                                <label><input type="radio" name="make" value="Mazda"> Mazda</label>
+                                <label><input type="radio" name="make" value="Mercedes-Benz"> Mercedes-Benz</label>
+                                <label><input type="radio" name="make" value="Mitsubishi"> Mitsubishi</label>
                                 <label><input type="radio" name="make" value="Nissan"> Nissan</label>
+                                <label><input type="radio" name="make" value="Peugeot"> Peugeot</label>
+                                <label><input type="radio" name="make" value="Subaru"> Subaru</label>
+                                <label><input type="radio" name="make" value="Suzuki"> Suzuki</label>
+                                <label><input type="radio" name="make" value="Toyota"> Toyota</label>
+                                <label><input type="radio" name="make" value="Volkswagen"> Volkswagen</label>
+                                <label><input type="radio" name="make" value="Volvo"> Volvo</label>
                             </div>
                         </details>
                     </div>
@@ -117,12 +134,32 @@
                         <label>Model</label>
                         <details class="custom-filter">
                             <summary>All Models <i class="fa-solid fa-chevron-down"></i></summary>
-                            <div class="custom-options">
+                            <div class="custom-options" style="max-height: 250px; overflow-y: auto;">
                                 <label><input type="radio" name="model" value="All Models" checked> All Models</label>
-                                <label><input type="radio" name="model" value="Hilux"> Hilux</label>
-                                <label><input type="radio" name="model" value="Ranger"> Ranger</label>
+                                <label><input type="radio" name="model" value="3 Series"> 3 Series</label>
+                                <label><input type="radio" name="model" value="C-Class"> C-Class</label>
+                                <label><input type="radio" name="model" value="Corolla"> Corolla</label>
+                                <label><input type="radio" name="model" value="CR-V"> CR-V</label>
+                                <label><input type="radio" name="model" value="CX-5"> CX-5</label>
+                                <label><input type="radio" name="model" value="Demio"> Demio</label>
+                                <label><input type="radio" name="model" value="Discovery"> Discovery</label>
                                 <label><input type="radio" name="model" value="Fit"> Fit</label>
                                 <label><input type="radio" name="model" value="Fortuner"> Fortuner</label>
+                                <label><input type="radio" name="model" value="Golf"> Golf</label>
+                                <label><input type="radio" name="model" value="Hardbody"> Hardbody</label>
+                                <label><input type="radio" name="model" value="Hilux"> Hilux</label>
+                                <label><input type="radio" name="model" value="KB Series"> KB Series</label>
+                                <label><input type="radio" name="model" value="Land Cruiser"> Land Cruiser</label>
+                                <label><input type="radio" name="model" value="March"> March</label>
+                                <label><input type="radio" name="model" value="Navara"> Navara</label>
+                                <label><input type="radio" name="model" value="Pajero"> Pajero</label>
+                                <label><input type="radio" name="model" value="Prado"> Prado</label>
+                                <label><input type="radio" name="model" value="Ranger"> Ranger</label>
+                                <label><input type="radio" name="model" value="RAV4"> RAV4</label>
+                                <label><input type="radio" name="model" value="Swift"> Swift</label>
+                                <label><input type="radio" name="model" value="Triton"> Triton</label>
+                                <label><input type="radio" name="model" value="X-Trail"> X-Trail</label>
+                                <label><input type="radio" name="model" value="Yaris"> Yaris</label>
                             </div>
                         </details>
                     </div>
@@ -135,10 +172,13 @@
 
                     <div class="filter-group">
                         <label>Price Range</label>
-                        <input type="range" class="price-slider" min="0" max="100000" id="filter-price-slider">
+                        <div class="range-slider-container">
+                            <input type="range" class="price-slider min-slider" min="0" max="100000" value="0" id="filter-price-slider-min">
+                            <input type="range" class="price-slider max-slider" min="0" max="100000" value="100000" id="filter-price-slider-max">
+                        </div>
                         <div class="price-inputs">
-                            <input type="number" id="filter-price-min" placeholder="Min">
-                            <input type="number" id="filter-price-max" placeholder="Max">
+                            <input type="number" id="filter-price-min" placeholder="Min" min="0">
+                            <input type="number" id="filter-price-max" placeholder="Max" min="0">
                         </div>
                     </div>
 
@@ -158,12 +198,18 @@
                         <label>Location</label>
                         <details class="custom-filter">
                             <summary>All Provinces <i class="fa-solid fa-chevron-down"></i></summary>
-                            <div class="custom-options">
+                            <div class="custom-options" style="max-height: 250px; overflow-y: auto;">
                                 <label><input type="radio" name="loc" value="All Provinces" checked> All Provinces</label>
-                                <label><input type="radio" name="loc" value="Harare"> Harare</label>
                                 <label><input type="radio" name="loc" value="Bulawayo"> Bulawayo</label>
-                                <label><input type="radio" name="loc" value="Mutare"> Mutare</label>
-                                <label><input type="radio" name="loc" value="Gweru"> Gweru</label>
+                                <label><input type="radio" name="loc" value="Harare"> Harare</label>
+                                <label><input type="radio" name="loc" value="Manicaland"> Manicaland</label>
+                                <label><input type="radio" name="loc" value="Mashonaland Central"> Mashonaland Central</label>
+                                <label><input type="radio" name="loc" value="Mashonaland East"> Mashonaland East</label>
+                                <label><input type="radio" name="loc" value="Mashonaland West"> Mashonaland West</label>
+                                <label><input type="radio" name="loc" value="Masvingo"> Masvingo</label>
+                                <label><input type="radio" name="loc" value="Matabeleland North"> Matabeleland North</label>
+                                <label><input type="radio" name="loc" value="Matabeleland South"> Matabeleland South</label>
+                                <label><input type="radio" name="loc" value="Midlands"> Midlands</label>
                             </div>
                         </details>
                     </div>
@@ -178,7 +224,7 @@
                         <div class="highlight-image">
                             <span class="badge">Featured</span>
                             <a href="product.html?id=hilux">
-                                <img src="hilux.jpg" alt="Toyota Hilux">
+                                <img src="hilux.jpg" alt="Toyota Hilux" loading="lazy">
                             </a>
                         </div>
                         <div class="highlight-details">
@@ -208,11 +254,6 @@
                                 </div>
                             </details>
                         </div>
-                        <div class="pagination">
-                            <label>Page:</label>
-                            <button class="page-btn"><i class="fa-solid fa-chevron-left"></i></button>
-                            <button class="page-btn"><i class="fa-solid fa-chevron-right"></i></button>
-                        </div>
                     </div>
 
                     <!-- Product Grid -->
@@ -223,7 +264,7 @@
                                 <span class="v-badge">Featured</span>
                                 <button class="v-fav"><i class="fa-regular fa-heart"></i></button>
                                 <a href="product.html?id=hilux">
-                                    <img src="hilux.jpg" alt="Toyota Hilux">
+                                    <img src="hilux.jpg" alt="Toyota Hilux" loading="lazy">
                                 </a>
                             </div>
                             <div class="v-card-content">
@@ -239,7 +280,7 @@
                                 <span class="v-badge">New</span>
                                 <button class="v-fav"><i class="fa-regular fa-heart"></i></button>
                                 <a href="product.html?id=hilux">
-                                    <img src="hilux.jpg" alt="Toyota Hilux">
+                                    <img src="hilux.jpg" alt="Toyota Hilux" loading="lazy">
                                 </a>
                             </div>
                             <div class="v-card-content">
@@ -255,7 +296,7 @@
                                 <span class="v-badge">Used</span>
                                 <button class="v-fav"><i class="fa-regular fa-heart"></i></button>
                                 <a href="product.html?id=honda-fit">
-                                    <img src="honda-fit.jpg" alt="Honda Fit">
+                                    <img src="honda-fit.jpg" alt="Honda Fit" loading="lazy">
                                 </a>
                             </div>
                             <div class="v-card-content">
@@ -271,7 +312,7 @@
                                 <span class="v-badge">Used</span>
                                 <button class="v-fav"><i class="fa-regular fa-heart"></i></button>
                                 <a href="product.html?id=fortuner">
-                                    <img src="fortuner.jpg" alt="Toyota Fortuner">
+                                    <img src="fortuner.jpg" alt="Toyota Fortuner" loading="lazy">
                                 </a>
                             </div>
                             <div class="v-card-content">
@@ -287,7 +328,7 @@
                                 <span class="v-badge">Used</span>
                                 <button class="v-fav"><i class="fa-regular fa-heart"></i></button>
                                 <a href="product.html?id=ford-ranger">
-                                    <img src="ford-ranger.jpg" alt="Ford Ranger">
+                                    <img src="ford-ranger.jpg" alt="Ford Ranger" loading="lazy">
                                 </a>
                             </div>
                             <div class="v-card-content">

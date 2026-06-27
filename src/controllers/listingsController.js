@@ -106,7 +106,7 @@ export const createListing = async (req, res) => {
 export const getAllListings = async (req, res) => {
     const { 
         category, province, search, limit, user_id, shuffle,
-        price_min, price_max, make, model, condition, transmission
+        price_min, price_max, make, model, condition, transmission, type, breed, sort, page
     } = req.query;
 
     // Build a dynamic query based on what filters were sent
@@ -142,6 +142,14 @@ export const getAllListings = async (req, res) => {
         params.push(parseFloat(price_max));
         query += ` AND l.price <= $${params.length}`;
     }
+    if (type && type !== 'All Types') {
+        params.push(type);
+        query += ` AND l.specs->>'type' = $${params.length}`;
+    }
+    if (breed && breed !== 'All Breeds') {
+        params.push(breed);
+        query += ` AND l.specs->>'breed' = $${params.length}`;
+    }
     if (make && make !== 'All Makes') {
         params.push(make);
         query += ` AND l.specs->>'make' = $${params.length}`;
@@ -158,24 +166,50 @@ export const getAllListings = async (req, res) => {
         params.push(transmission);
         query += ` AND l.specs->>'transmission' = $${params.length}`;
     }
-
-    // ── HOMEPAGE ROTATION ALGORITHM ──────────────────────────
+    
+    // ── SORTING & ROTATION ALGORITHM ──────────────────────────
     if (shuffle === 'true') {
         query += ` AND l.is_featured = TRUE ORDER BY RANDOM()`;
     } else {
-        query += ` ORDER BY l.is_featured DESC, l.created_at DESC`;
+        if (sort === 'low') {
+            query += ` ORDER BY l.is_featured DESC, l.price ASC`;
+        } else if (sort === 'high') {
+            query += ` ORDER BY l.is_featured DESC, l.price DESC`;
+        } else if (sort === 'pop') {
+            query += ` ORDER BY l.is_featured DESC, l.views DESC NULLS LAST, l.created_at DESC`;
+        } else {
+            query += ` ORDER BY l.is_featured DESC, l.created_at DESC`;
+        }
     }
 
-    if (limit) {
-        params.push(parseInt(limit, 10));
-        query += ` LIMIT $${params.length}`;
-    }
+    const limitVal = parseInt(limit, 10) || 20; // default 20 per page
+    const pageVal = parseInt(page, 10) || 1;
+    const offsetVal = (pageVal - 1) * limitVal;
+
+    // Fetch limit + 1 to know if there's a next page
+    params.push(limitVal + 1);
+    query += ` LIMIT $${params.length}`;
+
+    params.push(offsetVal);
+    query += ` OFFSET $${params.length}`;
 
     try {
         const result = await pool.query(query, params);
+        
+        let hasNextPage = false;
+        let finalRows = result.rows;
+
+        // If we got more rows than the requested limit, it means there is a next page
+        if (finalRows.length > limitVal) {
+            hasNextPage = true;
+            finalRows.pop(); // Remove the extra row before sending to client
+        }
+
         return res.status(200).json({
-            count:    result.rows.length,
-            listings: result.rows
+            count: finalRows.length,
+            hasNextPage: hasNextPage,
+            page: pageVal,
+            listings: finalRows
         });
     } catch (err) {
         console.error('Get listings error:', err.message);

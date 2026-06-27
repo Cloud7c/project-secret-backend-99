@@ -8,8 +8,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelector('.nav-links');
 
     if (hamburger && navLinks) {
-        hamburger.addEventListener('click', () => {
+        hamburger.addEventListener('click', (e) => {
+            e.stopPropagation();
             navLinks.classList.toggle('active');
+        });
+
+        // Close when clicking a link inside the menu
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Close when clicking anywhere outside the menu
+        document.addEventListener('click', (e) => {
+            if (navLinks.classList.contains('active') && !navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+                navLinks.classList.remove('active');
+            }
         });
     }
 
@@ -46,8 +61,23 @@ document.addEventListener("DOMContentLoaded", function() {
     var mainNavLinks = document.getElementById("mainNavLinks");
     
     if (hamburgerIcon && mainNavLinks) {
-        hamburgerIcon.addEventListener("click", function() {
+        hamburgerIcon.addEventListener("click", function(e) {
+            e.stopPropagation();
             mainNavLinks.classList.toggle("active");
+        });
+
+        // Close when clicking a link
+        mainNavLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mainNavLinks.classList.remove('active');
+            });
+        });
+
+        // Close when clicking outside
+        document.addEventListener('click', (e) => {
+            if (mainNavLinks.classList.contains('active') && !mainNavLinks.contains(e.target) && !hamburgerIcon.contains(e.target)) {
+                mainNavLinks.classList.remove('active');
+            }
         });
     }
 });
@@ -63,7 +93,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const filterIcon = document.getElementById('filterIcon');
 
     if (filterBtn && filterSidebar) {
-        filterBtn.addEventListener('click', function() {
+        filterBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
             filterSidebar.classList.toggle('show-filters');
             
             if (filterSidebar.classList.contains('show-filters')) {
@@ -80,7 +111,41 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         });
+
+        // Close sidebar filters if clicking outside on mobile
+        document.addEventListener('click', (e) => {
+            if (filterSidebar.classList.contains('show-filters') && !filterSidebar.contains(e.target) && !filterBtn.contains(e.target)) {
+                filterSidebar.classList.remove('show-filters');
+                if (filterBtnText) filterBtnText.innerHTML = '<i class="fa-solid fa-filter"></i> Show Filters';
+                if (filterIcon) {
+                    filterIcon.classList.remove('fa-chevron-up');
+                    filterIcon.classList.add('fa-chevron-down');
+                }
+            }
+        });
     }
+});
+
+// =========================================
+// FIX STICKY CSS DROPDOWNS ON MOBILE TOUCH
+// =========================================
+document.addEventListener('DOMContentLoaded', () => {
+    // When clicking a link inside a dropdown, remove focus to fix the "back button" sticky issue
+    document.querySelectorAll('.dropdown-content a').forEach(link => {
+        link.addEventListener('click', () => {
+            document.activeElement.blur();
+        });
+    });
+
+    // Close any stuck hover dropdowns on outside tap
+    document.addEventListener('touchstart', (e) => {
+        if (!e.target.closest('.dropdown')) {
+            document.querySelectorAll('.dropdown-content').forEach(dc => {
+                dc.style.display = 'none';
+                setTimeout(() => dc.style.display = '', 100);
+            });
+        }
+    }, {passive: true});
 });
 
 // =========================================
@@ -140,7 +205,7 @@ if (homeSlider && (window.location.pathname === '/' || window.location.pathname.
                             <span class="category-badge" style="text-transform: capitalize;">${listing.category}</span>
                             <button class="favorite-btn"><i class="fa-regular fa-heart"></i></button>
                             <a href="product.html?id=${listing.id}">
-                                <img src="${imageUrl}" alt="${listing.title}" class="product-image">
+                                <img src="${imageUrl}" alt="${listing.title}" class="product-image" loading="lazy">
                             </a>
                         </div>
                         <div class="card-details">
@@ -208,17 +273,33 @@ if (path.includes('vehicles.html')) {
 
 if (targetCategory && targetGridId) {
     const gridElement = document.querySelector(targetGridId);
+    let currentPage = 1;
+
     if (gridElement) {
         
-        async function loadCategoryListings(queryString = '') {
+        async function loadCategoryListings(queryString = '', append = false) {
             try {
-                gridElement.innerHTML = `<div style="text-align:center; width:100%; padding: 40px; color: #666; grid-column: 1 / -1;">Loading ${targetCategory} listings <i class="fa-solid fa-spinner fa-spin"></i></div>`;
+                if (!append) {
+                    gridElement.innerHTML = `<div style="text-align:center; width:100%; padding: 40px; color: #666; grid-column: 1 / -1;">Loading ${targetCategory} listings <i class="fa-solid fa-spinner fa-spin"></i></div>`;
+                } else {
+                    // Remove existing load more button before appending
+                    const existingBtn = document.getElementById('load-more-btn-container');
+                    if (existingBtn) existingBtn.remove();
+                    
+                    const loadingHtml = `<div id="append-loading" style="text-align:center; width:100%; padding: 20px; color: #666; grid-column: 1 / -1;"><i class="fa-solid fa-spinner fa-spin"></i> Loading more...</div>`;
+                    gridElement.insertAdjacentHTML('beforeend', loadingHtml);
+                }
                 
                 const res = await fetch(`/api/listings?category=${targetCategory}${queryString}`);
                 const data = await res.json();
                 
+                if (append) {
+                    const appendLoading = document.getElementById('append-loading');
+                    if (appendLoading) appendLoading.remove();
+                }
+
                 if (data.listings && data.listings.length > 0) {
-                    gridElement.innerHTML = ''; // clear loading
+                    if (!append) gridElement.innerHTML = ''; // clear loading
                     
                     data.listings.forEach(listing => {
                         const priceFormatted = new Intl.NumberFormat('en-US', { style: 'currency', currency: listing.currency || 'USD' }).format(listing.price);
@@ -245,7 +326,7 @@ if (targetCategory && targetGridId) {
                                 <div class="v-card-image">
                                     <span class="v-badge ${specs.condition === 'Used' ? 'used' : ''}">${specs.condition || 'New'}</span>
                                     <button class="v-fav"><i class="fa-regular fa-heart"></i></button>
-                                    <a href="product.html?id=${listing.id}"><img src="${imageUrl}" alt="${listing.title}"></a>
+                                    <a href="product.html?id=${listing.id}"><img src="${imageUrl}" alt="${listing.title}" loading="lazy"></a>
                                 </div>
                                 <div class="v-card-content">
                                     <p class="v-price">${priceFormatted}</p>
@@ -260,7 +341,7 @@ if (targetCategory && targetGridId) {
                                 <div class="m-card-image">
                                     <span class="m-badge ${specs.condition === 'Used' ? 'used' : ''}">${specs.condition || 'New'}</span>
                                     <button class="m-fav"><i class="fa-regular fa-heart"></i></button>
-                                    <a href="product.html?id=${listing.id}"><img src="${imageUrl}" alt="${listing.title}"></a>
+                                    <a href="product.html?id=${listing.id}"><img src="${imageUrl}" alt="${listing.title}" loading="lazy"></a>
                                 </div>
                                 <div class="m-card-content">
                                     <p class="m-price">${priceFormatted}</p>
@@ -274,7 +355,7 @@ if (targetCategory && targetGridId) {
                             <div class="s-card">
                                 <span class="s-badge ${specs.condition === 'Used' ? '' : 'oem'}">${specs.condition || 'OEM'}</span>
                                 <div class="s-card-img">
-                                    <a href="product.html?id=${listing.id}"><img src="${imageUrl}" alt="${listing.title}"></a>
+                                    <a href="product.html?id=${listing.id}"><img src="${imageUrl}" alt="${listing.title}" loading="lazy"></a>
                                 </div>
                                 <p class="s-sku">SKU: ${specs.part_number || 'N/A'}</p>
                                 <h4 class="s-title"><a href="product.html?id=${listing.id}" style="color: inherit; text-decoration: none;">${listing.title}</a></h4>
@@ -291,7 +372,7 @@ if (targetCategory && targetGridId) {
                                 <div class="eq-card-img">
                                     <span class="eq-badge ${specs.condition === 'Used' ? 'used' : ''}">${specs.condition || 'New'}</span>
                                     <button class="eq-fav"><i class="fa-regular fa-heart"></i></button>
-                                    <a href="product.html?id=${listing.id}"><img src="${imageUrl}" alt="${listing.title}"></a>
+                                    <a href="product.html?id=${listing.id}"><img src="${imageUrl}" alt="${listing.title}" loading="lazy"></a>
                                 </div>
                                 <div class="eq-card-info">
                                     <h3><a href="product.html?id=${listing.id}" style="color: inherit; text-decoration: none;">${listing.title}</a></h3>
@@ -310,7 +391,7 @@ if (targetCategory && targetGridId) {
                                     <span class="ls-card-badge">${listing.category}</span>
                                     <button class="ls-fav"><i class="fa-regular fa-heart"></i></button>
                                     <a href="product.html?id=${listing.id}">
-                                        <img src="${imageUrl}" alt="${listing.title}">
+                                        <img src="${imageUrl}" alt="${listing.title}" loading="lazy">
                                     </a>
                                 </div>
                                 <div class="ls-card-body">
@@ -334,7 +415,7 @@ if (targetCategory && targetGridId) {
                                 <div class="card-img">
                                     <span class="card-badge organic">Fresh Crop</span>
                                     <a href="product.html?id=${listing.id}">
-                                        <img src="${imageUrl}" alt="${listing.title}">
+                                        <img src="${imageUrl}" alt="${listing.title}" loading="lazy">
                                     </a>
                                 </div>
                                 <div class="card-body">
@@ -349,17 +430,36 @@ if (targetCategory && targetGridId) {
                             </div>`;
                         }
 
-                        gridElement.innerHTML += cardHtml;
+                        gridElement.insertAdjacentHTML('beforeend', cardHtml);
                     });
+
+                    // Add Load More button if there is a next page
+                    if (data.hasNextPage) {
+                        const loadMoreHtml = `
+                        <div id="load-more-btn-container" style="grid-column: 1 / -1; text-align: center; margin-top: 20px;">
+                            <button id="load-more-btn" style="padding: 12px 30px; background-color: #2b332b; color: #fff; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.2s;">
+                                Load More <i class="fa-solid fa-chevron-down"></i>
+                            </button>
+                        </div>`;
+                        gridElement.insertAdjacentHTML('beforeend', loadMoreHtml);
+
+                        document.getElementById('load-more-btn').addEventListener('click', () => {
+                            currentPage++;
+                            triggerFilters(true); // true means append
+                        });
+                    }
+
                 } else {
-                    gridElement.innerHTML = `<div style="text-align:center; width:100%; padding: 60px; color: #666; grid-column: 1 / -1; background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
-                        <i class="fa-solid fa-box-open" style="font-size: 40px; color: #ddd; margin-bottom: 15px;"></i>
-                        <br>No <b>${targetCategory}</b> listings available at the moment.
-                    </div>`;
+                    if (!append) {
+                        gridElement.innerHTML = `<div style="text-align:center; width:100%; padding: 60px; color: #666; grid-column: 1 / -1; background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+                            <i class="fa-solid fa-box-open" style="font-size: 40px; color: #ddd; margin-bottom: 15px;"></i>
+                            <br>No <b>${targetCategory}</b> listings available at the moment.
+                        </div>`;
+                    }
                 }
             } catch (err) {
                 console.error('Error loading category listings:', err);
-                gridElement.innerHTML = `<div style="text-align:center; width:100%; padding: 40px; color: red; grid-column: 1 / -1;">Failed to load listings. Please check your connection.</div>`;
+                if (!append) gridElement.innerHTML = `<div style="text-align:center; width:100%; padding: 40px; color: red; grid-column: 1 / -1;">Failed to load listings. Please check your connection.</div>`;
             }
         }
         
@@ -419,19 +519,29 @@ if (targetCategory && targetGridId) {
             }
         }
         
-        loadCategoryListings();
-        loadCategoryHighlight();
-        
         // Setup filter button listener
-        const applyBtn = document.getElementById('apply-filters-btn');
+        const applyBtn = document.getElementById('apply-filters-btn') || document.getElementById('applyFiltersBtn');
         const searchInput = document.getElementById('category-search-input');
         const searchBtn = document.getElementById('category-search-btn');
 
-        function triggerFilters() {
+        function triggerFilters(isAppend = false) {
+            if (!isAppend) {
+                currentPage = 1;
+            }
+
             let queryString = '';
+
+            const type = document.querySelector('input[name="type"]:checked');
+            if (type && type.value !== 'All Types') queryString += `&type=${encodeURIComponent(type.value)}`;
 
             const make = document.querySelector('input[name="make"]:checked');
             if (make && make.value !== 'All Makes') queryString += `&make=${encodeURIComponent(make.value)}`;
+
+            const breed = document.querySelector('input[name="breed"]:checked');
+            if (breed && breed.value !== 'All Breeds') queryString += `&breed=${encodeURIComponent(breed.value)}`;
+
+            const sort = document.querySelector('input[name="sort"]:checked');
+            if (sort && sort.value !== 'new') queryString += `&sort=${encodeURIComponent(sort.value)}`;
 
             const model = document.querySelector('input[name="model"]:checked');
             if (model && model.value !== 'All Models') queryString += `&model=${encodeURIComponent(model.value)}`;
@@ -454,9 +564,76 @@ if (targetCategory && targetGridId) {
             if (searchInput && searchInput.value.trim()) {
                 queryString += `&search=${encodeURIComponent(searchInput.value.trim())}`;
             }
+            
+            if (currentPage > 1) {
+                queryString += `&page=${currentPage}`;
+            }
 
-            loadCategoryListings(queryString);
+            // Mobile Data Saving Algorithm (Zimbabwe Optimized)
+            const isMobile = window.innerWidth <= 768;
+            const itemLimit = isMobile ? 8 : 24; 
+            queryString += `&limit=${itemLimit}`;
+
+            // Sync URL silently
+            const newUrl = new URL(window.location);
+            newUrl.search = queryString;
+            window.history.replaceState({}, '', newUrl);
+
+            loadCategoryListings(queryString, isAppend);
         }
+
+        // Parse URL and restore filters on load
+        function restoreFiltersFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            let hasParams = false;
+
+            if (params.has('page')) {
+                currentPage = parseInt(params.get('page'), 10) || 1;
+            }
+
+            const restoreRadio = (name, value) => {
+                const radio = document.querySelector(`input[name="${name}"][value="${value}"]`);
+                if (radio) {
+                    radio.checked = true;
+                    // Update summary
+                    const details = radio.closest('details');
+                    if (details) {
+                        const summary = details.querySelector('summary');
+                        const label = radio.parentElement.textContent.trim();
+                        summary.innerHTML = `${label} <i class="fa-solid fa-chevron-down"></i>`;
+                    }
+                    hasParams = true;
+                }
+            };
+
+            if (params.has('type')) restoreRadio('type', params.get('type'));
+            if (params.has('make')) restoreRadio('make', params.get('make'));
+            if (params.has('breed')) restoreRadio('breed', params.get('breed'));
+            if (params.has('sort')) restoreRadio('sort', params.get('sort'));
+            if (params.has('model')) restoreRadio('model', params.get('model'));
+            if (params.has('condition')) restoreRadio('condition', params.get('condition'));
+            if (params.has('transmission')) restoreRadio('trans', params.get('transmission'));
+            if (params.has('province')) restoreRadio('loc', params.get('province'));
+
+            if (params.has('price_min')) {
+                const el = document.getElementById('filter-price-min');
+                if (el) { el.value = params.get('price_min'); hasParams = true; }
+            }
+            if (params.has('price_max')) {
+                const el = document.getElementById('filter-price-max');
+                if (el) { el.value = params.get('price_max'); hasParams = true; }
+            }
+            if (params.has('search')) {
+                if (searchInput) { searchInput.value = params.get('search'); hasParams = true; }
+            }
+
+            // Execute filters immediately (this will do the initial fetch with the URL params applied)
+            triggerFilters();
+        }
+
+        // Initialize
+        restoreFiltersFromUrl();
+        loadCategoryHighlight();
 
         if (applyBtn) {
             applyBtn.addEventListener('click', triggerFilters);
@@ -474,6 +651,85 @@ if (targetCategory && targetGridId) {
             });
         }
     }
+}
+
+// =========================================
+// CUSTOM FILTER AUTO-CLOSE & SUMMARY UPDATE
+// =========================================
+document.querySelectorAll('.custom-filter').forEach(details => {
+    const summary = details.querySelector('summary');
+    const originalText = summary ? summary.innerHTML.split('<i')[0].trim() : ''; // Get the text before the icon
+    
+    const radios = details.querySelectorAll('input[type="radio"]');
+    radios.forEach(radio => {
+        radio.addEventListener('change', (e) => {
+            if (e.target.checked) {
+                // Update summary text
+                if (summary) {
+                    const selectedLabel = e.target.parentElement.textContent.trim();
+                    summary.innerHTML = `${selectedLabel} <i class="fa-solid fa-chevron-down"></i>`;
+                }
+                // Close the dropdown
+                details.removeAttribute('open');
+            }
+        });
+    });
+});
+
+// =========================================
+// DUAL PRICE SLIDER LOGIC
+// =========================================
+const minSlider = document.getElementById('filter-price-slider-min');
+const maxSlider = document.getElementById('filter-price-slider-max');
+const minPriceInput = document.getElementById('filter-price-min');
+const maxPriceInput = document.getElementById('filter-price-max');
+
+function enforceMinMaxConstraints() {
+    let minVal = parseInt(minSlider.value);
+    let maxVal = parseInt(maxSlider.value);
+    
+    // Ensure min < max
+    if (minVal >= maxVal) {
+        minVal = maxVal - 1;
+        minSlider.value = minVal;
+    }
+    
+    // Update inputs
+    if (minPriceInput) minPriceInput.value = minVal;
+    if (maxPriceInput) maxPriceInput.value = maxVal;
+}
+
+if (minSlider && maxSlider) {
+    minSlider.addEventListener('input', enforceMinMaxConstraints);
+    maxSlider.addEventListener('input', enforceMinMaxConstraints);
+}
+
+if (minPriceInput && maxPriceInput) {
+    minPriceInput.addEventListener('input', (e) => {
+        let val = parseInt(e.target.value) || 0;
+        if (val < 0) val = 0; // Prevent negative
+        e.target.value = val;
+        
+        let maxVal = parseInt(maxSlider.value);
+        if (val >= maxVal) {
+            val = maxVal - 1;
+            e.target.value = val;
+        }
+        
+        minSlider.value = val;
+    });
+
+    maxPriceInput.addEventListener('input', (e) => {
+        let val = parseInt(e.target.value) || 0;
+        let minVal = parseInt(minSlider.value);
+        
+        if (val <= minVal) {
+            val = minVal + 1;
+            e.target.value = val;
+        }
+        
+        maxSlider.value = val;
+    });
 }
 
 // =========================================
@@ -659,4 +915,82 @@ if (window.location.pathname.includes('product.html')) {
         }
         loadProductDetails();
     }
-}
+}
+
+// =========================================
+// LIVESTOCK: DYNAMIC BREED FILTERING
+// =========================================
+if (window.location.pathname.includes('livestock.html')) {
+    const breedMap = {
+        "Cattle": ["Afrikaner", "Angus", "Beefmaster", "Bonsmara", "Boran", "Brahman", "Charolais", "Drakensberger", "Guernsey", "Hereford", "Holstein (Friesland)", "Jersey", "Limousin", "Mashona", "Nguni", "Nkone", "Santa Gertrudis", "Simbra", "Simmental", "Tuli"],
+        "Poultry": ["Australorp", "Boschveld", "Brahma", "Broilers (Ross/Cobb)", "Koekoek", "Layers", "Leghorn", "Orpington", "Plymouth Rock", "Rhode Island Red", "Road Runner", "Sussex", "Venda"],
+        "Goats": ["Boer Goat", "Kalahari Red", "Mashona Goat", "Matabele Goat", "Saanen", "Savanna", "Toggenburg"],
+        "Sheep": ["Blackhead Persian", "Damara", "Dohne Merino", "Dorper", "Hampshire Down", "Ile de France", "Meatmaster", "Merino", "Suffolk"],
+        "Pigs": ["Chester White", "Duroc", "Hampshire", "Landrace", "Large Black", "Large White", "Pietrain"],
+        "Farm Dogs": ["Anatolian Shepherd", "Boerboel", "Border Collie", "German Shepherd", "Jack Russell", "Malinois", "Rhodesian Ridgeback", "Rottweiler"],
+        "Rabbits": ["Angora", "Californian", "Chinchilla", "Dutch", "Flemish Giant", "New Zealand Red", "New Zealand White"],
+        "Horses": ["Appaloosa", "Arabian", "Boerperd", "Clydesdale", "Friesian", "Percheron", "Quarter Horse", "Saddlebred", "Shire", "Thoroughbred"],
+        "Donkeys": ["Standard Donkey", "Mammoth Jackstock"],
+        "Fish (Aquaculture)": ["African Catfish", "Carp", "Nile Tilapia", "Rainbow Trout"],
+        "Bees": ["African Honey Bee", "Cape Honey Bee"]
+    };
+
+    const typeRadios = document.querySelectorAll('input[name="type"]');
+    const breedInput = document.querySelector('input[name="breed"]');
+    
+    if (typeRadios.length > 0 && breedInput) {
+        const breedContainer = breedInput.closest('.custom-options');
+        const breedDetails = breedContainer.closest('.custom-filter');
+        const breedSummary = breedDetails.querySelector('summary');
+
+        // Function to populate breeds based on selected category
+        const populateBreeds = (selectedType) => {
+            breedContainer.innerHTML = '<label><input type="radio" name="breed" value="All Breeds" checked> All Breeds</label>';
+            breedSummary.innerHTML = 'All Breeds <i class="fa-solid fa-chevron-down"></i>';
+
+            let breedsToAdd = [];
+            if (selectedType === "All Livestock") {
+                Object.values(breedMap).forEach(arr => breedsToAdd.push(...arr));
+                breedsToAdd.sort(); // Alphabetical
+            } else if (breedMap[selectedType]) {
+                breedsToAdd = breedMap[selectedType];
+            }
+
+            // Remove duplicates and sort
+            breedsToAdd = [...new Set(breedsToAdd)].sort();
+
+            breedsToAdd.forEach(b => {
+                const label = document.createElement('label');
+                label.innerHTML = `<input type="radio" name="breed" value="${b}"> ${b}`;
+                breedContainer.appendChild(label);
+            });
+
+            // Re-attach listeners
+            const newRadios = breedContainer.querySelectorAll('input[type="radio"]');
+            newRadios.forEach(r => {
+                r.addEventListener('change', (ev) => {
+                    if (ev.target.checked) {
+                        const selectedLabel = ev.target.parentElement.textContent.trim();
+                        breedSummary.innerHTML = `${selectedLabel} <i class="fa-solid fa-chevron-down"></i>`;
+                        breedDetails.removeAttribute('open');
+                        
+                        if (typeof window.triggerFilters === 'function') {
+                            window.triggerFilters();
+                        }
+                    }
+                });
+            });
+        };
+
+        // Populate initially based on current selection
+        const initialType = document.querySelector('input[name="type"]:checked')?.value || "All Livestock";
+        populateBreeds(initialType);
+
+        // Attach listener for category changes
+        typeRadios.forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                populateBreeds(e.target.value);
+            });
+        });
+    }
+}

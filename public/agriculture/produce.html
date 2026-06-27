@@ -43,7 +43,7 @@
             </div>
 
             <ul class="nav-links" id="mainNavLinks">
-                <li><a href="#" onclick="history.back()" class="back-btn"><i class="fa-solid fa-arrow-left"></i> BACK</a></li>
+
                 
                 <li><a href="../index.html">HOME</a></li>
                 <li><a href="../vehicles.html">VEHICLES</a></li>
@@ -87,14 +87,32 @@
                 
                 <div class="sort-section">
                     <details class="custom-filter">
-                        <summary>Category <i class="fa-solid fa-chevron-down" style="font-size: 11px; color: #666;"></i></summary>
-                        <div class="custom-options">
-                            <label><input type="radio" name="cat" value="all" checked> All Produce</label>
-                            <label><input type="radio" name="cat" value="fresh"> Fresh Crops</label>
-                            <label><input type="radio" name="cat" value="dried"> Dried Crops</label>
-                            <label><input type="radio" name="cat" value="fruits"> Fruits</label>
-                            <label><input type="radio" name="cat" value="bulk"> Bulk Sacks</label>
-                            <label><input type="radio" name="cat" value="organic"> Organic</label>
+                        <summary>All Produce <i class="fa-solid fa-chevron-down" style="font-size: 11px; color: #666;"></i></summary>
+                        <div class="custom-options" style="max-height: 250px; overflow-y: auto;">
+                            <label><input type="radio" name="type" value="All Types" checked> All Produce</label>
+                            <label><input type="radio" name="type" value="Apples"> Apples</label>
+                            <label><input type="radio" name="type" value="Avocados"> Avocados</label>
+                            <label><input type="radio" name="type" value="Bananas"> Bananas</label>
+                            <label><input type="radio" name="type" value="Butternut"> Butternut</label>
+                            <label><input type="radio" name="type" value="Cabbage"> Cabbage</label>
+                            <label><input type="radio" name="type" value="Carrots"> Carrots</label>
+                            <label><input type="radio" name="type" value="Cassava"> Cassava</label>
+                            <label><input type="radio" name="type" value="Cotton"> Cotton</label>
+                            <label><input type="radio" name="type" value="Groundnuts"> Groundnuts</label>
+                            <label><input type="radio" name="type" value="Macadamia Nuts"> Macadamia Nuts</label>
+                            <label><input type="radio" name="type" value="Maize"> Maize</label>
+                            <label><input type="radio" name="type" value="Onions"> Onions</label>
+                            <label><input type="radio" name="type" value="Oranges"> Oranges</label>
+                            <label><input type="radio" name="type" value="Peas"> Peas</label>
+                            <label><input type="radio" name="type" value="Pecan Nuts"> Pecan Nuts</label>
+                            <label><input type="radio" name="type" value="Potatoes"> Potatoes</label>
+                            <label><input type="radio" name="type" value="Sorghum"> Sorghum</label>
+                            <label><input type="radio" name="type" value="Soybeans"> Soybeans</label>
+                            <label><input type="radio" name="type" value="Sugar Beans"> Sugar Beans</label>
+                            <label><input type="radio" name="type" value="Sweet Potatoes"> Sweet Potatoes</label>
+                            <label><input type="radio" name="type" value="Tobacco"> Tobacco</label>
+                            <label><input type="radio" name="type" value="Tomatoes"> Tomatoes</label>
+                            <label><input type="radio" name="type" value="Wheat"> Wheat</label>
                         </div>
                     </details>
                 </div>
@@ -119,7 +137,7 @@
                     <div class="card-img">
                         <span class="card-badge organic">Fresh Crop</span>
                         <a href="../product.html?id=tomatoes">
-                            <img src="tomatoes.png" alt="Tomatoes">
+                            <img src="tomatoes.png" alt="Tomatoes" loading="lazy">
                         </a>
                     </div>
                     <div class="card-body">
@@ -137,7 +155,7 @@
                     <div class="card-img">
                         <span class="card-badge wholesale">Dried Crop</span>
                         <a href="../product.html?id=maize">
-                            <img src="maize.png" alt="Maize">
+                            <img src="maize.png" alt="Maize" loading="lazy">
                         </a>
                     </div>
                     <div class="card-body">
@@ -155,7 +173,7 @@
                     <div class="card-img">
                         <span class="card-badge fresh">Fresh Crop</span>
                         <a href="../product.html?id=cabbage">
-                            <img src="cabbage.png" alt="Cabbage">
+                            <img src="cabbage.png" alt="Cabbage" loading="lazy">
                         </a>
                     </div>
                     <div class="card-body">
@@ -173,7 +191,7 @@
                     <div class="card-img">
                         <span class="card-badge wholesale">Dried Crop</span>
                         <a href="../product.html?id=sugarbeans">
-                            <img src="sugarbeans.png" alt="Sugar Beans">
+                            <img src="sugarbeans.png" alt="Sugar Beans" loading="lazy">
                         </a>
                     </div>
                     <div class="card-body">
@@ -191,7 +209,7 @@
                     <div class="card-img">
                         <span class="card-badge organic">Fresh Crop</span>
                         <a href="../product.html?id=onions">
-                            <img src="onions.png" alt="Onions">
+                            <img src="onions.png" alt="Onions" loading="lazy">
                         </a>
                     </div>
                     <div class="card-body">
@@ -209,7 +227,7 @@
                     <div class="card-img">
                         <span class="card-badge organic">Dried Crop</span>
                         <a href="../product.html?id=groundnuts">
-                            <img src="groundnuts.png" alt="Groundnuts">
+                            <img src="groundnuts.png" alt="Groundnuts" loading="lazy">
                         </a>
                     </div>
                     <div class="card-body">
@@ -227,7 +245,7 @@
                     <div class="card-img">
                         <span class="card-badge fresh">Fresh Crop</span>
                         <a href="../product.html?id=carrots">
-                            <img src="carrots.png" alt="Carrots">
+                            <img src="carrots.png" alt="Carrots" loading="lazy">
                         </a>
                     </div>
                     <div class="card-body">
@@ -245,7 +263,7 @@
                     <div class="card-img">
                         <span class="card-badge organic">Fresh Crop</span>
                         <a href="../product.html?id=potatoes">
-                            <img src="potatoes.png" alt="Potatoes">
+                            <img src="potatoes.png" alt="Potatoes" loading="lazy">
                         </a>
                     </div>
                     <div class="card-body">

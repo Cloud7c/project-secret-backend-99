@@ -44,7 +44,7 @@
             </div>
 
             <ul class="nav-links" id="mainNavLinks">
-                <li><a href="#" onclick="history.back()" class="back-btn"><i class="fa-solid fa-arrow-left"></i> BACK</a></li>
+
                 
                 <li><a href="../index.html">HOME</a></li>
                 <li><a href="../vehicles.html">VEHICLES</a></li>
@@ -91,45 +91,78 @@
                 <span class="filter-label">FILTER BY:</span>
                 
                 <div class="hf-selects">
-                    <select>
+                    <select id="eq-type">
                         <option>Machine Type (All)</option>
-                        <option>Tractors</option>
+                        <option>Balers</option>
+                        <option>Cranes</option>
+                        <option>Cultivators</option>
+                        <option>Earthmoving</option>
+                        <option>Excavators</option>
+                        <option>Forklifts</option>
+                        <option>Generators</option>
+                        <option>Graders</option>
                         <option>Harvesters</option>
-                        <option>Implements</option>
+                        <option>Loaders</option>
+                        <option>Planters</option>
+                        <option>Rollers</option>
+                        <option>Seeders</option>
+                        <option>Sprayers</option>
+                        <option>Tillage Equipment</option>
+                        <option>Tractors</option>
                     </select>
                     
-                    <select>
+                    <select id="eq-brand">
                         <option>Brand (All)</option>
+                        <option>Bobcat</option>
+                        <option>Case IH</option>
+                        <option>Caterpillar</option>
+                        <option>Claas</option>
+                        <option>Deutz-Fahr</option>
+                        <option>Hitachi</option>
+                        <option>JCB</option>
                         <option>John Deere</option>
+                        <option>Komatsu</option>
+                        <option>Kubota</option>
+                        <option>Mahindra</option>
                         <option>Massey Ferguson</option>
                         <option>New Holland</option>
+                        <option>Valtra</option>
+                        <option>Volvo</option>
                     </select>
 
-                    <select>
+                    <select id="eq-condition">
                         <option>Condition (New/Used)</option>
-                        <option>Brand New</option>
+                        <option>New</option>
                         <option>Used</option>
                     </select>
 
-                    <select>
+                    <select id="eq-price">
                         <option>Price (Range)</option>
                         <option>Under $10k</option>
                         <option>$10k - $30k</option>
                         <option>Over $30k</option>
                     </select>
 
-                    <select>
+                    <select id="eq-year">
                         <option>Year (All)</option>
+                        <option>2025 - current</option>
                         <option>2023 - 2024</option>
                         <option>2018 - 2022</option>
                         <option>Older</option>
                     </select>
 
-                    <select>
+                    <select id="eq-location">
                         <option>Location (All)</option>
-                        <option>Harare</option>
                         <option>Bulawayo</option>
-                        <option>Mutare</option>
+                        <option>Harare</option>
+                        <option>Manicaland</option>
+                        <option>Mashonaland Central</option>
+                        <option>Mashonaland East</option>
+                        <option>Mashonaland West</option>
+                        <option>Masvingo</option>
+                        <option>Matabeleland North</option>
+                        <option>Matabeleland South</option>
+                        <option>Midlands</option>
                     </select>
                     
                     <button class="clear-all-btn">Clear All</button>
@@ -145,7 +178,7 @@
                         <span class="eq-badge">Featured</span>
                         <button class="eq-fav"><i class="fa-regular fa-heart"></i></button>
                         <a href="../product.html?id=johndeere">
-                            <img src="../tractor-johndeere.jpg" alt="John Deere Tractor">
+                            <img src="../tractor-johndeere.jpg" alt="John Deere Tractor" loading="lazy">
                         </a>
                     </div>
                     <div class="eq-card-info">
@@ -165,7 +198,7 @@
                         <span class="eq-badge used">Used</span>
                         <button class="eq-fav"><i class="fa-regular fa-heart"></i></button>
                         <a href="../product.html?id=massey">
-                            <img src="../tractor-massey.jpg" alt="Massey Ferguson Tractor">
+                            <img src="../tractor-massey.jpg" alt="Massey Ferguson Tractor" loading="lazy">
                         </a>
                     </div>
                     <div class="eq-card-info">
@@ -185,7 +218,7 @@
                         <span class="eq-badge">New</span>
                         <button class="eq-fav"><i class="fa-regular fa-heart"></i></button>
                         <a href="../product.html?id=mahindra">
-                            <img src="../tractor-mahindra.jpg" alt="Mahindra Tractor">
+                            <img src="../tractor-mahindra.jpg" alt="Mahindra Tractor" loading="lazy">
                         </a>
                     </div>
                     <div class="eq-card-info">
@@ -205,7 +238,7 @@
                         <span class="eq-badge used">Used</span>
                         <button class="eq-fav"><i class="fa-regular fa-heart"></i></button>
                         <a href="../product.html?id=caseih">
-                            <img src="../harvester-caseih.jpg" alt="CASE IH Harvester">
+                            <img src="../harvester-caseih.jpg" alt="CASE IH Harvester" loading="lazy">
                         </a>
                     </div>
                     <div class="eq-card-info">
@@ -225,7 +258,7 @@
                         <span class="eq-badge">Featured</span>
                         <button class="eq-fav"><i class="fa-regular fa-heart"></i></button>
                         <a href="../product.html?id=newholland">
-                            <img src="../tractor-newholland.jpg" alt="New Holland Tractor">
+                            <img src="../tractor-newholland.jpg" alt="New Holland Tractor" loading="lazy">
                         </a>
                     </div>
                     <div class="eq-card-info">
@@ -241,18 +274,6 @@
 
             </div>
 
-            <!-- Page Navigation Bar -->
-            <div class="pagination-container">
-                <ul class="pagination">
-                    <li><a href="#" class="prev-btn"><i class="fa-solid fa-chevron-left"></i> Prev</a></li>
-                    <li><a href="#" class="active">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><span class="dots">...</span></li>
-                    <li><a href="#">12</a></li>
-                    <li><a href="#" class="next-btn">Next <i class="fa-solid fa-chevron-right"></i></a></li>
-                </ul>
-            </div>
 
         </div>
     </main>

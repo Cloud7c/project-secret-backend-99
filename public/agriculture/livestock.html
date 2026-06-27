@@ -45,7 +45,7 @@
             </div>
 
             <ul class="nav-links" id="mainNavLinks">
-                <li><a href="#" onclick="history.back()" class="back-btn"><i class="fa-solid fa-arrow-left"></i> BACK</a></li>
+
                 
                 <li><a href="../index.html">HOME</a></li>
                 <li><a href="../vehicles.html">VEHICLES</a></li>
@@ -114,32 +114,83 @@
             <aside class="livestock-sidebar" id="filterSidebar">
                 <div class="sidebar-section">
                     <h4>Category</h4>
-                    <label><input type="checkbox" checked> Cattle</label>
-                    <label><input type="checkbox"> Poultry (Chickens)</label>
-                    <label><input type="checkbox"> Goats</label>
-                    <label><input type="checkbox"> Sheep</label>
-                    <label><input type="checkbox"> Pigs</label>
-                    <label><input type="checkbox"> Fish (Aquaculture)</label>
-                    <label><input type="checkbox"> Farm Dogs</label>
-                    <label><input type="checkbox"> Rabbits</label>
+                    <details class="custom-filter">
+                        <summary>All Livestock <i class="fa-solid fa-chevron-down"></i></summary>
+                        <div class="custom-options" style="max-height: 250px; overflow-y: auto;">
+                            <label><input type="radio" name="type" value="All Livestock" checked> All Livestock</label>
+                            <label><input type="radio" name="type" value="Bees"> Bees</label>
+                            <label><input type="radio" name="type" value="Cattle"> Cattle</label>
+                            <label><input type="radio" name="type" value="Donkeys"> Donkeys</label>
+                            <label><input type="radio" name="type" value="Farm Dogs"> Farm Dogs</label>
+                            <label><input type="radio" name="type" value="Fish (Aquaculture)"> Fish (Aquaculture)</label>
+                            <label><input type="radio" name="type" value="Goats"> Goats</label>
+                            <label><input type="radio" name="type" value="Horses"> Horses</label>
+                            <label><input type="radio" name="type" value="Pigs"> Pigs</label>
+                            <label><input type="radio" name="type" value="Poultry"> Poultry</label>
+                            <label><input type="radio" name="type" value="Rabbits"> Rabbits</label>
+                            <label><input type="radio" name="type" value="Sheep"> Sheep</label>
+                        </div>
+                    </details>
+                </div>
+
+                <div class="sidebar-section">
+                    <h4>Breed</h4>
+                    <details class="custom-filter">
+                        <summary>All Breeds <i class="fa-solid fa-chevron-down"></i></summary>
+                        <div class="custom-options" style="max-height: 250px; overflow-y: auto;">
+                            <label><input type="radio" name="breed" value="All Breeds" checked> All Breeds</label>
+                            <label><input type="radio" name="breed" value="Angus"> Angus</label>
+                            <label><input type="radio" name="breed" value="Boer Goat"> Boer Goat</label>
+                            <label><input type="radio" name="breed" value="Boran"> Boran</label>
+                            <label><input type="radio" name="breed" value="Brahman"> Brahman</label>
+                            <label><input type="radio" name="breed" value="Broilers"> Broilers</label>
+                            <label><input type="radio" name="breed" value="Dorper"> Dorper</label>
+                            <label><input type="radio" name="breed" value="Hereford"> Hereford</label>
+                            <label><input type="radio" name="breed" value="Layers"> Layers</label>
+                            <label><input type="radio" name="breed" value="Mashona"> Mashona</label>
+                            <label><input type="radio" name="breed" value="Matabele Goat"> Matabele Goat</label>
+                            <label><input type="radio" name="breed" value="Merino"> Merino</label>
+                            <label><input type="radio" name="breed" value="Road Runner"> Road Runner</label>
+                            <label><input type="radio" name="breed" value="Simmental"> Simmental</label>
+                            <label><input type="radio" name="breed" value="Sussex"> Sussex</label>
+                            <label><input type="radio" name="breed" value="Tuli"> Tuli</label>
+                        </div>
+                    </details>
                 </div>
 
                 <div class="sidebar-section">
                     <h4>Location</h4>
-                    <select>
-                        <option>All</option>
-                        <option>Harare</option>
-                        <option>Bulawayo</option>
-                        <option>Mutare</option>
-                        <option>Masvingo</option>
-                    </select>
+                    <details class="custom-filter">
+                        <summary>All Provinces <i class="fa-solid fa-chevron-down"></i></summary>
+                        <div class="custom-options" style="max-height: 250px; overflow-y: auto;">
+                            <label><input type="radio" name="loc" value="All Provinces" checked> All Provinces</label>
+                            <label><input type="radio" name="loc" value="Bulawayo"> Bulawayo</label>
+                            <label><input type="radio" name="loc" value="Harare"> Harare</label>
+                            <label><input type="radio" name="loc" value="Manicaland"> Manicaland</label>
+                            <label><input type="radio" name="loc" value="Mashonaland Central"> Mashonaland Central</label>
+                            <label><input type="radio" name="loc" value="Mashonaland East"> Mashonaland East</label>
+                            <label><input type="radio" name="loc" value="Mashonaland West"> Mashonaland West</label>
+                            <label><input type="radio" name="loc" value="Masvingo"> Masvingo</label>
+                            <label><input type="radio" name="loc" value="Matabeleland North"> Matabeleland North</label>
+                            <label><input type="radio" name="loc" value="Matabeleland South"> Matabeleland South</label>
+                            <label><input type="radio" name="loc" value="Midlands"> Midlands</label>
+                        </div>
+                    </details>
                 </div>
 
                 <div class="sidebar-section">
                     <h4>Price Range</h4>
-                    <p class="price-range-label">$1,000 - $5,000</p>
-                    <input type="range" min="0" max="5000" class="price-slider">
+                    <div class="range-slider-container">
+                        <input type="range" class="price-slider min-slider" min="0" max="10000" value="0" id="filter-price-slider-min">
+                        <input type="range" class="price-slider max-slider" min="0" max="10000" value="10000" id="filter-price-slider-max">
+                    </div>
+                    <div class="price-inputs">
+                        <input type="number" id="filter-price-min" placeholder="Min" min="0">
+                        <input type="number" id="filter-price-max" placeholder="Max" min="0">
+                    </div>
                 </div>
+
+                <button class="apply-filters-btn" id="applyFiltersBtn">Apply Filters</button>
             </aside>
 
             <div class="livestock-right-column">
@@ -152,7 +203,7 @@
                             <span class="ls-card-badge premium">Premium</span>
                             <button class="ls-fav"><i class="fa-regular fa-heart"></i></button>
                             <a href="../product.html?id=angus">
-                                <img src="../cow-angus.jpg" alt="Angus Heifer">
+                                <img src="../cow-angus.jpg" alt="Angus Heifer" loading="lazy">
                             </a>
                         </div>
                         <div class="ls-card-body">
@@ -177,7 +228,7 @@
                             <span class="ls-card-badge new">New</span>
                             <button class="ls-fav"><i class="fa-regular fa-heart"></i></button>
                             <a href="../product.html?id=boer">
-                                <img src="../goat-boer.jpg" alt="Boer Doe">
+                                <img src="../goat-boer.jpg" alt="Boer Doe" loading="lazy">
                             </a>
                         </div>
                         <div class="ls-card-body">
@@ -201,7 +252,7 @@
                         <div class="ls-card-img">
                             <button class="ls-fav"><i class="fa-regular fa-heart"></i></button>
                             <a href="../product.html?id=hereford">
-                                <img src="../cow-hereford.jpg" alt="Hereford Steer">
+                                <img src="../cow-hereford.jpg" alt="Hereford Steer" loading="lazy">
                             </a>
                         </div>
                         <div class="ls-card-body">
@@ -225,7 +276,7 @@
                         <div class="ls-card-img">
                             <button class="ls-fav"><i class="fa-regular fa-heart"></i></button>
                             <a href="../product.html?id=nigerian">
-                                <img src="../goat-nigerian.jpg" alt="Nigerian Dwarf">
+                                <img src="../goat-nigerian.jpg" alt="Nigerian Dwarf" loading="lazy">
                             </a>
                         </div>
                         <div class="ls-card-body">
@@ -250,7 +301,7 @@
                             <span class="ls-card-badge premium">Pedigree</span>
                             <button class="ls-fav"><i class="fa-regular fa-heart"></i></button>
                             <a href="../product.html?id=brahman">
-                                <img src="../cow-brahman.jpg" alt="Brahman Bull">
+                                <img src="../cow-brahman.jpg" alt="Brahman Bull" loading="lazy">
                             </a>
                         </div>
                         <div class="ls-card-body">
@@ -275,7 +326,7 @@
                             <span class="ls-card-badge new">New</span>
                             <button class="ls-fav"><i class="fa-regular fa-heart"></i></button>
                             <a href="../product.html?id=holstein">
-                                <img src="../cow-holstein.jpg" alt="Holstein Dairy Cow">
+                                <img src="../cow-holstein.jpg" alt="Holstein Dairy Cow" loading="lazy">
                             </a>
                         </div>
                         <div class="ls-card-body">
@@ -299,7 +350,7 @@
                         <div class="ls-card-img">
                             <button class="ls-fav"><i class="fa-regular fa-heart"></i></button>
                             <a href="../product.html?id=boran">
-                                <img src="../cow-boran.jpg" alt="Boran Heifer">
+                                <img src="../cow-boran.jpg" alt="Boran Heifer" loading="lazy">
                             </a>
                         </div>
                         <div class="ls-card-body">
@@ -323,7 +374,7 @@
                         <div class="ls-card-img">
                             <button class="ls-fav"><i class="fa-regular fa-heart"></i></button>
                             <a href="../product.html?id=charolais">
-                                <img src="../cow-charolais.jpg" alt="Charolais Steer">
+                                <img src="../cow-charolais.jpg" alt="Charolais Steer" loading="lazy">
                             </a>
                         </div>
                         <div class="ls-card-body">
