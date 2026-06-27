@@ -25,15 +25,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 emailElement.textContent = user.email;
             }
 
-            // Set Avatar Initials
+            // Set Avatar Initials or Image
             const avatarElement = document.getElementById('profile-avatar');
-            if (avatarElement && user.full_name) {
-                const names = user.full_name.split(' ');
-                let initials = names[0].charAt(0).toUpperCase();
-                if (names.length > 1) {
-                    initials += names[names.length - 1].charAt(0).toUpperCase();
+            if (avatarElement) {
+                if (user.profile_picture) {
+                    avatarElement.innerHTML = `<img src="${user.profile_picture}" style="width: 100%; height: 100%; object-fit: cover;">`;
+                    avatarElement.style.backgroundColor = 'transparent';
+                } else if (user.full_name) {
+                    const names = user.full_name.split(' ');
+                    let initials = names[0].charAt(0).toUpperCase();
+                    if (names.length > 1) {
+                        initials += names[names.length - 1].charAt(0).toUpperCase();
+                    }
+                    avatarElement.textContent = initials;
                 }
-                avatarElement.textContent = initials;
+            }
+
+            // Set Cover Photo
+            const coverElement = document.getElementById('profile-cover');
+            if (coverElement && user.cover_picture) {
+                coverElement.style.backgroundImage = `url('${user.cover_picture}')`;
             }
 
             // Set Joined Date
@@ -42,6 +53,55 @@ document.addEventListener('DOMContentLoaded', () => {
                 const joinDate = new Date(user.created_at);
                 const options = { year: 'numeric', month: 'long' };
                 joinedElement.textContent = `Member Since: ${joinDate.toLocaleDateString(undefined, options)}`;
+            }
+            
+            // Image Upload Logic
+            const token = localStorage.getItem('zaa_token');
+            const avatarUpload = document.getElementById('avatar-upload');
+            const coverUpload = document.getElementById('cover-upload');
+
+            async function uploadImage(file, endpoint) {
+                const formData = new FormData();
+                formData.append('image', file);
+
+                const response = await fetch(endpoint, {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}` },
+                    body: formData
+                });
+                const data = await response.json();
+                if (!response.ok) throw new Error(data.error || 'Upload failed');
+                
+                // Update local storage with new user data
+                localStorage.setItem('zaa_user', JSON.stringify(data.user));
+                return data.user;
+            }
+
+            if (avatarUpload) {
+                avatarUpload.addEventListener('change', async (e) => {
+                    const file = e.target.files[0];
+                    if (!file) return;
+                    try {
+                        const updatedUser = await uploadImage(file, '/api/users/profile-picture');
+                        avatarElement.innerHTML = `<img src="${updatedUser.profile_picture}" style="width: 100%; height: 100%; object-fit: cover;">`;
+                        avatarElement.style.backgroundColor = 'transparent';
+                    } catch (err) {
+                        alert(err.message);
+                    }
+                });
+            }
+
+            if (coverUpload) {
+                coverUpload.addEventListener('change', async (e) => {
+                    const file = e.target.files[0];
+                    if (!file) return;
+                    try {
+                        const updatedUser = await uploadImage(file, '/api/users/cover-picture');
+                        coverElement.style.backgroundImage = `url('${updatedUser.cover_picture}')`;
+                    } catch (err) {
+                        alert(err.message);
+                    }
+                });
             }
             
         } catch (err) {

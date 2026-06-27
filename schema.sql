@@ -12,6 +12,8 @@ CREATE TABLE IF NOT EXISTS users (
     password_hash VARCHAR(255)  NOT NULL,
     province      VARCHAR(50),
     is_verified   BOOLEAN       DEFAULT FALSE,
+    profile_picture VARCHAR(500),
+    cover_picture   VARCHAR(500),
     created_at    TIMESTAMP     DEFAULT NOW()
 );
 
