@@ -36,18 +36,18 @@ const Navbar = () => {
 
                     <ul className={`nav-links ${menuOpen ? 'active' : ''}`}>
                         <li><Link to="/">HOME</Link></li>
-                        <li><Link to="/?category=vehicles">VEHICLES</Link></li>
-                        <li><Link to="/?category=machinery">MACHINERY</Link></li>
-                        <li><Link to="/?category=spares">SPARES</Link></li>
+                        <li><Link to="/category?category=vehicles">VEHICLES</Link></li>
+                        <li><Link to="/category?category=machinery">MACHINERY</Link></li>
+                        <li><Link to="/category?category=spares">SPARES</Link></li>
                         
                         <li className="dropdown">
                             <a href="#" className="dropbtn" onClick={(e) => e.preventDefault()}>
                                 FARMING <i className="fa-solid fa-chevron-down" style={{ fontSize: '12px', marginLeft: '4px' }}></i>
                             </a>
                             <div className="dropdown-content">
-                                <Link to="/?category=equipment">Equipments</Link>
-                                <Link to="/?category=livestock">Livestocks</Link>
-                                <Link to="/?category=produce">Crop & Produce</Link>
+                                <Link to="/category?category=equipment">Equipments</Link>
+                                <Link to="/category?category=livestock">Livestocks</Link>
+                                <Link to="/category?category=produce">Crop & Produce</Link>
                             </div>
                         </li>
 

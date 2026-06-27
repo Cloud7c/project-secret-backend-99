@@ -97,7 +97,7 @@ const AdminDashboard = () => {
     const activeListingsCount = listings.length;
 
     return (
-        <div style={{ position: 'relative', width: '100vw', height: '100vh', overflow: 'hidden', backgroundColor: '#0f172a' }}>
+        <div className="admin-layout" style={{ position: 'relative', width: '100vw', height: '100vh', overflow: 'hidden', backgroundColor: '#0f172a' }}>
             {/* Background Orbs for Glassmorphism */}
             <div className="bg-orb orb-1"></div>
             <div className="bg-orb orb-2"></div>

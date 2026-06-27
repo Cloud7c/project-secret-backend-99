@@ -123,34 +123,34 @@ const Home = () => {
             {/* CATEGORY CARDS */}
             <section className="category-cards-wrapper">
                 <div className="category-cards-container">
-                    <a href="#" onClick={(e) => { e.preventDefault(); handleCategoryClick('vehicles'); }} className={`category-card ${activeCategory === 'vehicles' ? 'active-card' : ''}`}>
+                    <Link to="/category?category=vehicles" className="category-card">
                         <i className="fa-solid fa-car card-icon"></i>
                         <span className="card-title">Vehicles</span>
-                    </a>
-                    <a href="#" onClick={(e) => { e.preventDefault(); handleCategoryClick('machinery'); }} className={`category-card ${activeCategory === 'machinery' ? 'active-card' : ''}`}>
+                    </Link>
+                    <Link to="/category?category=machinery" className="category-card">
                         <i className="fa-solid fa-truck-moving card-icon"></i>
                         <span className="card-title">Machinery</span>
-                    </a>
-                    <a href="#" onClick={(e) => { e.preventDefault(); handleCategoryClick('spares'); }} className={`category-card ${activeCategory === 'spares' ? 'active-card' : ''}`}>
+                    </Link>
+                    <Link to="/category?category=spares" className="category-card">
                         <i className="fa-solid fa-gear card-icon"></i>
                         <span className="card-title">Spares</span>
-                    </a>
-                    <a href="#" onClick={(e) => { e.preventDefault(); handleCategoryClick('vehicles'); }} className={`category-card ${activeCategory === 'trucks' ? 'active-card' : ''}`}>
+                    </Link>
+                    <Link to="/category?category=vehicles" className="category-card">
                         <i className="fa-solid fa-truck card-icon"></i>
                         <span className="card-title">Trucks</span>
-                    </a>
-                    <a href="#" onClick={(e) => { e.preventDefault(); handleCategoryClick('equipment'); }} className={`category-card ${activeCategory === 'equipment' ? 'active-card' : ''}`}>
+                    </Link>
+                    <Link to="/category?category=equipment" className="category-card">
                         <i className="fa-solid fa-tractor card-icon"></i>
                         <span className="card-title">Equipment</span>
-                    </a>
-                    <a href="#" onClick={(e) => { e.preventDefault(); handleCategoryClick('livestock'); }} className={`category-card ${activeCategory === 'livestock' ? 'active-card' : ''}`}>
+                    </Link>
+                    <Link to="/category?category=livestock" className="category-card">
                         <i className="fa-solid fa-cow card-icon"></i>
                         <span className="card-title">Livestock</span>
-                    </a>
-                    <a href="#" onClick={(e) => { e.preventDefault(); handleCategoryClick('produce'); }} className={`category-card ${activeCategory === 'produce' ? 'active-card' : ''}`}>
+                    </Link>
+                    <Link to="/category?category=produce" className="category-card">
                         <i className="fa-solid fa-wheat-awn card-icon"></i>
                         <span className="card-title">Crops &<br/>Produce</span>
-                    </a>
+                    </Link>
                 </div>
             </section>
 

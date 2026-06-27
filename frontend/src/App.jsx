@@ -8,6 +8,7 @@ import Register from './pages/Register';
 import MyAccount from './pages/MyAccount';
 import PostAd from './pages/PostAd';
 import AdminDashboard from './pages/AdminDashboard';
+import CategoryPage from './pages/CategoryPage';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/account" element={<MyAccount />} />
         <Route path="/post-ad" element={<PostAd />} />
+        <Route path="/category" element={<CategoryPage />} />
         <Route path="/admin" element={<AdminDashboard />} />
       </Routes>
       <Footer />
