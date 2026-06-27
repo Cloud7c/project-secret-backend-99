@@ -970,6 +970,22 @@ if (window.location.pathname.includes('product.html')) {
                     
                     const joinDate = new Date(listing.seller.created_at).getFullYear();
                     document.getElementById('dynamic-seller-date').innerHTML = `<i class="fa-solid fa-circle-check" style="color: green;"></i> Member since ${joinDate}`;
+
+                    const avatarEl = document.getElementById('dynamic-seller-avatar');
+                    if (avatarEl) {
+                        if (listing.seller.profile_picture) {
+                            avatarEl.innerHTML = `<img src="${listing.seller.profile_picture}" style="width: 100%; height: 100%; object-fit: cover;">`;
+                            avatarEl.style.backgroundColor = 'transparent';
+                        } else {
+                            const names = sellerName.split(' ');
+                            let initials = names[0].charAt(0).toUpperCase();
+                            if (names.length > 1) {
+                                initials += names[names.length - 1].charAt(0).toUpperCase();
+                            }
+                            avatarEl.innerHTML = initials;
+                            avatarEl.style.backgroundColor = '#2b7a4b';
+                        }
+                    }
                 }
                 
                 // Set Images

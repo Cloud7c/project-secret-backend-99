@@ -244,7 +244,7 @@ export const getListingById = async (req, res) => {
         const result = await pool.query(
             `SELECT *, (
                 SELECT row_to_json(u)
-                FROM (SELECT id, full_name, phone, province, is_verified, created_at
+                FROM (SELECT id, full_name, phone, province, is_verified, created_at, profile_picture
                       FROM users WHERE id = listings.user_id) u
              ) AS seller
              FROM listings
