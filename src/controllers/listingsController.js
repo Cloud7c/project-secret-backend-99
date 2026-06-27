@@ -53,21 +53,21 @@ export const createListing = async (req, res) => {
             }
         }
 
-        // 5. Handle Image Uploads with Sharp
+        // 5. Handle Image Uploads with Sharp (Base64 Database Storage)
         const uploadedImages = [];
         if (req.files && req.files.length > 0) {
             for (const file of req.files) {
-                const filename = `${crypto.randomUUID()}.webp`;
-                const filepath = path.join(process.cwd(), 'uploads', filename);
-
-                // Compress, resize to 1200px width max, convert to WebP
-                await sharp(file.buffer)
+                // Compress, resize to 1200px width max, convert to WebP buffer
+                const webpBuffer = await sharp(file.buffer)
                     .resize({ width: 1200, withoutEnlargement: true })
-                    .webp({ quality: 80 })
-                    .toFile(filepath);
+                    .webp({ quality: 60 }) // compress a bit more for base64 storage
+                    .toBuffer();
 
-                // Save the public path for the frontend
-                uploadedImages.push(`/uploads/${filename}`);
+                // Convert buffer to base64 Data URI
+                const base64Image = `data:image/webp;base64,${webpBuffer.toString('base64')}`;
+                
+                // Save the base64 string directly (no local file created)
+                uploadedImages.push(base64Image);
             }
         }
 
