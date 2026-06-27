@@ -646,3 +646,4 @@
 .left-arrow { left: 10px; }
 .right-arrow { right: 10px; }
 .thumb.active { border: 2px solid #28a745; opacity: 1; }
+.cache-buster { display: none; } 
