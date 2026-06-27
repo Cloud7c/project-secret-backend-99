@@ -647,7 +647,7 @@ if (targetCategory && targetGridId) {
 
             // Mobile Data Saving Algorithm (Zimbabwe Optimized)
             const isMobile = window.innerWidth <= 768;
-            const itemLimit = isMobile ? 16 : 48; 
+            const itemLimit = isMobile ? 16 : 32; 
             queryString += `&limit=${itemLimit}`;
 
             // Sync URL silently

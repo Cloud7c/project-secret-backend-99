@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const user = JSON.parse(userJson);
         const isMobile = window.innerWidth <= 768;
-        const limit = isMobile ? 16 : 48;
+        const limit = isMobile ? 16 : 32;
 
         if (!append && !isInitialLoad) {
             currentPage = 1;
