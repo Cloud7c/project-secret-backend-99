@@ -841,10 +841,29 @@ if (heroSearchBtn && heroSearchInput) {
         }
     };
 
-    heroSearchBtn.addEventListener('click', performGlobalSearch);
-    heroSearchInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') performGlobalSearch();
+    let heroDebounceTimer;
+    heroSearchInput.addEventListener('input', () => {
+        clearTimeout(heroDebounceTimer);
+        heroDebounceTimer = setTimeout(() => {
+            performGlobalSearch();
+        }, 500);
     });
+
+    heroSearchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            clearTimeout(heroDebounceTimer);
+            performGlobalSearch();
+        }
+    });
+    
+    // Instant trigger when selecting a dropdown option in the hero search
+    document.querySelectorAll('.hero-custom-dropdowns input[type="radio"]').forEach(radio => {
+        radio.addEventListener('change', () => {
+            performGlobalSearch();
+        });
+    });
+    
+    heroSearchBtn.addEventListener('click', performGlobalSearch);
 }
 
 // =========================================
