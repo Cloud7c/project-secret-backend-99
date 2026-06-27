@@ -184,18 +184,34 @@ export const getAllListings = async (req, res) => {
         query += ` AND l.specs->>'transmission' = $${params.length}`;
     }
     
-    // ── SORTING & ROTATION ALGORITHM ──────────────────────────
+    // ── SORTING & ROTATION ALGORITHM (PRO-SITE INTERLEAVING) ──
+    // This algorithm prevents old featured ads from permanently blocking fresh unfeatured ads,
+    // while still giving featured ads a massive, calculated advantage.
     if (shuffle === 'true') {
-        query += ` ORDER BY l.is_featured DESC, RANDOM()`;
+        // Randomly mix them, but give featured a mathematical probability boost
+        query += ` ORDER BY (CASE WHEN l.is_featured THEN RANDOM() + 0.5 ELSE RANDOM() END) DESC`;
     } else {
         if (sort === 'low') {
-            query += ` ORDER BY l.is_featured DESC, l.price ASC`;
+            // Price sorting should be strict to not annoy users, but featured breaks ties
+            query += ` ORDER BY l.price ASC, l.is_featured DESC, l.created_at DESC`;
         } else if (sort === 'high') {
-            query += ` ORDER BY l.is_featured DESC, l.price DESC`;
+            query += ` ORDER BY l.price DESC, l.is_featured DESC, l.created_at DESC`;
         } else if (sort === 'pop') {
-            query += ` ORDER BY l.is_featured DESC, l.views DESC NULLS LAST, l.created_at DESC`;
+            // Give featured ads an artificial +500 view bump to their ranking score
+            query += ` ORDER BY (COALESCE(l.views, 0) + CASE WHEN l.is_featured THEN 500 ELSE 0 END) DESC, l.created_at DESC`;
         } else {
-            query += ` ORDER BY l.is_featured DESC, l.created_at DESC`;
+            // Default "Freshness" + Hourly Rotation for Featured Ads!
+            // 1. All Featured ads get a +7 days artificial freshness bump.
+            // 2. Featured ads ALSO get up to +3 days of extra bonus pseudo-random time.
+            // 3. This bonus time is tied to the current HOUR, so every hour the top featured ads completely shuffle!
+            // 4. Because it's tied to the hour, pagination still works flawlessly (no duplicate ads when clicking Load More).
+            query += ` ORDER BY (
+                EXTRACT(EPOCH FROM l.created_at)
+                + CASE WHEN l.is_featured THEN 604800 ELSE 0 END
+                + CASE WHEN l.is_featured THEN 
+                    (('x' || substr(md5(l.id::text || to_char(current_timestamp, 'YYYY-MM-DD-HH24')), 1, 8))::bit(32)::bigint % 259200)
+                  ELSE 0 END
+            ) DESC`;
         }
     }
 
