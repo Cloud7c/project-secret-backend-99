@@ -133,9 +133,16 @@
                 <section class="spares-main">
                     
                     <div class="sorting-row">
-                        <div class="sort-options">
-                            <label>Sorted By:</label>
-                            <select><option>Most Relevant</option><option>Lowest Price</option></select>
+                        <div class="sort-section" style="margin-left: auto;">
+                            <details class="custom-sort">
+                                <summary>Sort by <i class="fa-solid fa-chevron-down" style="font-size: 11px; color: #666;"></i></summary>
+                                <div class="custom-options">
+                                    <label><input type="radio" name="sort" value="new" checked> Newest Arrivals</label>
+                                    <label><input type="radio" name="sort" value="low"> Price: Low to High</label>
+                                    <label><input type="radio" name="sort" value="high"> Price: High to Low</label>
+                                    <label><input type="radio" name="sort" value="pop"> Popularity</label>
+                                </div>
+                            </details>
                         </div>
                     </div>
 

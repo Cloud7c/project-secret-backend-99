@@ -91,81 +91,95 @@
                 <span class="filter-label">FILTER BY:</span>
                 
                 <div class="hf-selects">
-                    <select id="eq-type">
-                        <option>Machine Type (All)</option>
-                        <option>Balers</option>
-                        <option>Cranes</option>
-                        <option>Cultivators</option>
-                        <option>Earthmoving</option>
-                        <option>Excavators</option>
-                        <option>Forklifts</option>
-                        <option>Generators</option>
-                        <option>Graders</option>
-                        <option>Harvesters</option>
-                        <option>Loaders</option>
-                        <option>Planters</option>
-                        <option>Rollers</option>
-                        <option>Seeders</option>
-                        <option>Sprayers</option>
-                        <option>Tillage Equipment</option>
-                        <option>Tractors</option>
-                    </select>
+                    <div class="sort-section">
+                        <details class="custom-filter">
+                            <summary>Machine Type <i class="fa-solid fa-chevron-down"></i></summary>
+                            <div class="custom-options" style="max-height: 250px; overflow-y: auto;">
+                                <label><input type="radio" name="type" value="All Types" checked> All Types</label>
+                                <label><input type="radio" name="type" value="Balers"> Balers</label>
+                                <label><input type="radio" name="type" value="Cranes"> Cranes</label>
+                                <label><input type="radio" name="type" value="Cultivators"> Cultivators</label>
+                                <label><input type="radio" name="type" value="Earthmoving"> Earthmoving</label>
+                                <label><input type="radio" name="type" value="Excavators"> Excavators</label>
+                                <label><input type="radio" name="type" value="Forklifts"> Forklifts</label>
+                                <label><input type="radio" name="type" value="Generators"> Generators</label>
+                                <label><input type="radio" name="type" value="Graders"> Graders</label>
+                                <label><input type="radio" name="type" value="Harvesters"> Harvesters</label>
+                                <label><input type="radio" name="type" value="Loaders"> Loaders</label>
+                                <label><input type="radio" name="type" value="Planters"> Planters</label>
+                                <label><input type="radio" name="type" value="Rollers"> Rollers</label>
+                                <label><input type="radio" name="type" value="Seeders"> Seeders</label>
+                                <label><input type="radio" name="type" value="Sprayers"> Sprayers</label>
+                                <label><input type="radio" name="type" value="Tillage Equipment"> Tillage Equipment</label>
+                                <label><input type="radio" name="type" value="Tractors"> Tractors</label>
+                            </div>
+                        </details>
+                    </div>
                     
-                    <select id="eq-brand">
-                        <option>Brand (All)</option>
-                        <option>Bobcat</option>
-                        <option>Case IH</option>
-                        <option>Caterpillar</option>
-                        <option>Claas</option>
-                        <option>Deutz-Fahr</option>
-                        <option>Hitachi</option>
-                        <option>JCB</option>
-                        <option>John Deere</option>
-                        <option>Komatsu</option>
-                        <option>Kubota</option>
-                        <option>Mahindra</option>
-                        <option>Massey Ferguson</option>
-                        <option>New Holland</option>
-                        <option>Valtra</option>
-                        <option>Volvo</option>
-                    </select>
+                    <div class="sort-section">
+                        <details class="custom-filter">
+                            <summary>Brand <i class="fa-solid fa-chevron-down"></i></summary>
+                            <div class="custom-options" style="max-height: 250px; overflow-y: auto;">
+                                <label><input type="radio" name="make" value="All Makes" checked> All Brands</label>
+                                <label><input type="radio" name="make" value="Bobcat"> Bobcat</label>
+                                <label><input type="radio" name="make" value="Case IH"> Case IH</label>
+                                <label><input type="radio" name="make" value="Caterpillar"> Caterpillar</label>
+                                <label><input type="radio" name="make" value="Claas"> Claas</label>
+                                <label><input type="radio" name="make" value="Deutz-Fahr"> Deut-Fahr</label>
+                                <label><input type="radio" name="make" value="Hitachi"> Hitachi</label>
+                                <label><input type="radio" name="make" value="JCB"> JCB</label>
+                                <label><input type="radio" name="make" value="John Deere"> John Deere</label>
+                                <label><input type="radio" name="make" value="Komatsu"> Komatsu</label>
+                                <label><input type="radio" name="make" value="Kubota"> Kubota</label>
+                                <label><input type="radio" name="make" value="Mahindra"> Mahindra</label>
+                                <label><input type="radio" name="make" value="Massey Ferguson"> Massey Ferguson</label>
+                                <label><input type="radio" name="make" value="New Holland"> New Holland</label>
+                                <label><input type="radio" name="make" value="Valtra"> Valtra</label>
+                                <label><input type="radio" name="make" value="Volvo"> Volvo</label>
+                            </div>
+                        </details>
+                    </div>
 
-                    <select id="eq-condition">
-                        <option>Condition (New/Used)</option>
-                        <option>New</option>
-                        <option>Used</option>
-                    </select>
-
-                    <select id="eq-price">
-                        <option>Price (Range)</option>
-                        <option>Under $10k</option>
-                        <option>$10k - $30k</option>
-                        <option>Over $30k</option>
-                    </select>
-
-                    <select id="eq-year">
-                        <option>Year (All)</option>
-                        <option>2025 - current</option>
-                        <option>2023 - 2024</option>
-                        <option>2018 - 2022</option>
-                        <option>Older</option>
-                    </select>
-
-                    <select id="eq-location">
-                        <option>Location (All)</option>
-                        <option>Bulawayo</option>
-                        <option>Harare</option>
-                        <option>Manicaland</option>
-                        <option>Mashonaland Central</option>
-                        <option>Mashonaland East</option>
-                        <option>Mashonaland West</option>
-                        <option>Masvingo</option>
-                        <option>Matabeleland North</option>
-                        <option>Matabeleland South</option>
-                        <option>Midlands</option>
-                    </select>
+                    <div class="sort-section">
+                        <details class="custom-filter">
+                            <summary>Condition <i class="fa-solid fa-chevron-down"></i></summary>
+                            <div class="custom-options">
+                                <label><input type="radio" name="condition" value="Any" checked> Any Condition</label>
+                                <label><input type="radio" name="condition" value="New"> New</label>
+                                <label><input type="radio" name="condition" value="Used"> Used</label>
+                            </div>
+                        </details>
+                    </div>
                     
-                    <button class="clear-all-btn">Clear All</button>
+                    <div class="sort-section">
+                        <details class="custom-filter">
+                            <summary>Location <i class="fa-solid fa-chevron-down"></i></summary>
+                            <div class="custom-options" style="max-height: 250px; overflow-y: auto;">
+                                <label><input type="radio" name="loc" value="All Provinces" checked> All Locations</label>
+                                <label><input type="radio" name="loc" value="Bulawayo"> Bulawayo</label>
+                                <label><input type="radio" name="loc" value="Harare"> Harare</label>
+                                <label><input type="radio" name="loc" value="Manicaland"> Manicaland</label>
+                                <label><input type="radio" name="loc" value="Mashonaland Central"> Mashonaland Central</label>
+                                <label><input type="radio" name="loc" value="Mashonaland East"> Mashonaland East</label>
+                                <label><input type="radio" name="loc" value="Mashonaland West"> Mashonaland West</label>
+                                <label><input type="radio" name="loc" value="Masvingo"> Masvingo</label>
+                                <label><input type="radio" name="loc" value="Matabeleland North"> Matabeleland North</label>
+                                <label><input type="radio" name="loc" value="Matabeleland South"> Matabeleland South</label>
+                                <label><input type="radio" name="loc" value="Midlands"> Midlands</label>
+                            </div>
+                        </details>
+                    </div>
+
+                    <div class="sort-section">
+                        <details class="custom-sort">
+                            <summary>Sort By <i class="fa-solid fa-chevron-down"></i></summary>
+                            <div class="custom-options">
+                                <label><input type="radio" name="sort" value="new" checked> Newest Arrivals</label>
+                                <label><input type="radio" name="sort" value="low"> Price: Low to High</label>
+                                <label><input type="radio" name="sort" value="high"> Price: High to Low</label>
+                            </div>
+                        </details>
+                    </div>
                 </div>
             </div>
 
