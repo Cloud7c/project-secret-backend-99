@@ -149,20 +149,26 @@ export const getAllListings = async (req, res) => {
         query += ` AND l.price <= $${params.length}`;
     }
     if (type && type !== 'All Types') {
-        params.push(type);
-        query += ` AND l.specs->>'type' = $${params.length}`;
+        params.push(`%${type}%`);
+        query += ` AND (
+            l.specs->>'type' ILIKE $${params.length} OR 
+            l.specs->>'sub_category' ILIKE $${params.length} OR 
+            l.specs->>'part_category' ILIKE $${params.length} OR 
+            l.specs->>'body_type' ILIKE $${params.length}
+        )`;
     }
     if (breed && breed !== 'All Breeds') {
-        params.push(breed);
-        query += ` AND l.specs->>'breed' = $${params.length}`;
+        params.push(`%${breed}%`);
+        query += ` AND l.specs->>'breed' ILIKE $${params.length}`;
     }
     if (make && make !== 'All Makes') {
-        params.push(make);
-        query += ` AND l.specs->>'make' = $${params.length}`;
+        params.push(`%${make}%`);
+        // If it's spares, the make filter maps to the 'compatible' spec field or 'make'.
+        query += ` AND (l.specs->>'make' ILIKE $${params.length} OR l.specs->>'compatible' ILIKE $${params.length})`;
     }
     if (model && model !== 'All Models') {
-        params.push(model);
-        query += ` AND l.specs->>'model' = $${params.length}`;
+        params.push(`%${model}%`);
+        query += ` AND l.specs->>'model' ILIKE $${params.length}`;
     }
     if (condition && condition !== 'Any') {
         params.push(condition);
