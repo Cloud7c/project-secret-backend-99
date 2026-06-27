@@ -121,7 +121,9 @@ export const loginUser = async (req, res) => {
                 phone:       user.phone,
                 province:    user.province,
                 is_verified: user.is_verified,
-                created_at:  user.created_at
+                created_at:  user.created_at,
+                profile_picture: user.profile_picture,
+                cover_picture: user.cover_picture
             }
         });
 

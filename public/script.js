@@ -970,13 +970,29 @@ if (window.location.pathname.includes('product.html')) {
                     const sellerName = listing.seller.full_name || 'Verified Seller';
                     document.getElementById('dynamic-seller-name').innerText = sellerName;
                     
+                    const isVerified = listing.seller.is_verified;
+                    const verifBadge = document.getElementById('dynamic-verified-badge');
                     const verifNameEl = document.getElementById('dynamic-verification-name');
-                    if (verifNameEl) {
-                        verifNameEl.innerHTML = `${sellerName} <i class="fa-solid fa-circle-check" style="color: #1da1f2;"></i>`;
+                    const verifStatusEl = document.getElementById('dynamic-verification-status');
+                    
+                    if (isVerified) {
+                        if (verifBadge) verifBadge.style.display = 'inline-block';
+                        if (verifNameEl) verifNameEl.innerHTML = `${sellerName} <i class="fa-solid fa-circle-check" style="color: #1da1f2;"></i>`;
+                        if (verifStatusEl) {
+                            verifStatusEl.innerText = 'Verified Identity';
+                            verifStatusEl.style.color = '#2b7a4b';
+                        }
+                    } else {
+                        if (verifBadge) verifBadge.style.display = 'none';
+                        if (verifNameEl) verifNameEl.innerText = sellerName;
+                        if (verifStatusEl) {
+                            verifStatusEl.innerText = 'Unverified Identity';
+                            verifStatusEl.style.color = '#999';
+                        }
                     }
                     
                     const joinDate = new Date(listing.seller.created_at).getFullYear();
-                    document.getElementById('dynamic-seller-date').innerHTML = `<i class="fa-solid fa-circle-check" style="color: green;"></i> Member since ${joinDate}`;
+                    document.getElementById('dynamic-seller-date').innerHTML = `<i class="fa-solid fa-calendar-days" style="color: #666;"></i> Member since ${joinDate}`;
 
                     const avatarEl = document.getElementById('dynamic-seller-avatar');
                     if (avatarEl) {
