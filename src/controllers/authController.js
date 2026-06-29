@@ -11,7 +11,8 @@ const generateToken = (user) => {
         {
             id:        user.id,
             email:     user.email,
-            full_name: user.full_name
+            full_name: user.full_name,
+            is_admin:  user.is_admin || false
         },
         process.env.JWT_SECRET,
         { expiresIn: '7d' }
@@ -58,7 +59,7 @@ export const registerUser = async (req, res) => {
             `INSERT INTO users
                 (full_name, email, phone, password_hash, province)
              VALUES ($1, $2, $3, $4, $5)
-             RETURNING id, full_name, email, phone, province, created_at`,
+             RETURNING id, full_name, email, phone, province, is_admin, created_at`,
             [full_name, email.toLowerCase(), phone, password_hash, province]
         );
 
@@ -121,6 +122,7 @@ export const loginUser = async (req, res) => {
                 phone:       user.phone,
                 province:    user.province,
                 is_verified: user.is_verified,
+                is_admin:    user.is_admin,
                 created_at:  user.created_at,
                 profile_picture: user.profile_picture,
                 cover_picture: user.cover_picture

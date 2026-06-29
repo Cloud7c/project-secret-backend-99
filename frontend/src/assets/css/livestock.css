@@ -1,0 +1,716 @@
+/* =========================================
+   LIVESTOCK PAGE (4-COLUMN PASTURE LAYOUT)
+   ========================================= */
+* {
+    box-sizing: border-box !important;
+}
+
+body.bg-pasture-green {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background-color: #e8f0e8; 
+    margin: 0;
+    padding: 0;
+}
+
+/* =========================================
+   HEADER OVERRIDES (Pure White)
+   ========================================= */
+.top-header, .main-nav {
+    background-color: #ffffff !important; 
+    border: none !important;
+}
+
+.brand-text h1, .brand-text p, .nav-links a, .location-label, .dropbtn, .back-btn {
+    color: #2b332b !important; 
+}
+
+/* Kills extra nav padding */
+.main-nav {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+/* FIX FOR DROPDOWN CLOSING TOO FAST */
+.dropdown {
+    position: relative;
+}
+.dropdown-content {
+    top: 100%; 
+    margin-top: 0; 
+}
+.dropdown::after {
+    content: '';
+    position: absolute;
+    bottom: -15px; 
+    left: 0;
+    width: 100%;
+    height: 15px;
+}
+
+.nav-simplified {
+    justify-content: flex-start;
+    gap: 30px;
+}
+
+/* =========================================
+   FADING BANNER & COMPACT ILLUSTRATION
+   ========================================= */
+
+.livestock-banner {
+    position: relative;
+    background: linear-gradient(to right, 
+            #e8f0e8 calc(50% - 600px), 
+            #fff9ea calc(50% - 400px), 
+            #fff9ea calc(50% + 400px), 
+            #e8f0e8 calc(50% + 600px)
+        );
+    padding: 40px 20px 40px 20px; 
+    margin-top: 0;
+    margin-bottom: 30px; 
+    overflow: hidden; 
+}
+
+.livestock-banner::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30px; 
+    background: linear-gradient(to bottom, transparent 0%, #e8f0e8 100%);
+    z-index: 2; 
+    pointer-events: none;
+}
+
+.banner-inner {
+    max-width: 1100px; 
+    margin: 0 auto;
+    position: relative;
+}
+
+/* =========================================
+   PAGE HEADER & CONTROLS ROW
+   ========================================= */
+.ls-page-header {
+    position: relative;
+    z-index: 5;
+    text-align: center; 
+    width: 100%;
+}
+
+.ls-page-header h1 {
+    font-family: 'Montserrat', -apple-system, sans-serif;
+    font-size: clamp(14px, 4.2vw, 24px); 
+    font-weight: 900;
+    color: #362d25; 
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0;
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+}
+
+/* Forces Search and Filter to sit Side-by-Side */
+.mobile-controls-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    max-width: 480px; 
+    margin: 15px auto 0 auto;
+}
+
+.ls-page-search {
+    position: relative;
+    flex: 1; 
+}
+
+.ls-page-search input {
+    width: 100%;
+    padding: 10px 15px;
+    padding-right: 35px;
+    border-radius: 20px; 
+    border: 1px solid rgba(0,0,0,0.15);
+    font-family: 'Inter', -apple-system, Arial, sans-serif;
+    font-size: 13px;
+    outline: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: all 0.2s;
+}
+
+.ls-page-search input:focus {
+    border-color: #fcbf29; 
+    box-shadow: 0 4px 12px rgba(252, 191, 41, 0.15);
+}
+
+.ls-page-search i {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666666;
+}
+
+/* Default Desktop: Filter button is hidden */
+.filters-dropdown-btn {
+    display: none; 
+}
+
+/* 🟢 ILLUSTRATION REBUILT SO IT CAN BE SCALED PERFECTLY */
+.banner-illustration {
+    position: absolute;
+    bottom: 0px; 
+    right: 20px;
+    width: 380px; 
+    height: 110px; 
+    z-index: 1;
+    pointer-events: none;
+}
+
+.sun {
+    position: absolute;
+    bottom: 15px;
+    right: 100px;
+    width: 70px;
+    height: 70px;
+    background: #fcbf29;
+    border-radius: 50%;
+    box-shadow: 0 0 0 10px rgba(252, 191, 41, 0.15), 
+                0 0 0 25px rgba(252, 191, 41, 0.08);
+}
+
+.hill-back {
+    position: absolute;
+    bottom: -5px;
+    right: 0;
+    width: 250px;
+    height: 75px;
+    background: #9ebf8f;
+    border-radius: 50% 50% 0 0;
+}
+
+.hill-middle {
+    position: absolute;
+    bottom: -15px;
+    right: 65px;
+    width: 230px;
+    height: 85px;
+    background: #73a35d;
+    border-radius: 50% 50% 0 0;
+    background-image: repeating-linear-gradient(-45deg, transparent, transparent 8px, rgba(255,255,255,0.06) 8px, rgba(255,255,255,0.06) 16px);
+}
+
+.hill-front {
+    position: absolute;
+    bottom: 0px;
+    right: 130px;
+    width: 240px;
+    height: 60px;
+    background: #4a7c3b;
+    border-radius: 50% 50% 0 0;
+}
+
+.cow-shadow {
+    position: absolute;
+    z-index: 5;
+}
+
+.cow-1 {
+    bottom: 30px;
+    right: 35px;
+    font-size: 8px; 
+    color: #638f50; 
+    transform: scaleX(-1); 
+}
+
+.cow-2 {
+    bottom: 22px;
+    right: 110px;
+    font-size: 11px; 
+    color: #3b5c2c;
+}
+
+.cow-3 {
+    bottom: 10px;
+    right: 180px;
+    font-size: 16px; 
+    color: #2b332b; 
+    transform: scaleX(-1);
+}
+
+.cloud {
+    position: absolute;
+    background: #f2ead3;
+    width: 40px;
+    height: 12px;
+    border-radius: 20px;
+}
+.cloud::before {
+    content: ''; position: absolute; top: -8px; left: 8px; width: 20px; height: 20px; background: #f2ead3; border-radius: 50%;
+}
+.cloud::after {
+    content: ''; position: absolute; top: -5px; right: 8px; width: 12px; height: 12px; background: #f2ead3; border-radius: 50%;
+}
+.cloud-1 { top: 10px; right: 65px; }
+.cloud-2 { top: 25px; right: 210px; transform: scale(0.8); }
+
+/* --- MAIN LAYOUT (SIDEBAR + GRID) --- */
+.livestock-main-content {
+    display: flex;
+    max-width: 1100px; 
+    margin: 0 auto;
+    padding: 0 20px 60px 20px;
+    gap: 30px; 
+}
+
+/* --- SIDEBAR --- */
+.livestock-sidebar {
+    width: 220px;
+    flex-shrink: 0;
+}
+
+.sidebar-section {
+    margin-bottom: 25px; /* Tighter grouping */
+}
+
+.sidebar-section h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 14px; /* Amazon category headers are small */
+    color: #0F1111;
+    margin-bottom: 10px;
+    letter-spacing: 0px;
+}
+
+/* 🟢 AMAZON-STYLE TIGHT CHECKBOXES */
+.sidebar-section label {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #0F1111;
+    margin-bottom: 8px; /* Tighter gap */
+    font-weight: 400; /* Regular font weight */
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+}
+
+.sidebar-section label:hover {
+    color: #fcbf29; 
+}
+
+.sidebar-section label input {
+    margin-right: 8px;
+    width: 15px;
+    height: 15px;
+    accent-color: #fcbf29; 
+    cursor: pointer;
+}
+
+/* 🟢 AMAZON-STYLE NATIVE SELECT (Sort By / Filters) */
+.sidebar-section select {
+    width: 100%;
+    padding: 8px 30px 8px 12px;
+    border: 1px solid #D5D9D9;
+    border-radius: 8px;
+    background-color: #F0F2F2;
+    box-shadow: 0 2px 5px rgba(15,17,17,.15);
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: #0F1111;
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%230F1111%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px top 50%;
+    background-size: 10px auto;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.sidebar-section select:hover {
+    background-color: #E3E6E6;
+}
+
+.sidebar-section select:focus {
+    border-color: #008296;
+    box-shadow: 0 0 0 3px rgba(0,130,150,0.3);
+}
+
+.price-range-label {
+    font-size: 14px;
+    color: #0F1111;
+    font-weight: 700;
+    margin-bottom: 10px;
+    font-family: 'Inter', sans-serif;
+}
+
+.range-slider-container { position: relative; width: 100%; height: 30px; margin-bottom: 10px; }
+.price-slider { position: absolute; top: 50%; transform: translateY(-50%); width: 100%; pointer-events: none; -webkit-appearance: none; appearance: none; background: transparent; accent-color: #fcbf29; margin: 0; }
+.price-slider::-webkit-slider-runnable-track { width: 100%; height: 5px; background: #ddd; border-radius: 3px; }
+.price-slider.max-slider::-webkit-slider-runnable-track { background: transparent; }
+.price-slider::-webkit-slider-thumb { pointer-events: all; position: relative; z-index: 1; -webkit-appearance: none; height: 16px; width: 16px; border-radius: 50%; background: #fcbf29; cursor: pointer; border: 2px solid #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.3); margin-top: -5px; }
+.price-inputs { display: flex; gap: 10px; }
+.price-inputs input { width: 100%; padding: 10px 15px; border: 1px solid #ddd; border-radius: 6px; background-color: #fcfcfc; font-weight: 600; outline: none; min-width: 0; box-sizing: border-box; }
+
+/* =========================================
+   100% CUSTOM HTML DROPDOWNS (Amazon Style)
+   ========================================= */
+.custom-filter, .custom-sort { position: relative; width: 100%; min-width: 140px; margin-bottom: 12px; }
+
+/* 🟢 Amazon Dropdown Button */
+.custom-filter summary, .custom-sort summary {
+    list-style: none; display: flex; justify-content: space-between; align-items: center; width: 100%; 
+    padding: 8px 12px; 
+    border: 1px solid #D5D9D9; border-radius: 8px; background: #F0F2F2; color: #0F1111; 
+    font-weight: 400; font-size: 13px; cursor: pointer; user-select: none;
+    font-family: 'Inter', sans-serif; box-shadow: 0 2px 5px rgba(15,17,17,.15);
+    transition: background-color 0.2s;
+}
+
+.custom-filter summary:hover, .custom-sort summary:hover { background-color: #E3E6E6; }
+.custom-filter summary::-webkit-details-marker, .custom-sort summary::-webkit-details-marker { display: none; }
+.custom-filter[open] summary, .custom-sort[open] summary { border-bottom-left-radius: 0; border-bottom-right-radius: 0; box-shadow: none; }
+
+/* 🟢 Amazon Dropdown Popup Menu */
+.custom-options {
+    position: absolute; top: 100%; left: 0; right: 0; background: #ffffff; 
+    border: 1px solid #D5D9D9; border-top: none;
+    border-bottom-left-radius: 8px; border-bottom-right-radius: 8px; 
+    box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+    z-index: 1550 !important; 
+    max-height: 220px; overflow-y: auto; display: flex; flex-direction: column;
+}
+
+/* 🟢 Compact Amazon Options */
+.custom-options label { 
+    display: flex; align-items: center; gap: 8px; padding: 8px 12px; margin: 0 !important; 
+    font-size: 13px !important; font-weight: 400 !important; cursor: pointer; border-bottom: 1px solid #f0f0f0; 
+    color: #0F1111; font-family: 'Inter', sans-serif; 
+}
+
+.custom-options label:hover { background-color: #F0F2F2; color: #000; }
+.custom-options input[type="radio"] { accent-color: #fcbf29; transform: scale(1.1); margin: 0; cursor: pointer; }
+
+.apply-filters-btn {
+    width: 100%;
+    padding: 12px;
+    background: #fcbf29;
+    color: #2b332b;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    transition: background-color 0.2s, transform 0.1s;
+    margin-top: 15px;
+    display: block;
+}
+
+.apply-filters-btn:hover { background-color: #f0a500; }
+.apply-filters-btn:active { transform: scale(0.98); }
+
+/* --- RIGHT COLUMN --- */
+.livestock-right-column {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative; 
+}
+
+/* --- GRID --- */
+.livestock-grid {
+    display: grid !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    grid-template-columns: repeat(4, 1fr) !important; 
+    gap: 15px !important; 
+}
+
+/* --- CARDS --- */
+.ls-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 10px; 
+    box-shadow: 0 6px 20px rgba(0,0,0,0.03);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s, box-shadow 0.2s;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    margin: 0 !important;
+}
+
+.ls-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+}
+
+.ls-card-img {
+    position: relative;
+    width: 100%;
+    height: 140px; 
+    border-radius: 8px; 
+    overflow: hidden;
+    margin-bottom: 12px;
+    background: #f0f0f0;
+}
+
+.ls-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ls-fav {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background: rgba(255,255,255,0.9);
+    border: none;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    color: #888;
+    transition: all 0.2s;
+    z-index: 5;
+}
+
+.ls-fav:hover {
+    color: #e53935; 
+    transform: scale(1.1);
+}
+
+.ls-card-badge {
+    position: absolute;
+    top: 6px;
+    left: 6px; 
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 10px;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+}
+
+.ls-card-badge.premium {
+    background: #dff0d8;
+    color: #3c763d;
+}
+
+.ls-card-badge.new {
+    background: #fcf6ea;
+    color: #8a6d3b;
+}
+
+.ls-card-body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.ls-card-body h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 14px; 
+    color: #000;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    line-height: 1.2;
+}
+
+.ls-specs {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 12px;
+}
+
+.ls-specs p {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px; 
+    color: #444;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.ls-specs strong {
+    color: #000;
+    font-weight: 700;
+    display: inline-block;
+    width: 60px; 
+}
+
+.ls-price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 10px;
+    margin-top: auto;
+}
+
+.ls-price-row .price-label {
+    font-size: 13px;
+    color: #000;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+}
+
+.ls-price-row .price-value {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px; 
+    font-weight: 800;
+    color: #000;
+}
+
+/* ===================================================
+   THE 4 STAGES OF RESPONSIVE PROPORTIONS
+   (Mobile, Tablet, Laptop, Desktop Breakpoints)
+   =================================================== */
+
+/* 📱 & 📟 STAGE 1 & 2 SHARED: Mobile & Tablets (Up to 850px) */
+@media (max-width: 850px) {
+    .livestock-main-content { flex-direction: column !important; gap: 0 !important; position: relative !important; }
+    
+    /* 🟢 MOVED THE ACTION BAR FURTHER DOWN FROM THE TITLE! */
+    .mobile-controls-row { 
+        flex-direction: row !important; 
+        gap: 8px !important; 
+        width: 100% !important; 
+        margin-top: 40px !important; /* Pushed down away from the title */
+        margin-bottom: 0 !important;
+    }
+
+    /* 🟢 MOVED THE CARDS UP! No extra margin on the grid. */
+    .livestock-grid { margin-top: 0px !important; }
+
+    .ls-page-search input { font-size: 16px !important; height: 38px !important; border-radius: 19px !important; padding-left: 15px !important; }
+
+    .filters-dropdown-btn {
+        display: flex !important; align-items: center; justify-content: center; gap: 8px;
+        background-color: #2e7d32; color: #ffffff; border: none; height: 38px !important;
+        font-size: 13px !important; font-weight: 700 !important; border-radius: 19px !important; 
+        box-shadow: 0 4px 10px rgba(0,0,0,0.15) !important; flex: 1 !important;
+        position: relative !important; z-index: 999 !important; cursor: pointer !important;
+    }
+
+    .livestock-sidebar { display: none !important; width: 100% !important; }
+
+    /* 🟢 The floating gap from the Filter Button */
+    #filterSidebar {
+        display: none !important; 
+        position: absolute !important;
+        margin-top: 25px !important; /* 🟢 Gap between button and menu */
+        left: 20px !important; 
+        width: 240px !important; 
+        max-width: 85vw !important; 
+        background: #ffffff;
+        padding: 15px;
+        border-radius: 10px !important;
+        border: 1px solid #f0f0f0;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.3) !important;
+        z-index: 1500 !important; 
+        max-height: 450px !important; 
+        overflow-y: auto !important;
+        flex-direction: column !important;
+    }
+    #filterSidebar.show-filters { display: flex !important; }
+
+    /* ACCORDION FIX */
+    #filterSidebar .custom-options {
+        position: relative !important;
+        top: 0 !important;
+        box-shadow: none !important;
+        border: 1px solid #D5D9D9 !important;
+        border-top: none !important;
+        max-height: none !important; 
+        border-radius: 0 0 6px 6px !important;
+        margin-bottom: 10px !important;
+    }
+
+    .custom-filter summary, .custom-sort summary { font-size: 13px !important; padding: 10px 15px !important; height: 38px !important; }
+    .custom-options label { padding: 12px 15px !important; font-size: 13px !important; }
+}
+
+/* 📱 STAGE 1 Specifics: Mobile Phones (Up to 575px) */
+@media (max-width: 575px) {
+    /* 🟢 KILLED THE HUGE GAP! */
+    .livestock-main-content { padding: 10px 10px 10px 10px !important; } 
+    
+    .livestock-banner {
+        padding: 20px 10px 15px 10px !important; /* padding-bottom reduced to 15px */
+        margin-bottom: 0px !important; /* Margin killed */
+    }
+    .ls-page-header { margin-bottom: 10px !important; }
+    
+    /* SCALES THE COWS & SUN PERFECTLY INSTEAD OF HIDING THEM */
+    .banner-illustration { 
+        display: block !important; 
+        transform: scale(0.55) !important;
+        transform-origin: bottom right !important;
+        bottom: -5px !important;
+        right: -10px !important;
+    }
+    
+    .livestock-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
+    .ls-card { padding: 8px !important; border-radius: 10px !important; }
+    .ls-card-img { height: 110px !important; margin-bottom: 8px !important; }
+    .ls-price-row .price-value { font-size: 14px !important; }
+    .ls-card-body h3 { font-size: 11px !important; white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important; }
+    .ls-specs { gap: 2px !important; margin-bottom: 8px !important; }
+    .ls-specs p { font-size: 9px !important; }
+    .ls-card-body a { font-size: 10px !important; padding: 6px 0 !important; }
+}
+
+/* 📟 STAGE 2 Specifics: Tablets & iPads (576px to 850px) */
+@media (min-width: 576px) and (max-width: 850px) {
+    /* 🟢 KILLED THE HUGE GAP! */
+    .livestock-main-content { padding: 10px 20px 20px 20px !important; } 
+    
+    .livestock-banner {
+        padding: 30px 20px 15px 20px !important; /* padding-bottom reduced to 15px */
+        margin-bottom: 0px !important; /* Margin killed */
+    }
+    .ls-page-header { margin-bottom: 10px !important; }
+    
+    /* SCALES THE COWS & SUN PERFECTLY */
+    .banner-illustration { 
+        display: block !important; 
+        transform: scale(0.75) !important;
+        transform-origin: bottom right !important;
+        bottom: 0px !important;
+        right: 0px !important;
+    }
+    
+    .livestock-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 15px !important; }
+    .ls-card-img { height: 130px !important; }
+}
+
+/* 💻 STAGE 3: Small Laptops (851px to 1050px) */
+@media (min-width: 851px) and (max-width: 1050px) {
+    .livestock-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 15px !important; }
+    .filters-dropdown-btn { display: none !important; }
+    #filterSidebar { display: block !important; }
+}
+
+/* 🖥️ STAGE 4: Large Desktops (1051px and above) */
+@media (min-width: 1051px) {
+    .livestock-grid { grid-template-columns: repeat(4, 1fr) !important; gap: 15px !important; }
+    .filters-dropdown-btn { display: none !important; }
+    #filterSidebar { display: block !important; }
+}
+
+/* Toggle Animation */
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-15px); }
+    to { opacity: 1; transform: translateY(0); }
+}

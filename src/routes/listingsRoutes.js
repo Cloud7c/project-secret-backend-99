@@ -1,4 +1,3 @@
-// src/routes/listingsRoutes.js
 import express from 'express';
 import protect from '../middleware/auth.js';
 import multer from 'multer';
@@ -7,7 +6,8 @@ import {
     getAllListings,
     getListingById,
     incrementListingViews,
-    deleteListing
+    deleteListing,
+    updateListing
 } from '../controllers/listingsController.js';
 
 const router = express.Router();
@@ -26,6 +26,7 @@ router.post('/:id/view', incrementListingViews);
 // PROTECTED — must be logged in
 // Allow up to 5 images to be uploaded under the field name 'images'
 router.post('/',      protect, upload.array('images', 5), createListing);
+router.put('/:id',    protect, upload.array('images', 5), updateListing);
 router.delete('/:id', protect, deleteListing);
 
 export default router;

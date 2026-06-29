@@ -1,0 +1,280 @@
+/* =========================================
+   GLOBAL RESET & TYPOGRAPHY
+   ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+.register-wrapper {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    background-image: url('/hero.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    --dark-green: #144027; 
+    --input-bg: #eef5ef; 
+    --border-color: #c8dacb; 
+    --text-main: #1f2937;
+    --text-muted: #4b5563;
+}
+
+.register-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -20px; left: -20px; right: -20px; bottom: -20px;
+    background: inherit;
+    filter: blur(8px) brightness(0.85);
+    z-index: -1;
+}
+
+/* =========================================
+   THE REGISTRATION CARD (Slimmed Down!)
+   ========================================= */
+.login-container {
+    width: 100%;
+    /* Leaves a large buffer on the top and bottom of the screen */
+    padding: 30px 20px; 
+    display: flex;
+    justify-content: center;
+}
+
+.login-card {
+    background: #ffffff;
+    width: 100%;
+    /* Slimmed down so the sides of the background show cleanly */
+    max-width: 380px; 
+    /* Reduced inner padding so the form doesn't become extremely tall */
+    padding: 25px 30px; 
+    border-radius: 16px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Horizontal Logo Lockup */
+.brand-header {
+    text-align: center;
+    margin-bottom: 15px; /* Tightened */
+}
+.logo-lockup {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+.logo-img { height: 26px; } /* Slimmed */
+.brand-header h2 {
+    font-size: 20px; /* Slimmed */
+    font-weight: 800; 
+    color: var(--text-main);
+    letter-spacing: -0.5px;
+}
+
+/* Welcome Text */
+.welcome-text {
+    text-align: center;
+    margin-bottom: 18px; /* Tightened */
+}
+.welcome-text h1 {
+    font-size: 18px; /* Slimmed */
+    font-weight: 700; 
+    color: var(--text-main);
+    margin-bottom: 4px;
+}
+.welcome-text p {
+    font-size: 12px;
+    color: var(--text-main);
+    font-weight: 500; 
+}
+
+/* =========================================
+   COMPACT INPUTS
+   ========================================= */
+.premium-input-group {
+    display: flex;
+    align-items: center;
+    background-color: var(--input-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 50px; 
+    padding: 10px 16px; /* Tightened to prevent vertical stretching */
+    margin-bottom: 10px; /* Tightened */
+    transition: all 0.2s;
+}
+
+.premium-input-group:focus-within {
+    border-color: var(--dark-green);
+    background-color: #e5efe7; 
+    box-shadow: 0 0 0 4px rgba(20, 64, 39, 0.1);
+}
+
+.input-icon {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-right: 12px;
+    width: 16px;
+    text-align: center;
+}
+
+.input-content {
+    display: flex;
+    flex-grow: 1;
+}
+
+.input-content input {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 13px; /* Slightly smaller for slim card */
+    color: var(--text-main);
+    font-weight: 600; 
+    width: 100%;
+}
+
+.input-content input::placeholder {
+    color: var(--text-muted);
+    font-weight: 500; 
+}
+
+.toggle-password {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 600; 
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+}
+.toggle-password:hover { color: var(--text-main); }
+
+/* =========================================
+   PASSWORD STRENGTH METER
+   ========================================= */
+.password-strength-container {
+    margin-bottom: 15px; /* Tightened */
+    padding: 0 5px; 
+}
+.strength-bars {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 6px;
+}
+.bar {
+    flex: 1;
+    height: 4px; /* Slimmer bar */
+    background-color: #e5e7eb; 
+    border-radius: 2px;
+    transition: background-color 0.3s ease;
+}
+
+/* JavaScript will activate these colors dynamically! */
+.bar.active-weak { background-color: #ef4444; } /* Red */
+.bar.active-fair { background-color: #f59e0b; } /* Orange */
+.bar.active-good { background-color: #10b981; } /* Light Green */
+.bar.active-strong { background-color: var(--dark-green); } /* Zim AutoAgri Green! */
+
+.strength-text {
+    font-size: 10px; /* Slimmed */
+    color: var(--text-muted);
+    font-weight: 600;
+}
+.strength-text span {
+    color: var(--dark-green); 
+}
+
+/* =========================================
+   TERMS AND CONDITIONS & CHECKBOX
+   ========================================= */
+.terms-container {
+    margin-bottom: 18px; /* Tightened */
+    padding: 0 5px;
+}
+.terms-label {
+    display: flex;
+    align-items: flex-start; 
+    gap: 10px;
+    cursor: pointer;
+}
+.terms-label input { display: none; }
+.custom-checkbox {
+    width: 16px; 
+    height: 16px;
+    border: 2px solid var(--dark-green);
+    border-radius: 4px;
+    display: inline-block;
+    position: relative;
+    background: #ffffff;
+    flex-shrink: 0; 
+}
+.terms-label input:checked + .custom-checkbox {
+    background: var(--dark-green);
+}
+.terms-label input:checked + .custom-checkbox::after {
+    content: '\f00c'; 
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    color: white;
+    font-size: 10px;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.terms-text {
+    font-size: 11px; /* Slimmed */
+    line-height: 1.4;
+    color: var(--text-main);
+    font-weight: 500;
+}
+.terms-text strong {
+    font-weight: 700;
+    cursor: pointer;
+}
+.terms-text strong:hover { text-decoration: underline; }
+
+/* =========================================
+   BUTTONS & FOOTER
+   ========================================= */
+.primary-btn {
+    width: 100%;
+    padding: 12px;
+    border-radius: 50px; 
+    font-size: 14px;
+    font-weight: 700; 
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.2s;
+    border: none;
+    background-color: var(--dark-green);
+    color: white;
+}
+.primary-btn:hover {
+    background-color: #0d2b1a;
+    box-shadow: 0 4px 15px rgba(20, 64, 39, 0.3);
+}
+
+.card-footer {
+    margin-top: 18px; /* Tightened */
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-main);
+    font-weight: 500; 
+}
+.card-footer a {
+    color: var(--text-main);
+    text-decoration: underline;
+    font-weight: 700; 
+}
+
+/* =========================================
+   MOBILE RESPONSIVENESS
+   ========================================= */
+@media (max-width: 480px) {
+    .login-container { padding: 20px; }
+    .login-card { padding: 25px 20px; }
+    .brand-header h2 { font-size: 18px; }
+}

@@ -1,7 +1,11 @@
 import express from 'express';
 import pool from '../db.js';
+import adminAuth from '../middleware/adminAuth.js';
 
 const router = express.Router();
+
+// Secure all admin routes automatically
+router.use(adminAuth);
 
 // 1. Fetch All Users for Dashboard
 router.get('/users', async (req, res) => {
@@ -91,6 +95,14 @@ router.get('/stats', async (req, res) => {
             `SELECT COUNT(*) FROM users WHERE created_at >= CURRENT_DATE`
         );
 
+        // Total Traffic (Views)
+        const totalTrafficResult = await pool.query('SELECT SUM(views) as total_views FROM listings');
+        const totalTraffic = parseInt(totalTrafficResult.rows[0]?.total_views || 0);
+
+        // Platform Fees Collected (Placeholder: 2% of total listing prices)
+        const totalRevenueResult = await pool.query('SELECT SUM(price) as total_price FROM listings');
+        const totalRevenue = (parseFloat(totalRevenueResult.rows[0]?.total_price || 0) * 0.02).toFixed(2);
+
         // Daily activity for the past 7 days (for bar chart)
         const dailyActivity = await pool.query(`
             SELECT 
@@ -113,6 +125,14 @@ router.get('/stats', async (req, res) => {
             ORDER BY d.day ASC
         `);
 
+        // Category breakdown
+        const categoryData = await pool.query(`
+            SELECT category, COUNT(*) as count 
+            FROM listings 
+            GROUP BY category
+            ORDER BY count DESC
+        `);
+
         res.json({
             total_users: parseInt(totalUsers.rows[0].count),
             verified_users: parseInt(verifiedUsers.rows[0].count),
@@ -121,7 +141,10 @@ router.get('/stats', async (req, res) => {
             featured_listings: parseInt(featuredListings.rows[0].count),
             today_listings: parseInt(todayListings.rows[0].count),
             today_users: parseInt(todayUsers.rows[0].count),
-            daily_activity: dailyActivity.rows
+            total_traffic: totalTraffic,
+            total_revenue: parseFloat(totalRevenue),
+            daily_activity: dailyActivity.rows,
+            categories: categoryData.rows
         });
     } catch (err) {
         console.error('Error fetching stats:', err);

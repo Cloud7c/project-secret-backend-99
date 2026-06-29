@@ -29,3 +29,42 @@ app.use((req, res) => {
 app.listen(PORT, () => {
     console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
+
+// ── Background Sweeper for Rolling 7-Day Views ─────────────
+import pool from './src/db.js';
+
+const sweepOldViews = async () => {
+    try {
+        // Find all listings where view_history is not empty
+        const result = await pool.query(`SELECT id, view_history FROM listings WHERE view_history != '{}'::jsonb`);
+        
+        const sevenDaysAgo = new Date();
+        sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+
+        for (let row of result.rows) {
+            let history = row.view_history || {};
+            let totalViews = 0;
+            let changed = false;
+
+            for (const date in history) {
+                if (new Date(date) < sevenDaysAgo) {
+                    delete history[date];
+                    changed = true;
+                } else {
+                    totalViews += history[date];
+                }
+            }
+
+            // Only update if expired views were actually deleted
+            if (changed) {
+                await pool.query(`UPDATE listings SET views = $1, view_history = $2 WHERE id = $3`, [totalViews, history, row.id]);
+            }
+        }
+    } catch (err) {
+        console.error("Failed to sweep old views:", err);
+    }
+};
+
+// Run immediately on start, then every 1 hour
+sweepOldViews();
+setInterval(sweepOldViews, 60 * 60 * 1000);

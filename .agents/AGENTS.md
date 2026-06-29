@@ -1,1 +1,0 @@
-- NEVER commit or push code without explicit user permission. The user will tell you when to commit.

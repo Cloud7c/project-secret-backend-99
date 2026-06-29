@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS users (
     password_hash VARCHAR(255)  NOT NULL,
     province      VARCHAR(50),
     is_verified   BOOLEAN       DEFAULT FALSE,
+    is_admin      BOOLEAN       DEFAULT FALSE,
     profile_picture TEXT,
     cover_picture   TEXT,
     created_at    TIMESTAMP     DEFAULT NOW()
@@ -34,9 +35,12 @@ CREATE TABLE IF NOT EXISTS listings (
     province    VARCHAR(50),
     location    VARCHAR(100),
     image_url   VARCHAR(500),
+    images      TEXT[],
+    specs       JSONB,
     is_featured BOOLEAN       DEFAULT FALSE,
     is_active   BOOLEAN       DEFAULT TRUE,
     views       INTEGER       DEFAULT 0,
+    view_history JSONB        DEFAULT '{}',
     created_at  TIMESTAMP     DEFAULT NOW()
 );
 
