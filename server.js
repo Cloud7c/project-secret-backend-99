@@ -1,5 +1,7 @@
 import 'dotenv/config';
 import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import productRoutes  from './src/routes/productRoutes.js';
 import authRoutes     from './src/routes/authRoutes.js';
 import listingsRoutes from './src/routes/listingsRoutes.js';
@@ -9,9 +11,12 @@ import './src/db.js';
 
 const app  = express();
 const PORT = process.env.PORT || 3000;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 app.use(express.json());
 app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
 app.use('/uploads', express.static('uploads'));
 
 // ── API Routes ──────────────────────────────
@@ -21,9 +26,14 @@ app.use('/api/listings', listingsRoutes);
 app.use('/api/admin',    adminRoutes);
 app.use('/api/users',    usersRoutes);
 
-// ── 404 Handler ─────────────────────────────
-app.use((req, res) => {
-    res.status(404).json({ error: 'Route not found.' });
+// ── 404 Handler for API Routes ─────────────────────
+app.use('/api/*', (req, res) => {
+    res.status(404).json({ error: 'API Route not found.' });
+});
+
+// ── Catch-All for React Frontend ─────────────────────
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
 });
 
 app.listen(PORT, () => {
