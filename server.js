@@ -27,12 +27,12 @@ app.use('/api/admin',    adminRoutes);
 app.use('/api/users',    usersRoutes);
 
 // ── 404 Handler for API Routes ─────────────────────
-app.use('/api/*', (req, res) => {
+app.use('/api', (req, res) => {
     res.status(404).json({ error: 'API Route not found.' });
 });
 
 // ── Catch-All for React Frontend ─────────────────────
-app.get('*', (req, res) => {
+app.get(/^.*$/, (req, res) => {
     res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
 });
 
