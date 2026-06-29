@@ -114,11 +114,15 @@ export const getAllListings = async (req, res) => {
     const queryForCache = { ...req.query };
     delete queryForCache.seed;
     
-    // Generate a unique cache key based on the exact query parameters (excluding the random seed)
+    // Generate a unique cache key based on the exact query parameters
     const cacheKey = JSON.stringify(queryForCache);
 
+    // Bypass cache completely for personal dashboard requests (when user_id is present) 
+    // so users instantly see their newly created or edited listings.
+    const isPersonalDashboard = !!req.query.user_id;
+
     // Check if we have a fresh cached response for this exact query
-    if (cache.has(cacheKey)) {
+    if (!isPersonalDashboard && cache.has(cacheKey)) {
         const cachedEntry = cache.get(cacheKey);
         if (Date.now() < cachedEntry.expiry) {
             return res.status(200).json(cachedEntry.data);
