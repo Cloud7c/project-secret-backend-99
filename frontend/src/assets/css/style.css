@@ -456,6 +456,54 @@ body {
     min-height: 420px !important;
 }
 
+/* =========================================
+   🔒 UNIVERSAL IMAGE HEIGHT LOCK
+   Forces ALL card image types to the SAME
+   height when mixed on the Home page grid
+   ========================================= */
+.product-grid .ls-card-img,
+.product-grid .card-img,
+.product-grid .s-card-img,
+.product-grid .v-card-image,
+.product-grid .m-card-image,
+.product-grid .eq-card-img,
+.product-grid .card-image-wrapper {
+    height: 180px !important;
+    min-height: 180px !important;
+    max-height: 180px !important;
+    overflow: hidden !important;
+}
+
+/* 📟 Tablet: lock at same height */
+@media (min-width: 576px) and (max-width: 850px) {
+    .product-grid .ls-card-img,
+    .product-grid .card-img,
+    .product-grid .s-card-img,
+    .product-grid .v-card-image,
+    .product-grid .m-card-image,
+    .product-grid .eq-card-img,
+    .product-grid .card-image-wrapper {
+        height: 160px !important;
+        min-height: 160px !important;
+        max-height: 160px !important;
+    }
+}
+
+/* 📱 Mobile: lock at same height */
+@media (max-width: 575px) {
+    .product-grid .ls-card-img,
+    .product-grid .card-img,
+    .product-grid .s-card-img,
+    .product-grid .v-card-image,
+    .product-grid .m-card-image,
+    .product-grid .eq-card-img,
+    .product-grid .card-image-wrapper {
+        height: 110px !important;
+        min-height: 110px !important;
+        max-height: 110px !important;
+    }
+}
+
 .product-card {
     background: #1e293b !important; 
     border-radius: 10px !important;
