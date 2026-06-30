@@ -534,17 +534,36 @@ body.bg-fresh-market {
         grid-template-columns: repeat(3, 1fr) !important; 
         gap: 15px !important;
     }
-    .card-img { height: 130px !important; }
 }
 
 /* 💻 STAGE 3: Small Laptops (851px to 1050px) */
 @media (min-width: 851px) and (max-width: 1050px) {
     .masonry-grid { grid-template-columns: repeat(4, 1fr) !important; }
-    .card-img { height: 140px !important; }
 }
 
 /* 🖥️ STAGE 4: Large Desktops (1051px and above) */
 @media (min-width: 1051px) {
     .masonry-grid { grid-template-columns: repeat(5, 1fr) !important; }
-    .card-img { height: 150px !important; }
+}
+
+/* =========================================
+   🔒 UNIVERSAL IMAGE HEIGHT LOCK
+   Matches the home page lock exactly
+   ========================================= */
+.masonry-grid .card-img,
+.card-img {
+    height: 180px !important;
+    min-height: 180px !important;
+    max-height: 180px !important;
+    overflow: hidden !important;
+}
+
+@media (min-width: 576px) and (max-width: 850px) {
+    .masonry-grid .card-img,
+    .card-img { height: 160px !important; min-height: 160px !important; max-height: 160px !important; }
+}
+
+@media (max-width: 575px) {
+    .masonry-grid .card-img,
+    .card-img { height: 110px !important; min-height: 110px !important; max-height: 110px !important; }
 }

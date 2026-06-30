@@ -520,7 +520,6 @@
 /* 📟 STAGE 2 Specifics: Tablets & iPads (576px to 850px) */
 @media (min-width: 576px) and (max-width: 850px) {
     .spares-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 15px !important; }
-    .s-card-img { height: 130px !important; }
 }
 
 /* 💻 STAGE 3: Small Laptops (851px to 1050px) */
@@ -528,7 +527,6 @@
     .spares-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 15px !important; }
     .filters-dropdown-btn { display: none !important; }
     #filterSidebar { display: block !important; }
-    .s-card-img { height: 140px !important; }
 }
 
 /* 🖥️ STAGE 4: Large Desktops (1051px and above) */
@@ -536,5 +534,26 @@
     .spares-grid { grid-template-columns: repeat(4, 1fr) !important; gap: 20px !important; }
     .filters-dropdown-btn { display: none !important; }
     #filterSidebar { display: block !important; }
-    .s-card-img { height: 150px !important; }
+}
+
+/* =========================================
+   🔒 UNIVERSAL IMAGE HEIGHT LOCK
+   Matches the home page lock exactly
+   ========================================= */
+.spares-grid .s-card-img,
+.s-card-img {
+    height: 180px !important;
+    min-height: 180px !important;
+    max-height: 180px !important;
+    overflow: hidden !important;
+}
+
+@media (min-width: 576px) and (max-width: 850px) {
+    .spares-grid .s-card-img,
+    .s-card-img { height: 160px !important; min-height: 160px !important; max-height: 160px !important; }
+}
+
+@media (max-width: 575px) {
+    .spares-grid .s-card-img,
+    .s-card-img { height: 110px !important; min-height: 110px !important; max-height: 110px !important; }
 }

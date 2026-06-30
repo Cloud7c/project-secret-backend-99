@@ -677,12 +677,11 @@ body.bg-pasture-green {
     .livestock-main-content { padding: 10px 20px 20px 20px !important; } 
     
     .livestock-banner {
-        padding: 30px 20px 15px 20px !important; /* padding-bottom reduced to 15px */
-        margin-bottom: 0px !important; /* Margin killed */
+        padding: 30px 20px 15px 20px !important;
+        margin-bottom: 0px !important;
     }
     .ls-page-header { margin-bottom: 10px !important; }
     
-    /* SCALES THE COWS & SUN PERFECTLY */
     .banner-illustration { 
         display: block !important; 
         transform: scale(0.75) !important;
@@ -692,7 +691,6 @@ body.bg-pasture-green {
     }
     
     .livestock-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 15px !important; }
-    .ls-card-img { height: 130px !important; }
 }
 
 /* 💻 STAGE 3: Small Laptops (851px to 1050px) */
@@ -700,7 +698,6 @@ body.bg-pasture-green {
     .livestock-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 15px !important; }
     .filters-dropdown-btn { display: none !important; }
     #filterSidebar { display: block !important; }
-    .ls-card-img { height: 140px !important; }
 }
 
 /* 🖥️ STAGE 4: Large Desktops (1051px and above) */
@@ -708,7 +705,28 @@ body.bg-pasture-green {
     .livestock-grid { grid-template-columns: repeat(4, 1fr) !important; gap: 15px !important; }
     .filters-dropdown-btn { display: none !important; }
     #filterSidebar { display: block !important; }
-    .ls-card-img { height: 150px !important; }
+}
+
+/* =========================================
+   🔒 UNIVERSAL IMAGE HEIGHT LOCK
+   Matches the home page lock exactly
+   ========================================= */
+.livestock-grid .ls-card-img,
+.ls-card-img {
+    height: 180px !important;
+    min-height: 180px !important;
+    max-height: 180px !important;
+    overflow: hidden !important;
+}
+
+@media (min-width: 576px) and (max-width: 850px) {
+    .livestock-grid .ls-card-img,
+    .ls-card-img { height: 160px !important; min-height: 160px !important; max-height: 160px !important; }
+}
+
+@media (max-width: 575px) {
+    .livestock-grid .ls-card-img,
+    .ls-card-img { height: 110px !important; min-height: 110px !important; max-height: 110px !important; }
 }
 
 /* Toggle Animation */

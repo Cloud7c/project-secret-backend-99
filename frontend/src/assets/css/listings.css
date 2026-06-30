@@ -206,6 +206,57 @@
     min-height: 100px;
 }
 
+/* =========================================
+   🔒 UNIVERSAL IMAGE HEIGHT LOCK
+   Forces ALL card image types to the SAME
+   height in the All Results & Others grids
+   ========================================= */
+.product-grid-vertical .ls-card-img,
+.product-grid-vertical .card-img,
+.product-grid-vertical .s-card-img,
+.product-grid-vertical .v-card-image,
+.product-grid-vertical .m-card-image,
+.product-grid-vertical .eq-card-img,
+.product-grid-vertical .card-image-wrapper,
+.card-image-wrapper {
+    height: 180px !important;
+    min-height: 180px !important;
+    max-height: 180px !important;
+    overflow: hidden !important;
+}
+
+/* 📟 Tablet */
+@media (min-width: 576px) and (max-width: 850px) {
+    .product-grid-vertical .ls-card-img,
+    .product-grid-vertical .card-img,
+    .product-grid-vertical .s-card-img,
+    .product-grid-vertical .v-card-image,
+    .product-grid-vertical .m-card-image,
+    .product-grid-vertical .eq-card-img,
+    .product-grid-vertical .card-image-wrapper,
+    .card-image-wrapper {
+        height: 160px !important;
+        min-height: 160px !important;
+        max-height: 160px !important;
+    }
+}
+
+/* 📱 Mobile */
+@media (max-width: 575px) {
+    .product-grid-vertical .ls-card-img,
+    .product-grid-vertical .card-img,
+    .product-grid-vertical .s-card-img,
+    .product-grid-vertical .v-card-image,
+    .product-grid-vertical .m-card-image,
+    .product-grid-vertical .eq-card-img,
+    .product-grid-vertical .card-image-wrapper,
+    .card-image-wrapper {
+        height: 110px !important;
+        min-height: 110px !important;
+        max-height: 110px !important;
+    }
+}
+
 @media (max-width: 768px) {
     /* 2 items visible before scrolling in featured horizontal slider */
     .product-card {
