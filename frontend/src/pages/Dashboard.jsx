@@ -58,9 +58,19 @@ const Dashboard = () => {
             fetch('/api/users/me', {
                 headers: { 'Authorization': `Bearer ${token}` }
             })
-            .then(res => res.json())
+            .then(res => {
+                if (res.status === 401 || res.status === 403) {
+                    // Token actually expired/invalid
+                    localStorage.removeItem('zaa_token');
+                    localStorage.removeItem('zaa_user');
+                    navigate('/login?redirect=/account', { replace: true });
+                    throw new Error('Unauthorized');
+                }
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                return res.json();
+            })
             .then(data => {
-                if (data.user) {
+                if (data && data.user) {
                     localStorage.setItem('zaa_user', JSON.stringify(data.user));
                     setUser(data.user);
                     setSettingsData({
@@ -70,13 +80,11 @@ const Dashboard = () => {
                         notify_approvals: data.user.notify_approvals ?? true
                     });
                     if (!userJson) fetchUserListings(data.user.id, 1, false);
-                } else {
-                    localStorage.removeItem('zaa_token');
-                    localStorage.removeItem('zaa_user');
-                    navigate('/login?redirect=/account', { replace: true });
                 }
             })
-            .catch(err => console.error('Error fetching user data:', err));
+            .catch(err => {
+                console.warn('Using cached profile data (server update pending):', err);
+            });
 
         } catch (err) {
             console.error('Error parsing user data:', err);
