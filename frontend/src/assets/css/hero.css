@@ -136,7 +136,7 @@
 }
 
 /* --- Mobile Responsiveness --- */
-@media (max-width: 768px) {
+@media (max-width: 575px) {
     .hero-title { font-size: 32px; }
     .hero-subtitle { font-size: 26px; }
     

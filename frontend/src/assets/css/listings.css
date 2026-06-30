@@ -257,7 +257,7 @@
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 575px) {
     /* 2 items visible before scrolling in featured horizontal slider */
     .product-card {
         flex: 0 0 47% !important; /* Slightly under 50% to account for gap/borders perfectly */

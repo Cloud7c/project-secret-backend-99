@@ -614,6 +614,13 @@ body {
         width: calc(33.33% - 8px) !important;
         min-width: 0 !important;
     }
+
+    /* Wrap category cards on tablet so they don't overflow (since desktop is 805px wide) */
+    .category-cards-container {
+        flex-wrap: wrap !important;
+        gap: 15px !important;
+        padding: 0 20px !important;
+    }
 }
 
 /* =========================================
@@ -730,6 +737,13 @@ body {
         font-weight: 600 !important;
         border: none !important;
     }
+
+} /* END of max-width: 768px for Nav */
+
+/* =========================================
+   📱 STRICTLY PHONES (up to 575px)
+   ========================================= */
+@media (max-width: 575px) {
 
     /* --- 3. CATEGORY CARDS (4 PER ROW!) --- */
     .category-cards-container {

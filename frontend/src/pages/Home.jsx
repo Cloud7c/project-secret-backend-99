@@ -295,12 +295,10 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* FORCE MOBILE STYLING TO BYPASS BROWSER CACHE */}
             <style>
                 {`
                 @media (max-width: 768px) {
-                    /* Align container padding to exactly match the Livestock page (10px on mobile) */
-                    /* FIX: style.css has a global rule adding 20px padding to .featured-container, causing double padding! */
+                    /* Align container padding */
                     .featured-section {
                         padding-left: 10px !important;
                         padding-right: 10px !important;
@@ -310,15 +308,14 @@ const Home = () => {
                         padding-right: 0 !important;
                     }
 
-                    /* FIX: style.css adds 15px padding inside .product-grid, shifting cards right. Strip it and set gap to 10px */
+                    /* Featured slider padding & gap */
                     #featured-slider {
                         padding-left: 0 !important;
                         padding-right: 0 !important;
                         gap: 10px !important;
                     }
                     
-                    /* Target ALL card types (ls-card, machinery-card, etc) */
-                    /* Width is 50vw minus 15px (10px padding per side + half of the 10px slider gap) */
+                    /* 📱 PHONES (up to 575px): 2 wide cards */
                     #featured-slider > div {
                         flex: 0 0 calc(50vw - 15px) !important;
                         width: calc(50vw - 15px) !important;
@@ -327,13 +324,34 @@ const Home = () => {
                         box-sizing: border-box !important;
                     }
                     
+                    /* Others / All Results: 2 columns on phone */
                     .product-grid-vertical {
                         display: grid !important;
                         grid-template-columns: repeat(2, 1fr) !important;
-                        gap: 15px !important;
+                        gap: 10px !important;
                     }
+                }
 
-                    /* Universal font scaling for all cards */
+                /* 📟 TABLETS (576px to 768px): 3 narrower cards — NOT stretched */
+                @media (min-width: 576px) and (max-width: 768px) {
+                    #featured-slider > div {
+                        flex: 0 0 calc(33.33vw - 14px) !important;
+                        width: calc(33.33vw - 14px) !important;
+                        max-width: calc(33.33vw - 14px) !important;
+                        min-width: calc(33.33vw - 14px) !important;
+                        box-sizing: border-box !important;
+                    }
+                    
+                    /* Others / All Results: 3 columns on tablet */
+                    .product-grid-vertical {
+                        display: grid !important;
+                        grid-template-columns: repeat(3, 1fr) !important;
+                        gap: 12px !important;
+                    }
+                }
+
+                /* Universal font scaling for all cards */
+                @media (max-width: 768px) {
                     #featured-slider > div *,
                     .product-grid-vertical > div * {
                         font-size: 11px !important;
@@ -344,11 +362,20 @@ const Home = () => {
                         margin-bottom: 4px !important;
                     }
                     
-                    /* Universal image scaling */
+                    /* Universal image scaling — phones */
                     #featured-slider > div > div:first-child,
                     .product-grid-vertical > div > div:first-child {
-                        height: 120px !important;
-                        min-height: 120px !important;
+                        height: 110px !important;
+                        min-height: 110px !important;
+                    }
+                }
+
+                /* Tablet image height — slightly taller */
+                @media (min-width: 576px) and (max-width: 768px) {
+                    #featured-slider > div > div:first-child,
+                    .product-grid-vertical > div > div:first-child {
+                        height: 130px !important;
+                        min-height: 130px !important;
                     }
                 }
                 `}
