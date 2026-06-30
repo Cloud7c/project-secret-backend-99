@@ -139,7 +139,9 @@
 /* Sidebar Buttons */
 .action-buttons {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 10px;
     margin-bottom: 25px;
 }
@@ -226,6 +228,16 @@
     padding: 5px;
     border-radius: 14px;
     margin-top: 25px;
+}
+
+/* Sidebar Collapsed State (when not on Profile tab) */
+.profile-sidebar.collapsed {
+    width: 100px;
+    padding: 10px;
+}
+.profile-sidebar.collapsed .bottom-nav {
+    margin-top: 0;
+    flex-direction: column;
 }
 .nav-item {
     flex: 1; 
@@ -328,7 +340,7 @@
 /* =========================================
    MOBILE RESPONSIVENESS
    ========================================= */
-@media (max-width: 768px) {
+@media (max-width: 575px) {
     .dashboard-container { padding: 20px; }
     .dashboard-card { flex-direction: column; } 
     
@@ -337,6 +349,18 @@
         padding: 20px;
     }
     
+    .profile-sidebar.collapsed {
+        width: 100%;
+        padding: 20px;
+    }
+    .profile-sidebar.collapsed .bottom-nav {
+        flex-direction: row;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+
     .main-content { padding: 20px; }
     .content-header { flex-direction: column; align-items: flex-start; gap: 10px; }
 

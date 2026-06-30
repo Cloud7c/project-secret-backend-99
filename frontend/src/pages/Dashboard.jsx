@@ -36,21 +36,48 @@ const Dashboard = () => {
         const token = localStorage.getItem('zaa_token');
         const userJson = localStorage.getItem('zaa_user');
         
-        if (!token || !userJson) {
+        if (!token) {
             navigate('/login?redirect=/account', { replace: true });
             return;
         }
 
         try {
-            const parsedUser = JSON.parse(userJson);
-            setUser(parsedUser);
-            setSettingsData({
-                full_name: parsedUser.full_name || '',
-                phone: parsedUser.phone || '',
-                notify_messages: parsedUser.notify_messages ?? true,
-                notify_approvals: parsedUser.notify_approvals ?? true
-            });
-            fetchUserListings(parsedUser.id, 1, false);
+            if (userJson) {
+                const parsedUser = JSON.parse(userJson);
+                setUser(parsedUser);
+                setSettingsData({
+                    full_name: parsedUser.full_name || '',
+                    phone: parsedUser.phone || '',
+                    notify_messages: parsedUser.notify_messages ?? true,
+                    notify_approvals: parsedUser.notify_approvals ?? true
+                });
+                fetchUserListings(parsedUser.id, 1, false);
+            }
+
+            // Fetch fresh data from DB
+            fetch('/api/users/me', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.user) {
+                    localStorage.setItem('zaa_user', JSON.stringify(data.user));
+                    setUser(data.user);
+                    setSettingsData({
+                        full_name: data.user.full_name || '',
+                        phone: data.user.phone || '',
+                        notify_messages: data.user.notify_messages ?? true,
+                        notify_approvals: data.user.notify_approvals ?? true
+                    });
+                    if (!userJson) fetchUserListings(data.user.id, 1, false);
+                } else {
+                    localStorage.removeItem('zaa_token');
+                    localStorage.removeItem('zaa_user');
+                    navigate('/login?redirect=/account', { replace: true });
+                }
+            })
+            .catch(err => console.error('Error fetching user data:', err));
+
         } catch (err) {
             console.error('Error parsing user data:', err);
             localStorage.removeItem('zaa_token');
@@ -199,11 +226,11 @@ const Dashboard = () => {
                 <div className="dashboard-card">
                     
                     {/* LEFT COLUMN: Profile Sidebar */}
-                    <aside className="profile-sidebar" style={{ display: activeTab !== 'profile' ? 'block' : 'flex', padding: activeTab !== 'profile' ? '10px' : '25px', width: window.innerWidth > 768 ? (activeTab !== 'profile' ? '100px' : '550px') : '100%', margin: '0 auto' }}>
+                    <aside className={`profile-sidebar ${activeTab !== 'profile' ? 'collapsed' : ''}`}>
                         {activeTab === 'profile' && (
                             <>
                                 <div className="profile-header">
-                                    <div className="cover-photo uploadable" id="profile-cover" style={{ position: 'relative', backgroundImage: user.cover_picture ? `url('${user.cover_picture}')` : 'none', backgroundColor: '#2b7a4b', width: '100%', height: window.innerWidth > 768 ? '200px' : '100px' }}>
+                                    <div className="cover-photo uploadable" id="profile-cover" style={{ backgroundImage: user.cover_picture ? `url('${user.cover_picture}')` : 'none', backgroundColor: '#2b7a4b' }}>
                                         <input type="file" id="cover-upload" accept="image/*" style={{ display: 'none' }} onChange={async (e) => {
                                             if(e.target.files[0]) {
                                                 const formData = new FormData();
@@ -303,10 +330,10 @@ const Dashboard = () => {
                                         </svg>
                                     </h2>
                                     <p className="farm-name" id="profile-email">{user.email}</p>
-                                    <p className="member-since" id="profile-joined">Member</p>
+                                    <p className="member-since" id="profile-joined">Member since {new Date(user.created_at).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</p>
                                 </div>
 
-                                <div className="action-buttons" style={{ display: 'flex', flexDirection: window.innerWidth > 768 ? 'row' : 'column', justifyContent: 'center', gap: '15px' }}>
+                                <div className="action-buttons">
                                     <button className="primary-btn" style={{ padding: '12px 25px' }} onClick={() => setActiveTab('settings')}>Edit Profile / Settings</button>
                                     <button className="secondary-btn" style={{ padding: '12px 25px' }}>Messages</button>
                                 </div>
@@ -334,7 +361,7 @@ const Dashboard = () => {
                             </>
                         )}
 
-                        <nav className="bottom-nav" style={activeTab !== 'profile' ? { marginTop: 0, display: 'flex', flexDirection: window.innerWidth > 768 ? 'column' : 'row' } : {}}>
+                        <nav className="bottom-nav">
                             <a href="#" className={`nav-item ${activeTab === 'profile' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); setActiveTab('profile'); }}>
                                 <i className="fa-regular fa-user"></i>
                                 <span>Profile</span>
