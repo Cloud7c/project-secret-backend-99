@@ -513,6 +513,7 @@ body.bg-green-tint, .bg-green-tint {
     .eq-grid { grid-template-columns: repeat(4, 1fr) !important; gap: 15px !important; }
     .filters-dropdown-btn { display: none !important; }
     #filterSidebar { display: flex !important; }
+    .eq-card-img { height: 140px !important; }
 }
 
 /* 🖥️ STAGE 4: Large Desktops (1051px and above) */
@@ -520,6 +521,7 @@ body.bg-green-tint, .bg-green-tint {
     .eq-grid { grid-template-columns: repeat(5, 1fr) !important; gap: 20px !important; }
     .filters-dropdown-btn { display: none !important; }
     #filterSidebar { display: flex !important; }
+    .eq-card-img { height: 150px !important; }
 }
 
 /* Toggle Animation */

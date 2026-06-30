@@ -540,9 +540,11 @@ body.bg-fresh-market {
 /* 💻 STAGE 3: Small Laptops (851px to 1050px) */
 @media (min-width: 851px) and (max-width: 1050px) {
     .masonry-grid { grid-template-columns: repeat(4, 1fr) !important; }
+    .card-img { height: 140px !important; }
 }
 
 /* 🖥️ STAGE 4: Large Desktops (1051px and above) */
 @media (min-width: 1051px) {
     .masonry-grid { grid-template-columns: repeat(5, 1fr) !important; }
+    .card-img { height: 150px !important; }
 }
