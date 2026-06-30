@@ -854,6 +854,7 @@ body {
         scrollbar-width: none !important;  
     }
 
+    /* 📱 PHONES ONLY: 2 wide cards per row */
     .product-card,
     .product-grid > div,
     .product-grid > .ls-card,
@@ -870,6 +871,19 @@ body {
         min-height: 240px !important; 
         display: flex !important;
         flex-direction: column !important; 
+    }
+
+    /* 📟 TABLETS (576-768px): 3 narrower cards per row — NOT stretched */
+    @media (min-width: 576px) {
+        .product-card,
+        .product-grid > div,
+        .product-grid > .ls-card,
+        .product-grid > .eq-card,
+        .product-grid > .masonry-card,
+        .product-grid > .s-card {
+            flex: 0 0 calc(33.33% - 8px) !important;
+            width: calc(33.33% - 8px) !important;
+        }
     }
     
     .card-image-wrapper {
