@@ -234,7 +234,7 @@ const Dashboard = () => {
                 <div className="dashboard-card">
                     
                     {/* LEFT COLUMN: Profile Sidebar */}
-                    <aside className={`profile-sidebar ${activeTab !== 'profile' ? 'collapsed' : ''}`}>
+                    <aside className={`profile-sidebar ${activeTab !== 'profile' ? 'collapsed' : 'full-view'}`}>
                         {activeTab === 'profile' && (
                             <>
                                 <div className="profile-header">

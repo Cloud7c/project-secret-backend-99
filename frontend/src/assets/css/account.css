@@ -230,6 +230,16 @@
     margin-top: 25px;
 }
 
+/* Sidebar Full View (When on Profile Tab) */
+.profile-sidebar.full-view {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+.profile-sidebar.full-view .cover-photo {
+    height: 160px; /* Better proportion for 600px width */
+}
+
 /* Sidebar Collapsed State (when not on Profile tab) */
 .profile-sidebar.collapsed {
     width: 100px;
