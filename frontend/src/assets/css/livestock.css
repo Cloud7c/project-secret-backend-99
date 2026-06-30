@@ -721,7 +721,7 @@ body.bg-pasture-green {
 
 @media (min-width: 576px) and (max-width: 850px) {
     .livestock-grid .ls-card-img,
-    .ls-card-img { height: 160px !important; min-height: 160px !important; max-height: 160px !important; }
+    .ls-card-img { height: 130px !important; min-height: 130px !important; max-height: 130px !important; }
 }
 
 @media (max-width: 575px) {

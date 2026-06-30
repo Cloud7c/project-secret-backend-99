@@ -235,9 +235,9 @@
     .product-grid-vertical .eq-card-img,
     .product-grid-vertical .card-image-wrapper,
     .card-image-wrapper {
-        height: 160px !important;
-        min-height: 160px !important;
-        max-height: 160px !important;
+        height: 130px !important;
+        min-height: 130px !important;
+        max-height: 130px !important;
     }
 }
 
@@ -267,13 +267,23 @@
         min-height: 250px !important;
     }
     
-    /* 2 items per row in search results grid */
+    /* 2 items per row in search results grid (mobile only) */
     .product-grid-vertical {
         grid-template-columns: repeat(2, 1fr) !important;
         gap: 15px !important;
     }
-    
-    /* Scale down elements to fit beautifully in the split view */
+}
+
+/* 📟 Tablet: 3 columns so cards are not too wide/stretched */
+@media (min-width: 576px) and (max-width: 768px) {
+    .product-grid-vertical {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 12px !important;
+    }
+}
+
+/* Scale down elements to fit beautifully in the split view */
+@media (max-width: 575px) {
     .card-image-wrapper, .product-image {
         height: 120px !important;
     }

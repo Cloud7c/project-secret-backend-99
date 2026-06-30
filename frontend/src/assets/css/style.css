@@ -483,9 +483,9 @@ body {
     .product-grid .m-card-image,
     .product-grid .eq-card-img,
     .product-grid .card-image-wrapper {
-        height: 160px !important;
-        min-height: 160px !important;
-        max-height: 160px !important;
+        height: 130px !important;
+        min-height: 130px !important;
+        max-height: 130px !important;
     }
 }
 
@@ -599,6 +599,22 @@ body {
     background-color: #1b5e20 !important;
 }
 
+/* =========================================
+   📟 TABLET OVERRIDES (576px to 768px)
+   3 cards per row so they are NOT stretched
+   ========================================= */
+@media (min-width: 576px) and (max-width: 768px) {
+    .product-card,
+    .product-grid > div,
+    .product-grid > .ls-card,
+    .product-grid > .eq-card,
+    .product-grid > .masonry-card,
+    .product-grid > .s-card {
+        flex: 0 0 calc(33.33% - 8px) !important;
+        width: calc(33.33% - 8px) !important;
+        min-width: 0 !important;
+    }
+}
 
 /* =========================================
    📱 INDESTRUCTIBLE MOBILE OVERRIDES

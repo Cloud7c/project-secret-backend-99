@@ -560,7 +560,7 @@ body.bg-fresh-market {
 
 @media (min-width: 576px) and (max-width: 850px) {
     .masonry-grid .card-img,
-    .card-img { height: 160px !important; min-height: 160px !important; max-height: 160px !important; }
+    .card-img { height: 130px !important; min-height: 130px !important; max-height: 130px !important; }
 }
 
 @media (max-width: 575px) {
