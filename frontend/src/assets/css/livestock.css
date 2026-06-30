@@ -453,7 +453,7 @@ body.bg-pasture-green {
 .ls-card-img {
     position: relative;
     width: 100%;
-    height: 200px; 
+    height: 160px; 
     border-radius: 8px; 
     overflow: hidden;
     margin-bottom: 12px;
@@ -692,7 +692,7 @@ body.bg-pasture-green {
     }
     
     .livestock-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 15px !important; }
-    .ls-card-img { height: 150px !important; }
+    .ls-card-img { height: 130px !important; }
 }
 
 /* 💻 STAGE 3: Small Laptops (851px to 1050px) */
@@ -700,7 +700,7 @@ body.bg-pasture-green {
     .livestock-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 15px !important; }
     .filters-dropdown-btn { display: none !important; }
     #filterSidebar { display: block !important; }
-    .ls-card-img { height: 180px !important; }
+    .ls-card-img { height: 140px !important; }
 }
 
 /* 🖥️ STAGE 4: Large Desktops (1051px and above) */
@@ -708,7 +708,7 @@ body.bg-pasture-green {
     .livestock-grid { grid-template-columns: repeat(4, 1fr) !important; gap: 15px !important; }
     .filters-dropdown-btn { display: none !important; }
     #filterSidebar { display: block !important; }
-    .ls-card-img { height: 200px !important; }
+    .ls-card-img { height: 150px !important; }
 }
 
 /* Toggle Animation */
