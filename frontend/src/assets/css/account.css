@@ -340,7 +340,7 @@
 /* =========================================
    MOBILE RESPONSIVENESS
    ========================================= */
-@media (max-width: 575px) {
+@media (max-width: 768px) {
     .dashboard-container { padding: 20px; }
     .dashboard-card { flex-direction: column; } 
     
@@ -383,5 +383,48 @@
         flex-direction: column;
         justify-content: center;
         padding: 0 0 0 12px;
+    }
+}
+
+/* =========================================
+   TABLET-SPECIFIC STACKED TWEAKS
+   ========================================= */
+@media (min-width: 576px) and (max-width: 768px) {
+    .dashboard-container {
+        padding: 60px 20px;
+    }
+    
+    .dashboard-card {
+        max-width: 600px; /* Reduce width slightly so it doesn't stretch across the entire iPad */
+        margin: 0 auto;
+    }
+    
+    .cover-photo {
+        height: 180px; /* Taller cover photo for tablet */
+    }
+    
+    .avatar {
+        width: 120px; /* Larger avatar */
+        height: 120px;
+    }
+    
+    .action-buttons button {
+        padding: 15px; /* Taller buttons */
+        font-size: 15px;
+    }
+    
+    .nav-item {
+        padding: 16px 5px; /* Taller bottom nav items */
+        font-size: 13px;
+    }
+    .nav-item i {
+        font-size: 22px;
+    }
+    
+    .stats-grid {
+        gap: 25px; /* More breathing room */
+    }
+    .stat-item {
+        padding: 10px;
     }
 }
