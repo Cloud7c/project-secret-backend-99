@@ -262,16 +262,16 @@ const ProductCard = ({ listing }) => {
         }
 
         return (
-            <div className={cardClass}>
-                <div className={isVehicle ? "v-card-image" : "card-image-wrapper"}>
-                    <button className={isVehicle ? 'v-fav' : 'favorite-btn'}><i className="fa-regular fa-heart"></i></button>
+            <div className={isVehicle ? 'vehicle-card' : 'vehicle-card'}>
+                <div className="v-card-image">
+                    <button className="v-fav"><i className="fa-regular fa-heart"></i></button>
                     <Link to={`/product/${listing.id}`}>
                         <img src={imageUrl} alt={listing.title} className="product-image" loading="lazy" />
                     </Link>
                 </div>
-                <div className={listing.category === 'vehicles' ? 'v-card-content' : 'card-details'} style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+                <div className="v-card-content" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
                     <div style={{ flexGrow: 1 }}>
-                        {listing.category === 'vehicles' ? (
+                        {isVehicle ? (
                             <>
                                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '4px', marginBottom: '8px' }}>
                                     {listing.is_featured && <span className="featured-badge" style={{ backgroundColor: '#ff9900', color: '#fff', padding: '2px 6px', fontSize: '10px', borderRadius: '3px', fontWeight: 'bold', display: 'inline-block' }}><i className="fa-solid fa-star"></i> Featured</span>}
@@ -289,16 +289,14 @@ const ProductCard = ({ listing }) => {
                             <>
                                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '4px', marginBottom: '8px' }}>
                                     {listing.is_featured && <span className="featured-badge" style={{ backgroundColor: '#ff9900', color: '#fff', padding: '2px 6px', fontSize: '10px', borderRadius: '3px', fontWeight: 'bold', display: 'inline-block' }}><i className="fa-solid fa-star"></i> Featured</span>}
-                                    <p className="product-price" style={{ marginBottom: 0 }}>{priceFormatted}</p>
+                                    <p className="v-price" style={{ margin: 0 }}><strong>{priceFormatted}</strong></p>
                                 </div>
-                                <h4 className="product-name">
-                                    <Link to={`/product/${listing.id}`} style={{ color: 'inherit', textDecoration: 'none' }}>{listing.title}</Link>
+                                <h4>
+                                    <Link to={`/product/${listing.id}`}>{listing.title}</Link>
                                 </h4>
-                                <p className="product-location">
-                                    <i className="fa-solid fa-location-dot"></i> {listing.location}{listing.province ? ', ' + listing.province : ''}
-                                </p>
-                                <div className="product-meta">
-                                    {metaHtml}
+                                <div className="v-specs">
+                                    {specs.condition && <><span><i className="fa-solid fa-certificate"></i> {specs.condition}</span><br /></>}
+                                    <span><i className="fa-solid fa-location-dot"></i> {listing.location}{listing.province ? ', ' + listing.province : ''}</span>
                                 </div>
                             </>
                         )}
