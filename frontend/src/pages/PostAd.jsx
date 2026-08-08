@@ -107,16 +107,31 @@ const PostAd = () => {
                 body: submitData
             });
 
-            const data = await response.json();
+            let data;
+            try {
+                data = await response.json();
+            } catch (parseErr) {
+                throw new Error('Server returned an invalid response. Please try again.');
+            }
             
             if (!response.ok) {
                 throw new Error(data.error || 'Failed to post listing');
             }
 
-            navigate(`/product/${data.listing.id}`);
+            setLoading(false);
+
+            if (data.listing && data.listing.id) {
+                navigate(`/product/${data.listing.id}`);
+            } else {
+                // Listing was created but response shape was unexpected — go to homepage
+                alert('Listing posted successfully!');
+                navigate('/');
+            }
         } catch (err) {
             setError(err.message);
             setLoading(false);
+            // Scroll to top so user can see the error message
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     };
 

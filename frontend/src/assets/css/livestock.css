@@ -114,7 +114,7 @@ body.bg-pasture-green {
 /* Forces Search and Filter to sit Side-by-Side */
 .mobile-controls-row {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     gap: 10px;
     max-width: 480px; 
@@ -123,7 +123,9 @@ body.bg-pasture-green {
 
 .ls-page-search {
     position: relative;
-    flex: 1; 
+    flex: 0 1 auto;
+    width: 280px;
+    max-width: 320px;
 }
 
 .ls-page-search input {
