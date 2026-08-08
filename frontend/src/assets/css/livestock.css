@@ -124,8 +124,8 @@ body.bg-pasture-green {
 .ls-page-search {
     position: relative;
     flex: 0 1 auto;
-    width: 280px;
-    max-width: 320px;
+    width: 40%;
+    max-width: 240px;
 }
 
 .ls-page-search input {
