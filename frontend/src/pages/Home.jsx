@@ -431,7 +431,7 @@ const Home = () => {
                         <div className="product-grid-vertical">
                             {generalSearchResults.length > 0 ? (
                                 generalSearchResults.map(listing => (
-                                    <ProductCard key={`gen-${listing.id}`} listing={listing} />
+                                    <ProductCard key={`gen-${listing.id}`} listing={listing} forceVehicleStyle={true} />
                                 ))
                             ) : !loading && (
                                 <div style={{ width: '100%', textAlign: 'center', padding: '40px', color: '#666', gridColumn: '1 / -1' }}>

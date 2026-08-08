@@ -35,7 +35,7 @@ export const timeAgo = (dateString) => {
     }
 };
 
-const ProductCard = ({ listing }) => {
+const ProductCard = ({ listing, forceVehicleStyle = false }) => {
     const priceFormatted = new Intl.NumberFormat('en-US', { 
         style: 'currency', 
         currency: listing.currency || 'USD' 
@@ -78,7 +78,7 @@ const ProductCard = ({ listing }) => {
     const isProduce = listing.category === 'produce';
     const cardClass = isVehicle ? 'vehicle-card' : isMachinery ? 'machinery-card' : isSpares ? 's-card' : isEquipment ? 'eq-card' : isLivestock ? 'ls-card' : isProduce ? 'masonry-card' : `product-card ${badgeClass}`;
 
-    if (isProduce) {
+    if (isProduce && !forceVehicleStyle) {
         return (
             <div className="masonry-card">
                 <div className="card-img">
@@ -112,7 +112,7 @@ const ProductCard = ({ listing }) => {
         );
     }
 
-    if (isLivestock) {
+    if (isLivestock && !forceVehicleStyle) {
         return (
             <div className="ls-card">
                 <div className="ls-card-img">
@@ -147,7 +147,7 @@ const ProductCard = ({ listing }) => {
         );
     }
 
-    if (isEquipment) {
+    if (isEquipment && !forceVehicleStyle) {
         return (
             <div className="eq-card">
                 <div className="eq-card-img">
@@ -183,7 +183,7 @@ const ProductCard = ({ listing }) => {
         );
     }
 
-    if (isSpares) {
+    if (isSpares && !forceVehicleStyle) {
         return (
             <div className="s-card">
                 <div className="s-card-img">
@@ -223,7 +223,7 @@ const ProductCard = ({ listing }) => {
         );
     }
 
-    if (isMachinery) {
+    if (isMachinery && !forceVehicleStyle) {
             return (
                 <div className="machinery-card">
                     <div className="m-card-image">
