@@ -257,9 +257,6 @@ const CategoryPage = ({ title, category }) => {
                                     />
                                     <i className="fa-solid fa-magnifying-glass" onClick={handleSearch} style={{ cursor: 'pointer' }}></i>
                                 </div>
-                                <button className="filters-dropdown-btn" id="filterBtn" onClick={() => setFilterOpen(!filterOpen)}>
-                                    <span id="filterBtnText"><i className="fa-solid fa-filter"></i> Filters</span>
-                                </button>
                             </div>
                         </div>
                         <div className="banner-illustration">
